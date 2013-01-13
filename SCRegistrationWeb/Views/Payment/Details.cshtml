@@ -1,0 +1,57 @@
+﻿@model SCRegistrationWeb.Models.PaymentEntry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>PaymentEntry</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PaymentDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PaymentDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PaymentType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PaymentType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PaymentAmt)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PaymentAmt)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PaymentStat)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PaymentStat)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PaymentComment)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PaymentComment)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RegID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RegID)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PaymentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

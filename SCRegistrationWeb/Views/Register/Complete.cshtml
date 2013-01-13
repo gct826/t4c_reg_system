@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Complete";
+}
+
+@if (ViewBag.Found == false)
+{
+    <p>@ViewBag.Message</p>
+}
+else
+{
+<h2>Thank You</h2>
+
+<h5>
+    Your Registration has now been confirmed. Please Remember the e-mail and phone number you used for the registration.
+    This will allow you to go back and check and modify your registration. 
+</h5>
+<h5>
+    Please remember to write a check for @ViewBag.TotalPrice payable to T4C, and your Registration Number @ViewBag.RegID in the Memo line.
+</h5>
+<h5>
+    If you need scholorships select Request Scholorship to apply.
+</h5>
+    
+<input type="button" title="Back" value="Back" onclick="location.href='@Url.Action("Index","Register")'" />
+
+
+}

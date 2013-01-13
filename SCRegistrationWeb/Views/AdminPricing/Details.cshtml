@@ -1,0 +1,36 @@
+﻿@model SCRegistrationWeb.Models.RegPrice
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>RegPrice</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AgeRange.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AgeRange.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PartTimePrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PartTimePrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FullTimePrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FullTimePrice)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RegTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

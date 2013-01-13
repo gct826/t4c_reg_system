@@ -1,0 +1,51 @@
+﻿@model SCRegistrationWeb.Models.RegPrice
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>RegPrice</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AgeRangeID, "AgeRange")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AgeRangeID", String.Empty)
+            @Html.ValidationMessageFor(model => model.AgeRangeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PartTimePrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PartTimePrice)
+            @Html.ValidationMessageFor(model => model.PartTimePrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FullTimePrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FullTimePrice)
+            @Html.ValidationMessageFor(model => model.FullTimePrice)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

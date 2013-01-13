@@ -1,0 +1,92 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.ParticipantEntry>
+
+<table>
+    <tr>
+        <td class="label-large">
+            Participants List
+        </td>
+        <td>
+            @if (@ViewBag.RegIsConfirm == false)
+            {
+                <input type="button" title="Add New" value="Add Participant" onclick="location.href='@Url.Action("Create", new { RegUID = ViewBag.RegUID })'" />
+            }
+        </td>
+    </tr>
+</table>
+
+@if ((@ViewBag.RegIsConfirm == false) && (@ViewBag.RegIsComplete == false))
+{
+    <p>Warning, you have Incomplete Participant entries.</p>
+}
+
+<hr />
+
+<h2>@ViewBag.PartMessage</h2>
+
+<table class="context" style="width:100%;">
+
+@foreach (var item in Model)
+{
+
+        <tr>
+        <td>@Html.DisplayNameFor(model => model.ParticipantID)</td>
+        <td>@Html.DisplayNameFor(model => model.FirstName)</td>
+        <td>@Html.DisplayNameFor(model => model.LastName)</td>
+        <td>@Html.DisplayNameFor(model => model.ChineseName)</td>
+        <td>@Html.DisplayNameFor(model => model.Genders.Name)</td>
+        <td>@Html.DisplayNameFor(model => model.AgeRanges.Name)</td>
+        <td>@Html.DisplayNameFor(model => model.RegTypes.Name)</td>
+        <td>@Html.DisplayNameFor(model => model.PartPrice)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayFor(modelItem => item.ParticipantID)</th>
+        <th>@Html.DisplayFor(modelItem => item.FirstName)</th>
+        <th>@Html.DisplayFor(modelItem => item.LastName)</th>
+        <th>@Html.DisplayFor(modelItem => item.ChineseName)</th>
+        <th>@Html.DisplayFor(modelItem => item.Genders.Name)</th>
+        <th>@Html.DisplayFor(modelItem => item.AgeRanges.Name)</th>
+        <th>@Html.DisplayFor(modelItem => item.RegTypes.Name)</th>
+        <th>@String.Format("{0:C}", item.PartPrice)</th>
+    </tr>
+    <tr><td></td></tr>
+    <tr>
+        <td></td>
+        <td>@Html.DisplayNameFor(model => model.Services.Name)</td>
+        <td>@Html.DisplayNameFor(model => model.Fellowships.Name)</td>
+        <td>@Html.DisplayNameFor(model => model.RoomTypes.Name)</td>
+        <td>@Html.DisplayNameFor(model => model.Statuses.Name)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr style="border-bottom:1px solid;">   
+        <th></th>
+        <th>@Html.DisplayFor(modelItem => item.Services.Name)</th>
+        <th>@Html.DisplayFor(modelItem => item.Fellowships.Name)</th>
+        <th>@Html.DisplayFor(modelItem => item.RoomTypes.Name)</th>
+        <th>@Html.DisplayFor(modelItem => item.Statuses.Name)</th>
+        <td></td>
+        <td>
+            @if (@ViewBag.RegIsConfirm == false)
+            {
+                @Html.ActionLink("Edit", "Edit", new { RegUID = ViewBag.RegUID, id = item.ParticipantID })    
+                @Html.ActionLink("Remove", "Remove", new { RegUID = ViewBag.RegUID, id = item.ParticipantID })
+            }
+        </td>
+        <td></td>
+    </tr>
+
+    }
+
+</table>
+    
+    <hr />
+
+
+<h4>Total Registration Price: @String.Format("{0:C}", ViewBag.TotalPrice)</h4>
+
+@if ((@ViewBag.RegIsConfirm == false) && (@ViewBag.RegIsComplete))
+{
+    <p>Please click Confirm once you're done adding participants.</p>
+    <input type="button" title="Confirm" value="Confirm" onclick="location.href='@Url.Action("Lock", "Register", new { RegUID = ViewBag.RegUID }, "")'" />
+}
+

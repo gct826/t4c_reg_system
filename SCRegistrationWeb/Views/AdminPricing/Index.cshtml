@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.RegPrice>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AgeRange.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartTimePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullTimePrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgeRange.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartTimePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullTimePrice)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RegTypeID })
+        </td>
+    </tr>
+}
+
+</table>
