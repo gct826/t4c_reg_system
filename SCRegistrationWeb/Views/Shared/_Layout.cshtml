@@ -4,52 +4,62 @@
         <meta charset="utf-8" />
         <title>@ViewBag.Title - T4C Summer Conference</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=540px;" />
-        @Styles.Render("~/Content/css")
+
+        @Styles.Render("~/Content/themes/iridium/5grid/core.css")
+        @Styles.Render("~/Content/themes/iridium/5grid/core-desktop.css")
+        @Styles.Render("~/Content/themes/iridium/5grid/core-1200px.css")
+        @Styles.Render("~/Content/themes/iridium/5grid/core-noscript.css")
+        @Styles.Render("~/Content/themes/iridium/style.css")
+        @Styles.Render("~/Content/themes/iridium/style-desktop.css")        
+        
+        @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/Content/themes/iridium/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none")
+        @RenderSection("scripts", required: false)
     </head>
     <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="banner">
-                    <div class="float-left">
-                        <p class="site-title">@Html.ActionLink("T4C Summer Conference", "Index", "Home")</p>
+        <div id="header-wrapper">
+        <header id="header" class="5grid-layout">
+            <div class="row">
+                <div class="12u">
+                    <!-- Logo -->
+                    <h1 class="mobileUI-site-name">
+                        @Html.ActionLink("T4C SC", "Index", "Home")
+                    </h1>
 
-                    </div>
                     <div class="float-right">
-                        <section id="login">
-                            @Html.Partial("_LoginPartial")
-                        </section>
-                        <nav>
-                            <ul id="menu">
-                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                <li>@Html.ActionLink("Register", "Index", "Register")</li>
-                                <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
-                                <li>@Html.ActionLink("Payment","Index", "Payment")</li>
-                            </ul>
-                        </nav>
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
                     </div>
+
+                    <!-- Nav -->
+                    <nav class="mobileUI-site-nav">
+                        @Html.ActionLink("Home", "Index", "Home")
+                        @Html.ActionLink("Register", "Index", "Register")
+                        @Html.ActionLink("Admin", "Index", "Admin")
+                        @Html.ActionLink("Payment","Index", "Payment")
+                    </nav>
                 </div>
             </div>
-
         </header>
-        <div id="body" class="content-wrapper">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
         </div>
+
+
+        <!--div id="wrapper">
+            RenderSection("featured", required: false)
+            <section class="12u" id="main-content">
+            </section>
+        <div -->
+        
+        @RenderBody()
+
+        <div class="divider2"></div>
         <footer>
-            <div class="content-wrapper">
-                <div class="banner">
-                    <div class="float-left">
-                        <p>&copy; @DateTime.Now.Year - GCT826 Design</p>
-                    </div>
-                </div>
+            <div id="copyright">
+                <p>&copy; @DateTime.Now.Year - GCT826 Design</p>
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
     </body>
 </html>

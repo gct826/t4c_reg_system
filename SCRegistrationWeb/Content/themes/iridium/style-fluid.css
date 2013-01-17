@@ -1,0 +1,104 @@
+/*********************************************************************************/
+/* Basic                                                                         */
+/*********************************************************************************/
+
+	body
+	{
+		overflow-y: hidden;
+	}
+
+/*********************************************************************************/
+/* Demo                                                                          */
+/*********************************************************************************/
+
+	#demo-wrapper
+	{
+		display: none;
+		margin: 0 auto;
+	}
+
+	#demo
+	{
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		border: 0;
+	}
+
+/*********************************************************************************/
+/* Header                                                                        */
+/*********************************************************************************/
+
+	#header
+	{
+		padding: 1.5em 2em 1.5em 2em;
+	}
+
+		#header .modes
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 236px;
+			margin: -24px 0 0 -118px;
+		}
+
+			#header .modes li
+			{
+				display: inline-block;
+				width: 48px;
+				height: 48px;
+				background: #111;
+				padding: 0 10px 0 10px;
+				border-top: 0;
+				border-bottom: 0;
+				text-indent: -9999em;
+				border-radius: 5px;
+				margin: 0 4px 0 4px;
+				background-image: url('images/sprites.png');
+				opacity: 0.25;
+				cursor: pointer;
+				transition: opacity .25s ease-in-out;
+				-moz-transition: opacity .25s ease-in-out;
+				-webkit-transition: opacity .25s ease-in-out;
+				box-shadow: inset 0px 0px 3px 0px #000;
+			}
+
+			#header .modes li.desktop
+			{
+				background-position: 10px -81px;
+			}
+
+			#header .modes li.tablet
+			{
+				background-position: -38px -81px;
+			}
+
+			#header .modes li.mobile
+			{
+				background-position: -86px -81px;
+			}
+			
+			#header .modes li:hover
+			{
+				opacity: 0.5;
+			}
+
+			#header .modes li.active
+			{
+				opacity: 1.0 !important;
+			}
+			
+		#header .controls
+		{
+			position: absolute;
+			right: 0;
+			top: 50%;
+			height: 80px;
+			margin-top: -25px;
+		}
+		
+			#header .controls a
+			{
+				margin-left: 0.5em;
+			}

@@ -17,7 +17,6 @@ else
         <legend>Modify</legend>
         @foreach (var item in Model) 
         {
-
         <table class="context" style="width:600px;">
             <tr class="display-label">
                 <td>        
@@ -29,6 +28,7 @@ else
                 <td>        
                     @Html.DisplayNameFor(model => model.Phone)
                 </td>
+                <td></td>
             </tr>
 
             <tr class="display-field">
@@ -41,8 +41,10 @@ else
                 <th>        
                     @String.Format("{0:###-###-####}", Convert.ToInt64(item.Phone))
                 </th>
+                <th>
+                    @Html.ActionLink("Edit", "EditRegistration", new { RegUID=item.RegistrationUID })
+                </th>
             </tr>
-            
 
 
             @if (item.IsConfirmed)
@@ -50,10 +52,11 @@ else
                 <p>This registration has been confimed. To modify the registration please click the Edit bottom.</p>
                 <input type="button" title="Edit Registration" value="Edit Registration" onclick="location.href='@Url.Action("Unlock", new {RegUID = item.RegistrationUID})'" />
             }   
-                        
+       
         </table>
         
-        Html.RenderAction("Index", "Participant", new { RegUID = item.RegistrationUID });
+            
+        Html.RenderAction("Index", "Participant", new { RegUID = item.RegistrationUID, isAdmin = true });
             
         }
  

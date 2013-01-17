@@ -19,7 +19,7 @@ namespace SCRegistrationWeb.Controllers
         //
         // GET: /Participant/Index?RegUID=xxx
         [ChildActionOnly]
-        public ActionResult Index(string RegUID)
+        public ActionResult Index(string RegUID, bool isAdmin=false)
         {
 
             if (RegUID == null)
@@ -37,7 +37,8 @@ namespace SCRegistrationWeb.Controllers
                                     Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships).Include(p=> p.RoomTypes).
                                     Where(p => p.RegistrationID.Equals(RegID)).Where(p => !p.StatusID.Equals((int)4))
                                 select m;
-                
+
+                ViewBag.isAdmin = isAdmin;
                 ViewBag.RegUID = RegUID;
                 ViewBag.TotalPrice = FoundEntry.RegTotalPrice(RegUID);
                 ViewBag.RegIsConfirm = FoundEntry.RegIsConfirm(RegUID);
@@ -134,55 +135,37 @@ namespace SCRegistrationWeb.Controllers
         {
             if (RegUID == null || id == 0)
             {
-                ViewBag.PartMessage = "Participant not found";
                 return RedirectToAction("Index", "Home");
-
             }
+
             else
             {
-                var participantentry = from m in db.ParticipantEntries.Include(p => p.RegistrationEntries).
-                    Include(p => p.Statuses).Include(p => p.Services).Include(p => p.AgeRanges).
-                    Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships).Include(p=> p.RoomTypes).
-                    Where(p => p.ParticipantID.Equals(id))
-                                select m;
-
-                if (participantentry == null)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
                 RegistrationEntry FoundEntry = new RegistrationEntry();
                 int RegID = FoundEntry.RegUIDtoID(RegUID);
 
-                if (RegID == 0)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+                var participantentry = from m in db.ParticipantEntries.Include(p => p.RegistrationEntries).
+                    Include(p => p.Statuses).Include(p => p.Services).Include(p => p.AgeRanges).
+                    Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships).Include(p => p.RoomTypes).
+                    Where(p => p.ParticipantID.Equals(id))
+                                       select m;
 
-                ParticipantEntry FoundPartEntry = new ParticipantEntry();
-                FoundPartEntry = participantentry.FirstOrDefault();
-
-                if (FoundPartEntry == null)
-                {
-                    return HttpNotFound();
-                }
-
-                if (FoundPartEntry.RegistrationID != RegID)
+                if (participantentry == null || RegID == 0 || participantentry.FirstOrDefault().RegistrationID != RegID)
                 {
                     return RedirectToAction("Index", "Home");
                 }
 
                 ViewBag.RegUID = RegUID;
                 ViewBag.RegistrationID = RegID;
-                ViewBag.ParticipantID = FoundPartEntry.ParticipantID;
-                ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", FoundPartEntry.ServiceID);
-                ViewBag.AgeRangeID = new SelectList(db.AgeRanges, "AgeRangeID", "Name", FoundPartEntry.AgeRangeID);
-                ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "Name", FoundPartEntry.GenderID);
-                ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name", FoundPartEntry.RegTypeID);
+                ViewBag.ParticipantID = participantentry.FirstOrDefault().ParticipantID;
+                ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", participantentry.FirstOrDefault().ServiceID);
+                ViewBag.AgeRangeID = new SelectList(db.AgeRanges, "AgeRangeID", "Name", participantentry.FirstOrDefault().AgeRangeID);
+                ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "Name", participantentry.FirstOrDefault().GenderID);
+                ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name", participantentry.FirstOrDefault().RegTypeID);
 
                 EventHistory NewEvent = new EventHistory();
-                NewEvent.AddHistory(RegID, "Participant Opened", FoundPartEntry.ParticipantID);
+                NewEvent.AddHistory(RegID, "Participant Opened", participantentry.FirstOrDefault().ParticipantID);
 
-                return View(FoundPartEntry);
+                return View(participantentry.FirstOrDefault());
             }
         }
 
@@ -191,19 +174,13 @@ namespace SCRegistrationWeb.Controllers
         [HttpPost]
         public ActionResult Edit(string RegUID, int id, ParticipantEntry participantentry)
         {
-
-            int RegID = (int)0;
-
-            if (RegUID == null)
+            if (RegUID == null || id == 0)
             {
-                ViewBag.PartMessage = "Participant not found";
                 return RedirectToAction("Index", "Home");
             }
-            else
-            {
-                RegistrationEntry FoundEntry = new RegistrationEntry();
-                RegID = FoundEntry.RegUIDtoID(RegUID);
-            }
+
+            RegistrationEntry FoundEntry = new RegistrationEntry();
+            int RegID = FoundEntry.RegUIDtoID(RegUID);
 
             if (ModelState.IsValid && RegID != 0)
             {
@@ -265,55 +242,37 @@ namespace SCRegistrationWeb.Controllers
         {
             if (RegUID == null || id == 0)
             {
-                ViewBag.PartMessage = "Participant not found";
                 return RedirectToAction("Index", "Home");
-
             }
+
             else
             {
+                RegistrationEntry FoundEntry = new RegistrationEntry();
+                int RegID = FoundEntry.RegUIDtoID(RegUID);
+
                 var participantentry = from m in db.ParticipantEntries.Include(p => p.RegistrationEntries).
                     Include(p => p.Statuses).Include(p => p.Services).Include(p => p.AgeRanges).
                     Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships).Include(p => p.RoomTypes).
                     Where(p => p.ParticipantID.Equals(id))
                                        select m;
 
-                if (participantentry == null)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                RegistrationEntry FoundEntry = new RegistrationEntry();
-                int RegID = FoundEntry.RegUIDtoID(RegUID);
-
-                if (RegID == 0)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-
-                ParticipantEntry FoundPartEntry = new ParticipantEntry();
-                FoundPartEntry = participantentry.FirstOrDefault();
-
-                if (FoundPartEntry == null)
-                {
-                    return HttpNotFound();
-                }
-
-                if (FoundPartEntry.RegistrationID != RegID)
+                if (participantentry == null || RegID == 0 || participantentry.FirstOrDefault().RegistrationID != RegID)
                 {
                     return RedirectToAction("Index", "Home");
                 }
 
                 ViewBag.RegUID = RegUID;
                 ViewBag.RegistrationID = RegID;
-                ViewBag.ParticipantID = FoundPartEntry.ParticipantID;
-                ViewBag.ServiceID = new SelectList(db.Services.Where(p => p.ServiceID.Equals(FoundPartEntry.ServiceID)), "ServiceID", "Name", FoundPartEntry.ServiceID);
-                ViewBag.AgeRangeID = new SelectList(db.AgeRanges.Where(p => p.AgeRangeID.Equals(FoundPartEntry.AgeRangeID)), "AgeRangeID", "Name", FoundPartEntry.AgeRangeID);
-                ViewBag.GenderID = new SelectList(db.Genders.Where(p => p.GenderID.Equals(FoundPartEntry.GenderID)), "GenderID", "Name", FoundPartEntry.GenderID);
-                ViewBag.RegTypeID = new SelectList(db.RegTypes.Where(p => p.RegTypeID.Equals(FoundPartEntry.RegTypeID)), "RegTypeID", "Name", FoundPartEntry.RegTypeID);
-                ViewBag.FellowshipID = new SelectList(db.Fellowships.Where(p => p.ServiceID.Equals(FoundPartEntry.ServiceID)), "FellowshipID", "Name", FoundPartEntry.FellowshipID);
-                ViewBag.RoomTypeID = new SelectList(db.RoomTypes.Where(p => p.RegTypeID.Equals(FoundPartEntry.RegTypeID)), "RoomTypeID", "Name", FoundPartEntry.RoomTypeID);
-                ViewBag.PartPrice = FoundPartEntry.PartPrice;
+                ViewBag.ParticipantID = participantentry.FirstOrDefault().ParticipantID;
+                ViewBag.ServiceID = new SelectList(db.Services.Where(p => p.ServiceID.Equals(participantentry.FirstOrDefault().ServiceID)), "ServiceID", "Name", participantentry.FirstOrDefault().ServiceID);
+                ViewBag.AgeRangeID = new SelectList(db.AgeRanges.Where(p => p.AgeRangeID.Equals(participantentry.FirstOrDefault().AgeRangeID)), "AgeRangeID", "Name", participantentry.FirstOrDefault().AgeRangeID);
+                ViewBag.GenderID = new SelectList(db.Genders.Where(p => p.GenderID.Equals(participantentry.FirstOrDefault().GenderID)), "GenderID", "Name", participantentry.FirstOrDefault().GenderID);
+                ViewBag.RegTypeID = new SelectList(db.RegTypes.Where(p => p.RegTypeID.Equals(participantentry.FirstOrDefault().RegTypeID)), "RegTypeID", "Name", participantentry.FirstOrDefault().RegTypeID);
+                ViewBag.FellowshipID = new SelectList(db.Fellowships.Where(p => p.ServiceID.Equals(participantentry.FirstOrDefault().ServiceID)), "FellowshipID", "Name", participantentry.FirstOrDefault().FellowshipID);
+                ViewBag.RoomTypeID = new SelectList(db.RoomTypes.Where(p => p.RegTypeID.Equals(participantentry.FirstOrDefault().RegTypeID)), "RoomTypeID", "Name", participantentry.FirstOrDefault().RoomTypeID);
+                ViewBag.PartPrice = participantentry.FirstOrDefault().PartPrice;
 
-                return View(FoundPartEntry);
+                return View(participantentry.FirstOrDefault());
             }
         }
 
@@ -322,18 +281,13 @@ namespace SCRegistrationWeb.Controllers
         [HttpPost]
         public ActionResult Page2(string RegUID, int id, ParticipantEntry participantentry)
         {
-            int RegID = (int)0;
-
-            if (RegUID == null)
+            if (RegUID == null || id == 0)
             {
-                ViewBag.PartMessage = "Participant not found";
                 return RedirectToAction("Index", "Home");
             }
-            else
-            {
-                RegistrationEntry FoundEntry = new RegistrationEntry();
-                RegID = FoundEntry.RegUIDtoID(RegUID);
-            }
+            
+            RegistrationEntry FoundEntry = new RegistrationEntry();
+            int RegID = FoundEntry.RegUIDtoID(RegUID);
 
             if (ModelState.IsValid && RegID != 0)
             {

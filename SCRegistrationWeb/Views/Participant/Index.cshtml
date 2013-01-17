@@ -72,7 +72,12 @@
                 @Html.ActionLink("Remove", "Remove", new { RegUID = ViewBag.RegUID, id = item.ParticipantID })
             }
         </td>
-        <td></td>
+        <td>
+            @if (@ViewBag.isAdmin == true)
+            {
+                @Html.ActionLink("Admin Edit","TEMP",new { RegUID = ViewBag.RegUID})
+            }
+        </td>
     </tr>
 
     }

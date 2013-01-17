@@ -133,7 +133,6 @@
     <Compile Include="Controllers-Admin\AdminAgeRangeController.cs" />
     <Compile Include="Controllers-Admin\AdminController.cs" />
     <Compile Include="Controllers-Admin\AdminFellowshipController.cs" />
-    <Compile Include="Controllers-Admin\AdminParticipantController.cs" />
     <Compile Include="Controllers-Admin\AdminPricingController.cs" />
     <Compile Include="Controllers-Admin\AdminRoomTypeController.cs" />
     <Compile Include="Controllers-Admin\AdminServiceController.cs" />
@@ -182,6 +181,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\themes\iridium\style-1000px.css" />
+    <Content Include="Content\themes\iridium\style-desktop.css" />
+    <Content Include="Content\themes\iridium\style-fluid.css" />
+    <Content Include="Content\themes\iridium\style-ie9.css" />
+    <Content Include="Content\themes\iridium\style-mobile.css" />
+    <Content Include="Content\themes\iridium\style.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -236,8 +241,37 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\iridium\5grid\core-1000px.css" />
+    <Content Include="Content\themes\iridium\5grid\core-1200px.css" />
+    <Content Include="Content\themes\iridium\5grid\core-desktop.css" />
+    <Content Include="Content\themes\iridium\5grid\core-fluid.css" />
+    <Content Include="Content\themes\iridium\5grid\core-mobile.css" />
+    <Content Include="Content\themes\iridium\5grid\core-noscript.css" />
+    <Content Include="Content\themes\iridium\5grid\core.css" />
+    <Content Include="Content\themes\iridium\5grid\html5shiv.js" />
+    <Content Include="Content\images\banner-shadow-bg.png" />
+    <Content Include="Content\images\banner-wrapper-bg.png" />
+    <Content Include="Content\images\copyright-bg.png" />
+    <Content Include="Content\images\divider1-bg.png" />
+    <Content Include="Content\images\divider2-bg.png" />
+    <Content Include="Content\images\divider3-bg.png" />
+    <Content Include="Content\images\link-style1-divider.png" />
+    <Content Include="Content\images\marketing-bg.png" />
+    <Content Include="Content\images\spacer.gif" />
+    <Content Include="Content\themes\iridium\5grid\init.js" />
+    <Content Include="Content\themes\iridium\5grid\jquery.js" />
+    <Content Include="Content\themes\iridium\5grid\mobileUI-beveled.css" />
+    <Content Include="Content\themes\iridium\5grid\mobileUI-flat.css" />
+    <Content Include="Content\images\pics01.jpg" />
+    <Content Include="Content\images\pics02.png" />
+    <Content Include="Content\images\pics03.png" />
+    <Content Include="Content\images\pics04.png" />
+    <Content Include="Content\images\pics05.jpg" />
+    <Content Include="Content\images\pics06.jpg" />
+    <Content Include="Content\images\pics07.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\images\Thumbs.db" />
     <None Include="Properties\PublishProfiles\T4C-SC.gct826.com - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\T4C-SC.gct826.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
@@ -274,11 +308,6 @@
     <Content Include="Views\AdminFellowship\Create.cshtml" />
     <Content Include="Views\AdminFellowship\Edit.cshtml" />
     <Content Include="Views\AdminFellowship\Index.cshtml" />
-    <Content Include="Views\AdminParticipant\Create.cshtml" />
-    <Content Include="Views\AdminParticipant\Delete.cshtml" />
-    <Content Include="Views\AdminParticipant\Details.cshtml" />
-    <Content Include="Views\AdminParticipant\Edit.cshtml" />
-    <Content Include="Views\AdminParticipant\Index.cshtml" />
     <Content Include="Views\AdminPricing\Edit.cshtml" />
     <Content Include="Views\AdminPricing\Index.cshtml" />
     <Content Include="Views\AdminRoomType\Create.cshtml" />
@@ -309,13 +338,13 @@
     <Content Include="Views\Payment\Create.cshtml" />
     <Content Include="Views\Payment\Edit.cshtml" />
     <Content Include="Views\Payment\Delete.cshtml" />
-    <Content Include="Views\AdminRegistration\Index.cshtml" />
     <Content Include="Views\AdminRegistration\Details.cshtml" />
     <Content Include="Views\AdminRegistration\Create.cshtml" />
-    <Content Include="Views\AdminRegistration\Edit.cshtml" />
+    <Content Include="Views\SearchRegistration\EditRegistration.cshtml" />
     <Content Include="Views\AdminRegistration\Delete.cshtml" />
     <Content Include="Views\SearchRegistration\Index.cshtml" />
     <Content Include="Views\SearchRegistration\Detail.cshtml" />
+    <Content Include="Views\SearchRegistration\EditParticipant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

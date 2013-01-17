@@ -6,44 +6,37 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script> 
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-<h2>Registration</h2>
+<div id="main-wrapper">
+	<div class="12u" id="main-content">
+		<div class="5grid-layout">
+			<div class="row">
+				<div class="4u">
+                    <h2>Registration</h2>
+                    <div class="message-error">
+                        @if(ViewBag.Message != null)
+                        {
+                            @ViewBag.Message
+                        }
+                    </div>
 
-<div class="message-error">
-    @if(ViewBag.Message != null)
-    {
-        @ViewBag.Message
-    }
-</div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.EditorForModel()
 
-<table>
-    <tr>
-    <td class ="left-column">
-        @using (Html.BeginForm())
-        {
-            @Html.EditorForModel()
-
-            <br />
-            <input type="submit" value="Create New" name="action" />
-            <input type="submit" value="Open Existing" name="action" />
-        }
-    </td>
-    <td class="right-column">
-    
-        <p>
-            Enter an e-mail address and phone number to start the registration. Please remember the e-mail address and phone number you
-            use as this will allow you the ability to view and modify the registration at a later date as necessary.
-        </p>
-
-
-        <div>
-            <input type="button" value ="Back to Main Menu" onclick="location.href='@Url.Action("Index", "Home")'" />
+                        <br />
+                        <input type="submit" value="Create New" name="action" />
+                        <input type="submit" value="Open Existing" name="action" />
+                    }
+                </div>
+                <div class="8u">
+                    <p>
+                        Enter an e-mail address and phone number to start the registration. Please remember the e-mail address and phone number you
+                        use as this will allow you the ability to view and modify the registration at a later date as necessary.
+                    </p>
+                    
+                    <input type="button" value ="Back to Main Menu" onclick="location.href='@Url.Action("Index", "Home")    '" />
+                </div>
+            </div>
         </div>
-
-    
-    </td>
-    </tr>
-
-</table>
-
-
-
+    </div>
+</div>
