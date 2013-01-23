@@ -64,7 +64,7 @@ namespace SCRegistrationWeb.Controllers
                     NewEvent.AddHistory(order.RegUIDtoID(order.RegistrationUID),"New Registration Created",0);
 
           
-                    return RedirectToAction("Create", "Participant", new { RegUID = order.RegistrationUID });
+                    return RedirectToAction("Modify", "Participant", new { RegUID = order.RegistrationUID, isPage2=false, id=0 });
                     //return RedirectToAction("Index");
                 }
             }
@@ -91,14 +91,12 @@ namespace SCRegistrationWeb.Controllers
 
                 if (FoundRegID != 0)
                 {
-                    var registrationentry = from m in _db.RegEntries.Where(p => p.RegistrationID.Equals(FoundRegID))
-                                            select m;
-                    ViewBag.Found = true;
-
                     EventHistory NewEvent = new EventHistory();
-                    NewEvent.AddHistory(FoundRegID, "Registration Opened", 0);
+                    NewEvent.AddHistory(FoundRegID, "General Registration Opened", 0);
 
-                    return View(registrationentry.ToList());
+                    ViewBag.Found = true;
+                    ViewBag.RegID = FoundRegID;
+                    return View();
                 }
                 else
                 {
@@ -107,12 +105,33 @@ namespace SCRegistrationWeb.Controllers
                     return View();
                 }
             }
-
         }
 
         //
+        // GET: /Register/Summary?RegID
+        [ChildActionOnly]
+        public ActionResult Summary(int Id = 0)
+        {
+            if (Id == 0)
+            {
+                ViewBag.Found = false;
+                ViewBag.Message = "Participant not found";
+                return PartialView();
+            }
+            else
+            {
+                var registrationentry = from m in _db.RegEntries.Where(p => p.RegistrationID.Equals(Id))
+                                        select m;
+
+                ViewBag.Found = true;
+                return PartialView(registrationentry.ToList());
+            }
+        }
+
+
+        //
         // POST: /Register/Unlock/RegUID
-        public ActionResult Unlock(string RegUID)
+        public ActionResult Unlock(string RegUID, bool isAdmin = false)
         {
             if (RegUID == null)
             {
@@ -150,11 +169,20 @@ namespace SCRegistrationWeb.Controllers
                     }
                     _db.SaveChanges();
 
+                    if (isAdmin)
+                    {
+                        EventHistory NewEvent = new EventHistory();
+                        NewEvent.AddHistory(FoundRegID, "Admin Registration Unlocked", 0);
 
-                    EventHistory NewEvent = new EventHistory();
-                    NewEvent.AddHistory(FoundRegID, "Registration Unlocked", 0);
+                        return RedirectToAction("Detail", "SearchRegistration", new { Id = FoundRegID });
+                    }
+                    else
+                    {
+                        EventHistory NewEvent = new EventHistory();
+                        NewEvent.AddHistory(FoundRegID, "General Registration Unlocked", 0);
 
-                    return RedirectToAction("Modify", "Register", new { RegUID = RegUID });
+                        return RedirectToAction("Modify", "Register", new { RegUID = RegUID });
+                    }
                 }
                 else
                 {
@@ -167,7 +195,7 @@ namespace SCRegistrationWeb.Controllers
 
         //
         // POST: /Register/Lock/RegUID
-        public ActionResult Lock(string RegUID)
+        public ActionResult Lock(string RegUID, bool isAdmin = false)
         {
             if (RegUID == null)
             {
@@ -194,24 +222,32 @@ namespace SCRegistrationWeb.Controllers
                                    Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships).Include(p => p.RoomTypes).
                                    Where(p => p.RegistrationID.Equals(FoundEntry.RegistrationID)).Where(p => !p.StatusID.Equals((int)4))
                                     select m;
-           
+
                     foreach (ParticipantEntry FoundPart in PartEntry)
                     {
                         FoundPart.StatusID = (int)3;
                         _db.Entry(FoundPart).State = EntityState.Modified;
                     }
-                  
+
                     FoundEntry.IsConfirmed = true;
 
                     _db.Entry(FoundEntry).State = EntityState.Modified;
-                    _db.SaveChanges(); 
+                    _db.SaveChanges();
 
-                    EventHistory NewEvent = new EventHistory();
-                    NewEvent.AddHistory(FoundRegID, "Registration Locked", 0);
+                    if (isAdmin)
+                    {
+                        EventHistory NewEvent = new EventHistory();
+                        NewEvent.AddHistory(FoundRegID, "Admin Registration Locked", 0);
 
+                        return RedirectToAction("Detail", "SearchRegistration", new { Id = FoundRegID });
+                    }
+                    else
+                    {
+                        EventHistory NewEvent = new EventHistory();
+                        NewEvent.AddHistory(FoundRegID, "General Registration Locked", 0);
 
-                    return RedirectToAction("Complete", "Register", new { RegUID = RegUID });
-
+                        return RedirectToAction("Complete", "Register", new { RegUID = RegUID });
+                    }
                 }
                 else
                 {
@@ -289,7 +325,7 @@ namespace SCRegistrationWeb.Controllers
                     if (FoundRegID != 0)
                     {
                         ViewBag.Found = true;
-                        ViewBag.TotalPrice = FoundEntry.RegTotalPrice(RegUID);
+                        ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
                         ViewBag.RegID = FoundRegID;
 
                         return View();

@@ -11,7 +11,9 @@
 		<div class="5grid-layout">
 			<div class="row">
 				<div class="4u">
+
                     <h2>Registration</h2>
+                    
                     <div class="message-error">
                         @if(ViewBag.Message != null)
                         {
@@ -28,13 +30,17 @@
                         <input type="submit" value="Open Existing" name="action" />
                     }
                 </div>
+                
                 <div class="8u">
+                    <h2> </h2>
+                    <br />
                     <p>
                         Enter an e-mail address and phone number to start the registration. Please remember the e-mail address and phone number you
                         use as this will allow you the ability to view and modify the registration at a later date as necessary.
                     </p>
                     
                     <input type="button" value ="Back to Main Menu" onclick="location.href='@Url.Action("Index", "Home")    '" />
+                
                 </div>
             </div>
         </div>

@@ -51,34 +51,22 @@ namespace SCRegistrationWeb.Controllers
         //
         // GET: /SearchRegistration/Detail/RegUID
 
-        public ActionResult Detail(string RegUID)
+        public ActionResult Detail(int Id = 0)
         {
-            if (RegUID == null)
+            if (Id == 0)
             {
-                return RedirectToAction("Index", "Home");
+                ViewBag.Found = false;
+                ViewBag.Message = "No Registration number";
+                return View();
             }
             else
             {
-                RegistrationEntry FoundEntry = new RegistrationEntry();
-                int FoundRegID = FoundEntry.RegUIDtoID(RegUID);
+                EventHistory NewEvent = new EventHistory();
+                NewEvent.AddHistory(Id, "Admin Registration Opened", 0);
 
-                if (FoundRegID != 0)
-                {
- 
-                    var registrationentry = from m in db.RegEntries.Where(p => p.RegistrationID.Equals(FoundRegID))
-                                            select m;
-                    ViewBag.Message = "Registration Detail";
-
-                    EventHistory NewEvent = new EventHistory();
-                    NewEvent.AddHistory(FoundRegID, "Admin Registration Opened", 0);
-
-                    return View(registrationentry.ToList());
-                }
-                else
-                {
-                    ViewBag.Message = "Invalid Registration Key";
-                    return View();
-                }
+                ViewBag.Found = true;
+                ViewBag.RegID = Id;
+                return View();
             }
         }
 

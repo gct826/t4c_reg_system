@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.RegistrationEntry>
+
+@{
+    ViewBag.Title = "Summary";
+}
+
+@if (ViewBag.Found == false)
+{
+    <p>@ViewBag.Message</p>
+}
+
+@if (ViewBag.Found)
+{
+foreach (var item in Model)
+{
+<div id="banner-wrapper">
+	<div class="12u">
+		<div class="5grid-layout"><h2>Registration Information</h2>
+            <div class="3u">
+                <table>
+                    <tr class="admin1">
+                        <th>
+                            @Html.DisplayNameFor(model => model.RegistrationID)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegistrationID)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="4u">
+                <table>
+                    <tr class="admin1">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="4u">
+                <table>
+                    <tr class="admin1">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Phone)
+                        </th>
+                        <td>
+                            @String.Format("{0:###-###-####}", Convert.ToInt64(item.Phone))
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="divider1"></div>
+}
+}   

@@ -181,6 +181,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\themes\iridium\images\banner-shadow-bg.png" />
+    <Content Include="Content\themes\iridium\images\banner-wrapper-bg.png" />
+    <Content Include="Content\themes\iridium\images\copyright-bg.png" />
+    <Content Include="Content\themes\iridium\images\divider1-bg.png" />
+    <Content Include="Content\themes\iridium\images\divider2-bg.png" />
+    <Content Include="Content\themes\iridium\images\divider3-bg.png" />
+    <Content Include="Content\themes\iridium\images\link-style1-divider.png" />
+    <Content Include="Content\themes\iridium\images\marketing-bg.png" />
+    <Content Include="Content\themes\iridium\images\spacer.gif" />
     <Content Include="Content\themes\iridium\style-1000px.css" />
     <Content Include="Content\themes\iridium\style-desktop.css" />
     <Content Include="Content\themes\iridium\style-fluid.css" />
@@ -271,7 +280,6 @@
     <Content Include="Content\images\pics07.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\images\Thumbs.db" />
     <None Include="Properties\PublishProfiles\T4C-SC.gct826.com - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\T4C-SC.gct826.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
@@ -314,10 +322,7 @@
     <Content Include="Views\AdminRoomType\Edit.cshtml" />
     <Content Include="Views\AdminRoomType\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Participant\Create.cshtml" />
-    <Content Include="Views\Participant\Edit.cshtml" />
     <Content Include="Views\Participant\Index.cshtml" />
-    <Content Include="Views\Participant\Page2.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Register\Modify.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -345,6 +350,11 @@
     <Content Include="Views\SearchRegistration\Index.cshtml" />
     <Content Include="Views\SearchRegistration\Detail.cshtml" />
     <Content Include="Views\SearchRegistration\EditParticipant.cshtml" />
+    <Content Include="Views\Register\Summary.cshtml" />
+    <Content Include="Views\Participant\Modify.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Schedule.cshtml" />
+    <Content Include="Views\Home\Location.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

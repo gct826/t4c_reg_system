@@ -8,20 +8,34 @@
 }
 else
 {
-<h2>Thank You</h2>
-
-<h5>
-    Your Registration has now been confirmed. Please Remember the e-mail and phone number you used for the registration.
-    This will allow you to go back and check and modify your registration. 
-</h5>
-<h5>
-    Please remember to write a check for @ViewBag.TotalPrice payable to T4C, and your Registration Number @ViewBag.RegID in the Memo line.
-</h5>
-<h5>
-    If you need scholorships select Request Scholorship to apply.
-</h5>
     
-<input type="button" title="Back" value="Back" onclick="location.href='@Url.Action("Index","Register")'" />
+<div id="main-wrapper">
+	<div class="12u" id="main-content">
+		<div class="5grid-layout">
+
+            <h2>Thank You</h2>
+
+            <p>
+                Your Registration has now been confirmed. Please remember the e-mail and phone number you used for the registration.
+                This will allow you to go back and check or modify your registration at any time. 
+            </p>
+            <p>
+                Your total price for summer conference is @String.Format("{0:C}", ViewBag.TotalPrice).
+            </p>
+            <p>
+                Please remember to write a check payable to T4C, and your Registration Number @ViewBag.RegID in the Memo line.
+            </p>
+            <p>
+                If you need scholorships select Request Scholorship to apply.
+            </p>
+    
+            <input type="button" title="Back" value="Back" onclick="location.href='@Url.Action("Index", "Register")'" />
+                       
+        </div>
+    </div>
+</div>    
+    
+    
 
 
 }

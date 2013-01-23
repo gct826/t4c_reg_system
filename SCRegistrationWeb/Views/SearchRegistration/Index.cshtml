@@ -3,93 +3,98 @@
 @{
     ViewBag.Title = "Search Registration";
 }
+<div id="main-wrapper">
+    <div class="12u" id="main-content">
+	    <div class="5grid-layout">
+            <h2>Admin - Search Registration</h2>
 
-<h2>Admin - Search Registration</h2>
+            @using (Html.BeginForm()){
+                <div class="editor-field short"> 
+                    Email: @Html.TextBox("SearcheMail")
+                    Phone: @Html.TextBox("SearchPhone")
+                    Name: @Html.TextBox("SearchName")
+                    Status: @Html.DropDownList("StatusID", "All Active")  
+                    <input type ="submit" value="Filter" />
+                </div>
+            }
+            <table>
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegistrationEntries.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegistrationEntries.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ChineseName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Services.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AgeRanges.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Genders.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegTypes.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Statuses.Name)
+                    </th>
+                    <th></th>
+                </tr>
 
-@using (Html.BeginForm()){
-    <div class="editor-field short"> 
-        Email: @Html.TextBox("SearcheMail")
-        Phone: @Html.TextBox("SearchPhone")
-        Name: @Html.TextBox("SearchName")
-        Status: @Html.DropDownList("StatusID", "All Active")  
-        <input type ="submit" value="Filter" />
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationEntries.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationEntries.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChineseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Services.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgeRanges.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genders.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegTypes.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Statuses.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Open", "Detail", new { Id=item.RegistrationEntries.RegistrationID })
+                    </td>
+                </tr>
+            }
+
+            </table>
+        </div>
     </div>
-}
-<table>
-    <tr>
-        <th></th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegistrationEntries.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegistrationEntries.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ChineseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Services.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AgeRanges.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Genders.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegTypes.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Statuses.Name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegistrationID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegistrationEntries.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegistrationEntries.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChineseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Services.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AgeRanges.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genders.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegTypes.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Statuses.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Open", "Detail", new { RegUID=item.RegistrationEntries.RegistrationUID })
-        </td>
-    </tr>
-}
-
-</table>
+</div>

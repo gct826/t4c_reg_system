@@ -374,6 +374,7 @@ aside {
     font-weight: 700;
     font-size: 1.5em;
 
+
 }
 
 /* login page */
@@ -628,7 +629,7 @@ th {
 }
 
     th a {
-        display: block;
+        : block;
         position: relative;
     }
 

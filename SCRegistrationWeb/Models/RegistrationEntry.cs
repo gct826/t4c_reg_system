@@ -15,7 +15,7 @@ namespace SCRegistrationWeb.Models
 
         [Key]
         [ScaffoldColumn(false)]
-        [DisplayName("Registration ID 注册号")]
+        [DisplayName("Reg ID 注册号")]
         public int RegistrationID { get; set; }
 
         [ScaffoldColumn(false)]
@@ -67,11 +67,40 @@ namespace SCRegistrationWeb.Models
             }
         }
 
-        public bool RegIsConfirm(string UID)
+        public string RegIDtoUID(int ID=0)
         {
-            if (!String.IsNullOrEmpty(UID))
+            if (ID != 0)
             {
-                var RegEntry = _db.RegEntries.Where(s => s.RegistrationUID.Contains(UID));
+                var RegEntry = _db.RegEntries.Where(s => s.RegistrationID.Equals(ID));
+                if (RegEntry != null)
+                {
+                    RegistrationEntry FoundEntry = RegEntry.FirstOrDefault();
+                    if (FoundEntry != null)
+                    {
+                        return FoundEntry.RegistrationUID;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        public bool RegIsConfirm(int ID=0)
+        {
+            if (ID !=0)
+            {
+                var RegEntry = _db.RegEntries.Where(s => s.RegistrationID.Equals(ID));
                 if (RegEntry != null)
                 {
                     RegistrationEntry FoundEntry = RegEntry.FirstOrDefault();
@@ -95,17 +124,17 @@ namespace SCRegistrationWeb.Models
             }
         }
 
-        public decimal RegTotalPrice(string UID)
+        public decimal RegTotalPrice(int ID=0)
         {
-            if (!String.IsNullOrEmpty(UID))
+            if (ID != 0)
             {
-                var RegEntry = _db.RegEntries.Where(s => s.RegistrationUID.Contains(UID));
+                var RegEntry = _db.RegEntries.Where(s => s.RegistrationID.Equals(ID));
                 if (RegEntry != null)
                 {
                     RegistrationEntry FoundEntry = RegEntry.FirstOrDefault();
                     if (FoundEntry != null)
                     {
-                       var PartEntry = from m in _db.ParticipantEntries.Where(p => p.RegistrationID.Equals(FoundEntry.RegistrationID)).Where(p => !p.StatusID.Equals((int)4))
+                       var PartEntry = from m in _db.ParticipantEntries.Where(p => p.RegistrationID.Equals(ID)).Where(p => !p.StatusID.Equals((int)4))
                                         select m;
 
                         decimal totalPrice = (decimal)0;
@@ -133,17 +162,17 @@ namespace SCRegistrationWeb.Models
             }
         }
 
-        public bool RegIsComplete(string UID)
+        public bool RegIsComplete(int ID=0)
         {
-            if (!String.IsNullOrEmpty(UID))
+            if (ID != 0)
             {
-                var RegEntry = _db.RegEntries.Where(s => s.RegistrationUID.Contains(UID));
+                var RegEntry = _db.RegEntries.Where(s => s.RegistrationID.Equals(ID));
                 if (RegEntry != null)
                 {
                     RegistrationEntry FoundEntry = RegEntry.FirstOrDefault();
                     if (FoundEntry != null)
                     {
-                        var PartEntry = from m in _db.ParticipantEntries.Where(p => p.RegistrationID.Equals(FoundEntry.RegistrationID)).Where(p => !p.StatusID.Equals((int)4))
+                        var PartEntry = from m in _db.ParticipantEntries.Where(p => p.RegistrationID.Equals(ID)).Where(p => !p.StatusID.Equals((int)4))
                                         select m;
 
                         bool IsComplete = true;

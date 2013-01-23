@@ -20,7 +20,7 @@
         <table class="context">
             <tr class="editing">
                 <td>       
-                    <div class="editor-label readonly">
+                    <div> class="editor-label readonly">
                         @Html.LabelFor(model => model.FirstName)
                     </div>
                     <div class="editor-field readonly">
@@ -53,10 +53,7 @@
                     <div class="editor-label readonly">
                         @Html.LabelFor(model => model.GenderID)
                     </div>
-                    <div class="editor-field readonly">
-                        @Html.DisplayFor(model => model.Genders.Name)
-                        @Html.HiddenFor(model => model.GenderID)
-                    </div>
+
                 </td>
                 <td>
                     <div class="editor-label readonly">

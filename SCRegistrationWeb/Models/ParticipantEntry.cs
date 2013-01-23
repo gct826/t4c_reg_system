@@ -20,7 +20,7 @@ namespace SCRegistrationWeb.Models
         public int ParticipantID { get; set; }
 
         [ScaffoldColumn(false)]
-        [DisplayName("Registration ID 注册号")]
+        [DisplayName("Reg ID 注册号")]
         public int RegistrationID { get; set; }
 
         [ScaffoldColumn(false)]

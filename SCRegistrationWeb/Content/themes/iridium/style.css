@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Dosis:200,400);
+﻿@import url(http://fonts.googleapis.com/css?family=Dosis:200,400);
 @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,200);
 
 /*
@@ -61,6 +61,31 @@ p {
 	margin-bottom: 10px;
 }
 
+/* info and errors */
+.message-info {
+    border: 1px solid;
+    clear: both;
+    padding: 10px 20px;
+}
+
+.message-error {
+    clear: both;
+    color: #e80c4d;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.message-success {
+    color: #7ac0da;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.error {
+    color: #e80c4d;
+}
 
 /* Reusable Buttons */
 
@@ -245,4 +270,239 @@ p {
 .list-style2 .first {
 	padding-top: 0px;
 	border-top: none;
+}
+
+/* tables
+----------------------------------------------------------*/
+table {
+    border-collapse: collapse;
+    border-spacing: 10px;
+    margin-top: 0.75em;
+    width: 100%;
+}
+
+th {
+    font-size: 1em;
+    text-align: left;
+    padding: 0.25em 2em 0.25em 0em;
+    color:gray;
+}
+
+    th a {
+        display: block;
+        position: relative;
+    }
+
+    th a:link, th a:visited, th a:active, th a:hover {
+        color: #333;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0;
+    }
+
+    th a:hover {
+        color: #000;
+    }
+
+    th.asc a, th.desc a {
+        margin-right: .75em;
+    }
+
+    th.asc a:after, th.desc a:after {
+        display: block;
+        position: absolute;
+        right: 0em;
+        top: 0;
+        font-size: 0.75em;
+    }
+
+    th.asc a:after {
+        content: '▲';
+    }
+
+    th.desc a:after {
+        content: '▼';
+    }
+
+td {
+    font-size: 1.2em;
+    color:black;
+    padding: 0.25em 2em 0.25em 0em;
+    text-align: left;
+}
+
+tr.editing > td {
+    padding: 0.25em 2em 0.25em 0em;
+    padding-left: 0.5em;
+    padding-bottom: 1.5em;
+}
+
+tr.radioselect > td {
+
+    vertical-align:top;
+
+}
+
+tr.pager > td {
+    padding: 0 0.25em 0 0;
+}
+
+tr.admin1 > th {
+    width: 100px;
+}
+
+tr.partview > th {
+    width: 175px;
+}
+
+/* forms */
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+fieldset legend {
+    display: none;
+}
+
+fieldset ol {
+    padding: 0;
+    list-style: none;
+}
+
+fieldset ol li {
+    padding-bottom: 5px;
+}
+
+
+label {
+    display: inline-block;
+    font-size: 1em;
+}
+
+.large {
+    font-size: 1.2em;
+    margin: 2px 0 2px 0;
+    padding: 2px;
+    }
+
+label.checkbox {
+    display: inline;
+}
+
+.required {
+    display: inline-block;
+}
+
+.required:after{
+    font-size: 0.8em;
+    content: "*";
+    font-weight:bold;
+    color: red; 
+}
+
+
+input, textarea {
+    border: 1px solid #e2e2e2;
+    background: #fff;
+    color: #333;
+    font-size: 1.2em;
+    margin: 2px 0 2px 0;
+    padding: 2px;
+    width: 200px;
+}
+
+.short input, textarea {
+    width: 170px;
+}
+
+
+.readonly input,textarea
+{
+    background: none;
+    border:none;
+}
+
+.readonly:after {
+    content: "*";
+    font-weight: bold;
+    color:transparent;
+}
+
+textarea {
+    font-family: inherit;
+    width: 200px;
+}
+
+.long {
+    width: 250px;
+}
+
+
+    input:focus, textarea:focus {
+        border: 1px solid #7ac0da;
+    }
+
+    
+    input[type="checkbox"] {
+        background: transparent;
+        border: inherit;
+        width: auto;
+    }
+
+    input[type="radio"] {
+    width: 12px;
+    margin-right:5px;
+    text-align: left;
+    font-size:1em;
+    vertical-align:middle;
+    }
+
+    input[type="submit"],
+    input[type="button"],
+    button {
+        background-color: #d3dce0;
+        border: 1px solid #787878;
+        cursor: pointer;
+        font-size: .8em;
+        padding: 7px;
+        margin: 4px 7px 2px 4px;
+        width: auto;
+    }
+
+    td input[type="submit"],
+    td input[type="button"],
+    td button {
+        font-size: 1em;
+        padding: 4px;
+        margin-right: 4px;
+    }
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 0.5em;
+}
+
+.validation-summary-valid {
+    display: none;
 }

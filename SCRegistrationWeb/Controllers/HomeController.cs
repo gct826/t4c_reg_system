@@ -16,5 +16,29 @@ namespace SCRegistrationWeb.Controllers
             return View();
         }
 
+        //
+        // GET: /Home/About
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        //
+        // GET: /Home/Schedule
+        public ActionResult Schedule()
+        {
+            return View();
+        }
+
+        //
+        // GET: /Home/Location
+        public ActionResult Location()
+        {
+            return View();
+        }
+
+
     }
+
+   
 }
