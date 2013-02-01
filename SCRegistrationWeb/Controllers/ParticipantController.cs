@@ -167,7 +167,6 @@ namespace SCRegistrationWeb.Controllers
 
             if (RegID != 0 && Id == 0)
             {
-
                 if (ModelState.IsValid)
                 {
 

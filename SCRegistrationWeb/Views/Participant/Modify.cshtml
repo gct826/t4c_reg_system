@@ -288,7 +288,7 @@
                                                 </div>
                                             }
                                         }
-                                        else
+                                        else if(ViewBag.isNew == false)
                                         {
                                             @Html.HiddenFor(model => model.FellowshipID)
                                         }                                                                             
@@ -318,7 +318,7 @@
                                                 </div>
                                             }
                                         }
-                                        else
+                                        else if(ViewBag.isNew == false)
                                         {
                                             @Html.HiddenFor(model => model.RoomTypeID)
                                         }                                                                             

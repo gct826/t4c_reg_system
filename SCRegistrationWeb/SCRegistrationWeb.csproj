@@ -126,6 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers-Admin\AdminHistoryController.cs" />
     <Compile Include="Controllers-Admin\AdminRegistrationController.cs" />
     <Compile Include="Controllers-Admin\AdminStatusController.cs" />
     <Compile Include="Controllers-Admin\SearchRegistrationController.cs" />
@@ -167,13 +168,25 @@
     <Compile Include="Migrations\201212241618273_UpdatePaymentEntry1.Designer.cs">
       <DependentUpon>201212241618273_UpdatePaymentEntry1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201301280428442_Payment_Properties.cs" />
+    <Compile Include="Migrations\201301280428442_Payment_Properties.Designer.cs">
+      <DependentUpon>201301280428442_Payment_Properties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201301280451559_Update_PaymentEntry.cs" />
+    <Compile Include="Migrations\201301280451559_Update_PaymentEntry.Designer.cs">
+      <DependentUpon>201301280451559_Update_PaymentEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201301312003580_Jan31.cs" />
+    <Compile Include="Migrations\201301312003580_Jan31.Designer.cs">
+      <DependentUpon>201301312003580_Jan31.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Helpers\MultiButtonAttribute.cs" />
     <Compile Include="Models\HistoryModel.cs" />
     <Compile Include="Models\PartAttributeModels.cs" />
     <Compile Include="Models\ParticipantEntry.cs" />
-    <Compile Include="Models\PaymentEntry.cs" />
+    <Compile Include="Models\PaymentModels.cs" />
     <Compile Include="Models\PricingModels.cs" />
     <Compile Include="Models\RadioButtonList.cs" />
     <Compile Include="Models\RegistrationEntry.cs" />
@@ -338,11 +351,6 @@
     <Content Include="Views\AdminStatus\Edit.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Register\Complete.cshtml" />
-    <Content Include="Views\Payment\Index.cshtml" />
-    <Content Include="Views\Payment\Details.cshtml" />
-    <Content Include="Views\Payment\Create.cshtml" />
-    <Content Include="Views\Payment\Edit.cshtml" />
-    <Content Include="Views\Payment\Delete.cshtml" />
     <Content Include="Views\AdminRegistration\Details.cshtml" />
     <Content Include="Views\AdminRegistration\Create.cshtml" />
     <Content Include="Views\SearchRegistration\EditRegistration.cshtml" />
@@ -355,6 +363,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Schedule.cshtml" />
     <Content Include="Views\Home\Location.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Payment\Create.cshtml" />
+    <Content Include="Views\Payment\Edit.cshtml" />
+    <Content Include="Views\AdminHistory\Index.cshtml" />
+    <Content Include="Views\Register\Scholarship.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -380,6 +393,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201212241618273_UpdatePaymentEntry1.resx">
       <DependentUpon>201212241618273_UpdatePaymentEntry1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201301280428442_Payment_Properties.resx">
+      <DependentUpon>201301280428442_Payment_Properties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201301280451559_Update_PaymentEntry.resx">
+      <DependentUpon>201301280451559_Update_PaymentEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201301312003580_Jan31.resx">
+      <DependentUpon>201301312003580_Jan31.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

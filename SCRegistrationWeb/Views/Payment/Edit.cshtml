@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Edit";
 }
+<div id="main-wrapper">
+	<div class="12u" id="main-content">
+		<div class="5grid-layout">
 
 <h2>Edit</h2>
 
@@ -21,11 +24,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.PaymentType)
+            @Html.LabelFor(model => model.PmtTypeID, "PmtTypes")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.PaymentType)
-            @Html.ValidationMessageFor(model => model.PaymentType)
+            @Html.DropDownList("PmtTypeID", String.Empty)
+            @Html.ValidationMessageFor(model => model.PmtTypeID)
         </div>
 
         <div class="editor-label">
@@ -37,11 +40,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.PaymentStat)
+            @Html.LabelFor(model => model.PmtStatusID, "PmtStatuses")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.PaymentStat)
-            @Html.ValidationMessageFor(model => model.PaymentStat)
+            @Html.DropDownList("PmtStatusID", String.Empty)
+            @Html.ValidationMessageFor(model => model.PmtStatusID)
         </div>
 
         <div class="editor-label">
@@ -68,6 +71,10 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
+</div>
+
+        </div> 
+    </div>
 </div>
 
 @section Scripts {

@@ -2,22 +2,48 @@
     ViewBag.Title = "TableModification";
 }
 
-<h2>TableModification</h2>
+<div id="main-wrapper">
+	<div class="12u" id="main-content">
+		<div class="5grid-layout">
 
-<h4>Fellowship Table</h4>
-@{Html.RenderAction("Index", "AdminFellowship");}
+            <h2>TableModification</h2>
 
-<h4>Pricing Table</h4>
-@{Html.RenderAction("Index", "AdminPricing");}
+			<div class="row">
+                <div class="divider1"></div>
+                <h3>Fellowship Table</h3>
+                @{Html.RenderAction("Index", "AdminFellowship");}
+            </div>
+            <div class="row">
+                <div class="divider1"></div>
 
-<h4>Room Type Table</h4>
-@{Html.RenderAction("Index", "AdminRoomType");}
+                <h3>Pricing Table</h3>
+                @{Html.RenderAction("Index", "AdminPricing");}
+            </div>
+            <div class="row">
+                <div class="divider1"></div>
 
-<h4>Age Range Table</h4>
-@{Html.RenderAction("Index", "AdminAgeRange");}
+                <h3>Room Type Table</h3>
+                @{Html.RenderAction("Index", "AdminRoomType");}
+            </div>
+            <div class="row">
+                <div class="divider1"></div>
 
-<h4>Congregation Table</h4>
-@{Html.RenderAction("Index", "AdminService");}
+                <h3>Age Range Table</h3>
+                @{Html.RenderAction("Index", "AdminAgeRange");}
+            </div>
+            <div class="row">
+                <div class="divider1"></div>
 
-<h4>Status Table</h4>
-@{Html.RenderAction("Index", "AdminStatus");}
+                <h3>Congregation Table</h3>
+                @{Html.RenderAction("Index", "AdminService");}
+            </div>
+            <div class="row">
+                <div class="divider1"></div>
+
+                <h3>Status Table</h3>
+                @{Html.RenderAction("Index", "AdminStatus");}
+
+            </div>
+        </div>
+    </div>
+</div>

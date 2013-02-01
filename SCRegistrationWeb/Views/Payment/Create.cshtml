@@ -1,74 +1,128 @@
 ﻿@model SCRegistrationWeb.Models.PaymentEntry
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add Payment";
 }
 
-<h2>Create</h2>
+<div id="main-wrapper">
+	<div class="12u" id="main-content">
+		<div class="5grid-layout">
+			<div class="row">
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>PaymentEntry</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PaymentDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PaymentDate)
-            @Html.ValidationMessageFor(model => model.PaymentDate)
-        </div>
+            @if (ViewBag.isEmpty == true)
+            {
+            using (Html.BeginForm()) {
+                @Html.ValidationSummary(true)
+                
+                <h2>Add Payment Entry</h2>
+                                
+                <h3>Please enter the Registration ID</h3>
+                
+                <div class="message-error">
+                @if(ViewBag.Message != null)
+                {
+                    @ViewBag.Message
+                }
+                </div>
+                
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.RegID)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.RegID)
+                    @Html.ValidationMessageFor(model => model.RegID)
+                </div>
+                
+                <p>
+                    <input type="submit" value="Open Registration" />
+                </p>
+            }
+            }
+            
+            @if (ViewBag.isEmpty == false)
+            {
+                
+                Html.RenderAction("Summary", "Register", new { Id = ViewBag.RegID });
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PaymentType)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PaymentType)
-            @Html.ValidationMessageFor(model => model.PaymentType)
-        </div>
+                using (Html.BeginForm()) {
+                @Html.ValidationSummary(true)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PaymentAmt)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PaymentAmt)
-            @Html.ValidationMessageFor(model => model.PaymentAmt)
-        </div>
+                <div class="row">
+                    <div class="12u">
+                        <h3>Registration still owes: @ViewBag.RegAmtOwes</h3>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="12u">
+                 <h2>Add Payment Entry</h2>
+                
+                <div class="message-error">
+                @if(ViewBag.Message != null)
+                {
+                    @ViewBag.Message
+                }
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PaymentStat)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PaymentStat)
-            @Html.ValidationMessageFor(model => model.PaymentStat)
-        </div>
+                <fieldset>
+                    <legend>PaymentEntry</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PaymentComment)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PaymentComment)
-            @Html.ValidationMessageFor(model => model.PaymentComment)
-        </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PaymentDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PaymentDate)
+                        @Html.ValidationMessageFor(model => model.PaymentDate)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RegID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.RegID)
-            @Html.ValidationMessageFor(model => model.RegID)
-        </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PmtTypeID, "PmtTypes")
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownList("PmtTypeID", String.Empty)
+                        @Html.ValidationMessageFor(model => model.PmtTypeID)
+                    </div>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PaymentAmt)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PaymentAmt)
+                        @Html.ValidationMessageFor(model => model.PaymentAmt)
+                    </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PaymentComment)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PaymentComment)
+                        @Html.ValidationMessageFor(model => model.PaymentComment)
+                    </div>
+                        
+                        @Html.HiddenFor(model => model.PmtStatusID)
+
+                        @Html.HiddenFor(model => model.RegID)
+                    
+                    <p>
+                        <input type="submit" value="Add Payment" />
+                    </p>
+                </fieldset>
+                    </div>
+                    </div>
+            }
+            }
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+            
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

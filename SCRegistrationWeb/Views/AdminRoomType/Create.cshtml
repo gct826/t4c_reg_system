@@ -4,38 +4,53 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<div id="main-wrapper">
+	<div class="12u" id="main-content">
+		<div class="5grid-layout">
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+        <h2>Create Room Type</h2>
 
-    <fieldset>
-        <legend>RoomType</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RegTypeID, "RegTypes")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("RegTypeID", String.Empty)
-            @Html.ValidationMessageFor(model => model.RegTypeID)
+        <div class="message-error">
+            <p>
+                @ViewBag.Message
+            </p>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+        @using (Html.BeginForm()) {
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>RoomType</legend>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.RegTypeID, "RegTypes")
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("RegTypeID", String.Empty)
+
+                    @Html.ValidationMessageFor(model => model.RegTypeID)
+                </div>
+
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Name)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+
+                <p>
+                    <input type="submit" value="Create" />
+                    <input type="button" value="Cancel" onclick="location.href='@Url.Action("TableModification","Admin")    '" />
+                </p>
+            </fieldset>
+        }
+
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-            <input type="button" value="Cancel" onclick="location.href='@Url.Action("TableModification","Admin")    '" />
-        </p>
-    </fieldset>
-}
-
-
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+

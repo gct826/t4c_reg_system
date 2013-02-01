@@ -309,7 +309,113 @@ namespace SCRegistrationWeb.Controllers
     
         //
         // GET: /Register/Complete/RegUID
-        public ActionResult Complete(string RegUID)
+        public ActionResult Complete(string RegUID, FormCollection values)
+        {          
+            if (RegUID == null)
+            {
+                ViewBag.Found = false;
+                return View();
+            }
+            
+            if (values.Count == 0)
+            {
+                RegistrationEntry FoundEntry = new RegistrationEntry();
+                int FoundRegID = FoundEntry.RegUIDtoID(RegUID);
+
+                if (FoundRegID != 0)
+                {
+                    ViewBag.Found = true;
+                    ViewBag.Scholarship = false;
+                    ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
+                    ViewBag.RegID = FoundRegID;
+                    
+                    return View();
+                }
+                else
+                {
+                    ViewBag.Found = false;
+                    ViewBag.Message = "Invalid Registration Key";
+                    return View();
+                }
+            }
+
+            ViewBag.Found = false;
+            return View();
+        }
+
+        //
+        // POST: /Register/Complete/RegUID
+        [HttpPost]
+        public ActionResult Complete(string RegUID, PaymentEntry values)
+        {
+            if (RegUID == null)
+            {
+                ViewBag.Found = false;
+                return View();
+            }
+            
+            RegistrationEntry FoundEntry = new RegistrationEntry();
+            int FoundRegID = FoundEntry.RegUIDtoID(RegUID);
+
+            if (values.RegID == 0 && values.PaymentAmt == (decimal)0)
+            {
+                ViewBag.Found = true;
+                ViewBag.Scholarship = true;
+                ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
+                ViewBag.RegID = FoundRegID;
+                values.RegID = (int)FoundRegID;
+                values.PaymentDate = DateTime.Now;
+                values.PmtTypeID = (int)1;
+                values.PmtStatusID = (int)1;
+
+                return View(values);
+            }
+
+            if (values.RegID == FoundRegID && values.PaymentAmt <= (decimal)0)
+            {
+                ViewBag.Found = true;
+                ViewBag.Scholarship = true;
+                ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
+                ViewBag.RegID = FoundRegID;
+                ViewBag.Message = "Please enter an Amount greater then 0";
+                values.RegID = (int)FoundRegID;
+                values.PaymentDate = DateTime.Now;
+                values.PmtTypeID = (int)1;
+                values.PmtStatusID = (int)1;
+
+                return View(values);
+            }
+            
+            if (values.RegID == FoundRegID && values.PaymentAmt > (decimal)0)
+            {
+                values.RegID = (int)FoundRegID;
+                values.PaymentDate = DateTime.Now;
+                values.PmtTypeID = (int)1;
+                values.PmtStatusID = (int)1;
+
+                _db.PaymentEntries.Add(values);
+                _db.SaveChanges();
+
+                EventHistory NewEvent = new EventHistory();
+                NewEvent.AddHistory(values.RegID, "Scholarship Request Entered", values.PaymentID);
+
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Found = true;
+            ViewBag.Scholarship = false;
+            ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
+            ViewBag.RegID = FoundRegID;
+
+            return View();
+
+        }
+
+
+        //
+        // GET: /Register/Scholarship/RegUID
+
+        public ActionResult Scholarship(string RegUID)
         {
             {
                 if (RegUID == null)
@@ -339,7 +445,6 @@ namespace SCRegistrationWeb.Controllers
                 }
             }
         }
-
     }
 }
     

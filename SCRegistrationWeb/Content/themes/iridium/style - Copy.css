@@ -420,16 +420,6 @@ input, textarea {
     width: 200px;
 }
 
-input,select{
-	padding:3px;
-	color:#333333;
-	
-	border:1px solid #96A6C5;
-	margin-top:2px;
-	width:200px;
-	font-size:1.2em;
-}
-
 .short input, textarea {
     width: 170px;
 }
@@ -479,7 +469,6 @@ textarea {
 
     input[type="submit"],
     input[type="button"],
-    input[type="dropdown"],
     button {
         background-color: #d3dce0;
         border: 1px solid #787878;

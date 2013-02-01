@@ -3,61 +3,67 @@
 @{
     ViewBag.Title = "Index";
 }
+            <div id="main-wrapper">
+                <div class="12u" id="main-content">
+	                <div class="5grid-layout">
+                        <div class="row">
+            <h2>Payment Entries</h2>
 
-<h2>Index</h2>
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PaymentDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PmtTypes.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PaymentAmt)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PmtStatuses.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PaymentComment)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegID)
+                    </th>
+                    <th></th>
+                </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentAmt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentStat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentComment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegID)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PmtTypes.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentAmt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PmtStatuses.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentComment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegID)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.PaymentID })
+                    </td>
+                </tr>
+            }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaymentDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaymentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaymentAmt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaymentStat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaymentComment)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PaymentID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PaymentID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PaymentID })
-        </td>
-    </tr>
-}
+            </table>
 
-</table>
+            </div>
+        </div>
+    </div>
+</div>

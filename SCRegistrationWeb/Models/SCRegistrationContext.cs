@@ -28,6 +28,8 @@ namespace SCRegistrationWeb.Models
         public DbSet<EventHistory> EventHistory { get; set; }
 
         public DbSet<PaymentEntry> PaymentEntries { get; set; }
+        public DbSet<PmtStatus> PmtStatuses { get; set; }
+        public DbSet<PmtType> PmtTypes { get; set; }
 
     }
 }

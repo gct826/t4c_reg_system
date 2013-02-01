@@ -17,58 +17,58 @@ namespace SCRegistrationWeb.Migrations
         protected override void Seed(SCRegistrationWeb.Models.SCRegistrationContext context)
         {
             context.Statuses.AddOrUpdate(
-                 s => s.Name,
-                 new Status { Name = "Incomplete" },
-                 new Status { Name = "Pending" },
-                 new Status { Name = "Confirmed" },
-                 new Status { Name = "Cancelled" },
-                 new Status { Name = "Checked In" },
-                 new Status { Name = "Checked Out" }
+                 s => s.StatusID,
+                 new Status { StatusID = 1, Name = "Incomplete" },
+                 new Status { StatusID = 2, Name = "Pending" },
+                 new Status { StatusID = 3, Name = "Confirmed" },
+                 new Status { StatusID = 4, Name = "Cancelled" },
+                 new Status { StatusID = 5, Name = "Checked In" },
+                 new Status { StatusID = 6, Name = "Checked Out" }
                  );
 
             context.Services.AddOrUpdate(
-                v => v.Name,
-                new Service { Name = "English" },
-                new Service { Name = "Mandarian" },
-                new Service { Name = "Cantonese" },
-                new Service { Name = "T4C West" },
-                new Service { Name = "Youth Group" },
-                new Service { Name = "Children" },
-                new Service { Name = "Nursery" }
+                v => v.ServiceID,
+                new Service { ServiceID = 1, Name = "English" },
+                new Service { ServiceID = 2, Name = "Mandarian" },
+                new Service { ServiceID = 3, Name = "Cantonese" },
+                new Service { ServiceID = 4, Name = "T4C West" },
+                new Service { ServiceID = 5, Name = "Youth Group" },
+                new Service { ServiceID = 6, Name = "Children" },
+                new Service { ServiceID = 7, Name = "Nursery" }
                 );
 
             context.AgeRanges.AddOrUpdate(
-                a => a.Name,
-                new AgeRange { Name = "0-1 yrs" },
-                new AgeRange { Name = "1-5 yrs" },
-                new AgeRange { Name = "6-12 yrs" },
-                new AgeRange { Name = "Teenager" },
-                new AgeRange { Name = "Adult" },
-                new AgeRange { Name = "Senior" }
+                a => a.AgeRangeID,
+                new AgeRange { AgeRangeID = 1, Name = "0-1 yrs" },
+                new AgeRange { AgeRangeID = 2, Name = "1-5 yrs" },
+                new AgeRange { AgeRangeID = 3, Name = "6-12 yrs" },
+                new AgeRange { AgeRangeID = 4, Name = "Teenager" },
+                new AgeRange { AgeRangeID = 5, Name = "Adult" },
+                new AgeRange { AgeRangeID = 6, Name = "Senior" }
                 );
 
             context.Genders.AddOrUpdate(
-                 a => a.Name,
-                 new Gender { Name = "Male" },
-                 new Gender { Name = "Female" }
+                 a => a.GenderID,
+                 new Gender { GenderID = 1, Name = "Male" },
+                 new Gender { GenderID = 2, Name = "Female" }
                  );
+
+            context.Fellowships.AddOrUpdate(
+                a => a.FellowshipID,
+                new Fellowship { FellowshipID = 1, ServiceID = 1, Name = "No Fellowship Selected" },
+                new Fellowship { FellowshipID = 2, ServiceID = 2, Name = "No Fellowship Selected" },
+                new Fellowship { FellowshipID = 3, ServiceID = 3, Name = "No Fellowship Selected" },
+                new Fellowship { FellowshipID = 4, ServiceID = 4, Name = "No Fellowship Selected" },
+                new Fellowship { FellowshipID = 5, ServiceID = 5, Name = "No Fellowships" },
+                new Fellowship { FellowshipID = 6, ServiceID = 6, Name = "No Fellowships" },
+                new Fellowship { FellowshipID = 7, ServiceID = 7, Name = "No Fellowships" }
+                );
 
             context.RegTypes.AddOrUpdate(
                  a => a.Name,
                  new RegType { Name = "Full Time" },
                  new RegType { Name = "Part Time" }
                  );
-
-            context.Fellowships.AddOrUpdate(
-                a => a.ServiceID,
-                new Fellowship { ServiceID = 1, Name = "No Fellowship Selected"},
-                new Fellowship { ServiceID = 2, Name = "No Fellowship Selected"},
-                new Fellowship { ServiceID = 3, Name = "No Fellowship Selected"},
-                new Fellowship { ServiceID = 4, Name = "No Fellowship Selected"},
-                new Fellowship { ServiceID = 5, Name = "No Fellowships"},
-                new Fellowship { ServiceID = 6, Name = "No Fellowships"},
-                new Fellowship { ServiceID = 7, Name = "No Fellowships"}
-                );
 
             context.RegPrices.AddOrUpdate(
                 a => a.AgeRangeID,
@@ -81,14 +81,33 @@ namespace SCRegistrationWeb.Migrations
                 );
 
             context.RoomTypes.AddOrUpdate(
-                a => a.Name,
-                new RoomType { RegTypeID = 1, Name = "No Preference"},
-                new RoomType { RegTypeID = 2, Name = "Part Time - No Room"},
-                new RoomType { RegTypeID = 1, Name = "Family Room"},
-                new RoomType { RegTypeID = 1, Name = "Small Children/Senior"},
-                new RoomType { RegTypeID = 1, Name = "Dormatory"},
-                new RoomType { RegTypeID = 1, Name = "Handicap Accessible"}
+                a => a.RoomTypeID,
+                new RoomType { RoomTypeID = 1, RegTypeID = 1, Name = "No Preference"},
+                new RoomType { RoomTypeID = 2, RegTypeID = 2, Name = "Part Time - No Room" },
+                new RoomType { RoomTypeID = 3, RegTypeID = 1, Name = "Family Room" },
+                new RoomType { RoomTypeID = 4, RegTypeID = 1, Name = "Small Children/Senior" },
+                new RoomType { RoomTypeID = 5, RegTypeID = 1, Name = "Dormatory" },
+                new RoomType { RoomTypeID = 6, RegTypeID = 1, Name = "Handicap Accessible" }
                 );
+
+
+            context.PmtStatuses.AddOrUpdate(
+                a => a.PmtStatusID,
+                new PmtStatus { PmtStatusID = 1, Name = "Pending" },
+                new PmtStatus { PmtStatusID = 2, Name = "Approved" },
+                new PmtStatus { PmtStatusID = 3, Name = "Declined" },
+                new PmtStatus { PmtStatusID = 4, Name = "Refunded" }
+                );
+
+            context.PmtTypes.AddOrUpdate(
+                a => a.PmtTypeID,
+                new PmtType { PmtTypeID = 1, Name = "Scholorship" },
+                new PmtType { PmtTypeID = 2, Name = "Cash" },
+                new PmtType { PmtTypeID = 3, Name = "Check" }
+                );
+
+
+
         }
     }
 }

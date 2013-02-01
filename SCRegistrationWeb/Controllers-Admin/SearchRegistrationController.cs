@@ -9,7 +9,7 @@ using SCRegistrationWeb.Models;
 
 namespace SCRegistrationWeb.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class SearchRegistrationController : Controller
     {
         private SCRegistrationContext db = new SCRegistrationContext();

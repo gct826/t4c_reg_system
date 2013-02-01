@@ -4,45 +4,52 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<div id="main-wrapper">
+	<div class="12u" id="main-content">
+		<div class="5grid-layout">
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+        <h2>Edit</h2>
 
-    <fieldset>
-        <legend>RegPrice</legend>
+        @using (Html.BeginForm()) {
+            @Html.ValidationSummary(true)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AgeRangeID, "AgeRange")
-        </div>
-        <div class="editor-field readonly">
-            @Html.TextBoxFor(model => model.AgeRange.Name, new { disabled = "disabled", @readonly = "readonly" })
-            @Html.HiddenFor(model => model.AgeRangeID)
-        </div>
+            <fieldset>
+                <legend>RegPrice</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PartTimePrice)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PartTimePrice)
-            @Html.ValidationMessageFor(model => model.PartTimePrice)
-        </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.AgeRangeID, "AgeRange")
+                </div>
+                <div class="editor-field readonly">
+                    @Html.TextBoxFor(model => model.AgeRange.Name, new { disabled = "disabled", @readonly = "readonly" })
+                    @Html.HiddenFor(model => model.AgeRangeID)
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FullTimePrice)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FullTimePrice)
-            @Html.ValidationMessageFor(model => model.FullTimePrice)
-        </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PartTimePrice)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.PartTimePrice)
+                    @Html.ValidationMessageFor(model => model.PartTimePrice)
+                </div>
 
-        <p>
-            <input type="submit" value="Save" />
-            <input type="button" value="Cancel" onclick="location.href='@Url.Action("TableModification","Admin")'" />
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.FullTimePrice)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.FullTimePrice)
+                    @Html.ValidationMessageFor(model => model.FullTimePrice)
+                </div>
 
-        </p>
-    </fieldset>
-}
+                <p>
+                    <input type="submit" value="Save" />
+                    <input type="button" value="Cancel" onclick="location.href='@Url.Action("TableModification","Admin")'" />
+
+                </p>
+            </fieldset>
+        }
+        </div> 
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

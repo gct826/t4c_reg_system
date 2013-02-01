@@ -41,7 +41,8 @@ namespace SCRegistrationWeb.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name");
+            int defaultRegTypeID = (int)1;
+            ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name", defaultRegTypeID);
             return View();
         }
 
@@ -53,9 +54,18 @@ namespace SCRegistrationWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.RoomTypes.Add(roomtype);
-                db.SaveChanges();
-                return RedirectToAction("TableModification", "Admin");
+                if (roomtype.RegTypeID != 1)
+                {
+                    ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name", roomtype.RegTypeID);
+                    ViewBag.Message = "Can not add Room Type to Part Time rooms";
+                    return View(roomtype);
+                }
+                else
+                {
+                    db.RoomTypes.Add(roomtype);
+                    db.SaveChanges();
+                    return RedirectToAction("TableModification", "Admin");
+                }
             }
 
             ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name", roomtype.RegTypeID);

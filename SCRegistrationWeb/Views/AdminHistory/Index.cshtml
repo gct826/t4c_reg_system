@@ -1,0 +1,50 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.EventHistory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="main-wrapper">
+	<div class="12u" id="main-content">
+		<div class="5grid-layout">
+
+        <h2>Event History</h2>
+
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.HistoryDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RegHistID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HistoryEvent)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EventHistID)
+                </th>
+            </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HistoryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegHistID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HistoryEvent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventHistID)
+                </td>
+            </tr>
+        }
+
+        </table>
+
+        </div>
+    </div>
+</div>

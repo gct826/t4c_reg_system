@@ -151,8 +151,8 @@ namespace SCRegistrationWeb.Migrations
             DropIndex("dbo.RoomTypes", new[] { "RegTypeID" });
             DropIndex("dbo.Fellowships", new[] { "ServiceID" });
             DropForeignKey("dbo.RegPrices", "AgeRangeID", "dbo.AgeRanges");
-            DropForeignKey("dbo.ParticipantEntries", "RoomTypeID", "dbo.RoomTypes");
-            DropForeignKey("dbo.ParticipantEntries", "FellowshipID", "dbo.Fellowships");
+            //DropForeignKey("dbo.ParticipantEntries", "RoomTypeID", "dbo.RoomTypes");
+            //DropForeignKey("dbo.ParticipantEntries", "FellowshipID", "dbo.Fellowships");
             DropForeignKey("dbo.ParticipantEntries", "RegTypeID", "dbo.RegTypes");
             DropForeignKey("dbo.ParticipantEntries", "GenderID", "dbo.Genders");
             DropForeignKey("dbo.ParticipantEntries", "AgeRangeID", "dbo.AgeRanges");
