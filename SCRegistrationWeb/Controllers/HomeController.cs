@@ -37,6 +37,12 @@ namespace SCRegistrationWeb.Controllers
             return View();
         }
 
+        //
+        // GET: /Home/Copyright
+        public ActionResult Copyright()
+        {
+            return View();
+        }
 
     }
 

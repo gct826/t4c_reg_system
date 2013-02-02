@@ -368,6 +368,7 @@
     <Content Include="Views\Payment\Edit.cshtml" />
     <Content Include="Views\AdminHistory\Index.cshtml" />
     <Content Include="Views\Register\Scholarship.cshtml" />
+    <Content Include="Views\Home\Copyright.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
