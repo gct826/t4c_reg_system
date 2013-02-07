@@ -11,37 +11,48 @@
     <div class="12u" id="main-content">
 	    <div class="5grid-layout">
             <div class="row">
-                <div class="3u">
-                    <h3>Participant</h3>
-                </div>
 
-                <div class="9u">
-                    @if (@ViewBag.RegIsConfirm)
-                    {
+
+                @if (@ViewBag.RegIsConfirm)
+                {
+                    
+                    <div class="5u">
+                    
                         <p>This registration has been confimed. Click "Edit Registration" to modify registration.</p>
                         <input type="button" title="Edit Registration" value="Edit Registration" onclick="location.href='@Url.Action("Unlock", "Register", new {RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin})    '" />
-                    }      
+                        <input type="button" title="Close Registration" value="Close Registration" onclick="location.href='@Url.Action("Index", "Register")    '" />
+  
+                    </div>
+                    Html.RenderAction("PaymentSummary", "Register", new { ID = ViewBag.RegID });
+                }
 
+                @if (@ViewBag.RegIsConfirm == false)
+                {
+                    <div class="9u">
         
-                    @if ((@ViewBag.RegIsConfirm == false) && (@ViewBag.RegIsComplete))
+                    @if (@ViewBag.RegIsComplete)
                     {
                         <p>Select "Add Participant to add a new participant. Please click "Confirm Registration" once you're done.</p>
                         <input type="button" title="Add New" value="Add Participant" onclick="location.href='@Url.Action("Modify", "Participant", new { RegUID = ViewBag.RegUID, isPage2=false, id=0 })    '" />
                         <input type="button" title="Confim" value="Confirm Registration" onclick="location.href='@Url.Action("Lock", "Register", new { RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin }, "")    '" />
+                        <input type="button" title="Close" value="Close Registration" onclick="location.href='@Url.Action("Index", "Register")    '" />
+
                     }
     
-                    @if ((@ViewBag.RegIsConfirm == false) && (@ViewBag.RegIsComplete == false))
+                    @if (@ViewBag.RegIsComplete == false)
                     {
                         <div class="message-error">
                         <p>Warning, you have an Incomplete Participant entry. Please finish before continuing.</p>
                         </div>
                     }
-                </div>   
+                    </div>
+                }   
             </div>
 
             <h2>@ViewBag.PartMessage</h2>
 
             <div class="12u">
+                <h3>Registration Participants</h3>
             @foreach (var item in Model)
             {
                 <div class="divider1"></div>
@@ -159,17 +170,6 @@
             }
 
                 <div class="divider1"></div>
-
-                <div class="row">
-                    <div class="12u">
-                    <h4>Total Registration Price: @String.Format("{0:C}", ViewBag.TotalPrice)</h4>
-
-                    @if (@ViewBag.RegIsConfirm)
-                    {
-                        <input type="button" title="Close" value="Close" onclick="location.href='@Url.Action("Index", "Register")    '" />
-                    }      
-                    </div>
-                </div>
             </div>
         </div>
     </div>

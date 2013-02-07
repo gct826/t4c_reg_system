@@ -4,12 +4,19 @@
     ViewBag.Title = "Add Payment";
 }
 
+
+@if (ViewBag.isEmpty == false)
+{
+    Html.RenderAction("Summary", "Register", new { Id = ViewBag.RegID });
+
+
+
+}
+
 <div id="main-wrapper">
 	<div class="12u" id="main-content">
 		<div class="5grid-layout">
 			<div class="row">
-
-
 
             @if (ViewBag.isEmpty == true)
             {
@@ -43,18 +50,11 @@
             
             @if (ViewBag.isEmpty == false)
             {
-                
-                Html.RenderAction("Summary", "Register", new { Id = ViewBag.RegID });
+                Html.RenderAction("PaymentSummary", "Register", new { ID = ViewBag.RegID });
 
                 using (Html.BeginForm()) {
                 @Html.ValidationSummary(true)
 
-                <div class="row">
-                    <div class="12u">
-                        <h3>Registration still owes: @ViewBag.RegAmtOwes</h3>
-                    </div>
-                </div>
-                
                 <div class="row">
                     <div class="12u">
                  <h2>Add Payment Entry</h2>

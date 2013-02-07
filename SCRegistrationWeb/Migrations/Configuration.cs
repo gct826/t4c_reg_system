@@ -95,15 +95,16 @@ namespace SCRegistrationWeb.Migrations
                 a => a.PmtStatusID,
                 new PmtStatus { PmtStatusID = 1, Name = "Pending" },
                 new PmtStatus { PmtStatusID = 2, Name = "Approved" },
-                new PmtStatus { PmtStatusID = 3, Name = "Declined" },
-                new PmtStatus { PmtStatusID = 4, Name = "Refunded" }
+                new PmtStatus { PmtStatusID = 3, Name = "Declined" }
                 );
 
             context.PmtTypes.AddOrUpdate(
                 a => a.PmtTypeID,
                 new PmtType { PmtTypeID = 1, Name = "Scholorship" },
                 new PmtType { PmtTypeID = 2, Name = "Cash" },
-                new PmtType { PmtTypeID = 3, Name = "Check" }
+                new PmtType { PmtTypeID = 3, Name = "Check" },
+                new PmtType { PmtTypeID = 4, Name = "Refund" }
+
                 );
 
 

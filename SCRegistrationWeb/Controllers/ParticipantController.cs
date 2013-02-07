@@ -40,8 +40,8 @@ namespace SCRegistrationWeb.Controllers
 
                 ViewBag.Found = true;   
                 ViewBag.isAdmin = isAdmin;
+                ViewBag.RegID = Id;
                 ViewBag.RegUID = Registration.RegIDtoUID(Id);
-                ViewBag.TotalPrice = Registration.RegTotalPrice(Id);
                 ViewBag.RegIsConfirm = Registration.RegIsConfirm(Id);
                 ViewBag.RegIsComplete = Registration.RegIsComplete(Id);
 

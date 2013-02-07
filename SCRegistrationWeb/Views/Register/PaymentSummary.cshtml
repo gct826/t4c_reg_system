@@ -1,0 +1,80 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.PaymentEntry>
+
+@if (ViewBag.Found == false)
+{
+    <p>@ViewBag.Message</p>
+}
+
+@if (ViewBag.Found)
+{
+
+    	<div class="5u">
+            <h2>Payment Summary</h2>
+            
+            <table>
+                <tr>
+                    <td>Total Registration Price</td>
+                    <td>@String.Format("{0:C}", ViewBag.totalRegPrice)</td>
+                </tr>
+                @if (ViewBag.totalScholarshipPending > 0)
+                {
+                    <tr>
+                        <td>Scholorship Requested</td>
+                        <td>@String.Format("{0:C}", ViewBag.totalScholarshipPending)</td>
+                    </tr>
+                }
+                @if (ViewBag.totalScholarshipApproved > 0)
+                {
+                    <tr>
+                        <td>Scholorship Approved</td>
+                        <td>@String.Format("{0:C}", ViewBag.totalScholarshipApproved)</td>
+                    </tr>
+                }
+                @if (ViewBag.totalCashRecieved > 0)
+                {
+                    <tr>
+                        <td>Cash Payment</td>
+                        <td>@String.Format("{0:C}", ViewBag.totalcashRecieved)</td>
+                    </tr>
+                }
+                @if (ViewBag.totalCheckPending > 0)
+                {
+                    <tr>
+                        <td>Check Payment (Pending)</td>
+                        <td>@String.Format("{0:C}", ViewBag.totalCheckPending)</td>
+                    </tr>
+                }
+                @if (ViewBag.totalCheckApproved > 0)
+                {
+                    <tr>
+                        <td>Check Payment</td>
+                        <td>@String.Format("{0:C}", ViewBag.totalCheckApproved)</td>
+                    </tr>
+                }                    
+                @if (ViewBag.totalRefundPending > 0)
+                {
+                    <tr>
+                        <td>Refund (Pending)</td>
+                        <td>@String.Format("{0:C}", ViewBag.totalRefundPending)</td>
+                    </tr>
+                }
+                @if (ViewBag.totalRefundApproved > 0)
+                {
+                    <tr>
+                        <td>Refunded</td>
+                        <td>@String.Format("{0:C}", ViewBag.totalRefundApproved)</td>
+                    </tr>
+                }                    
+                <tr>
+                    <td>Total Remaining</td>
+                    <td>@String.Format("{0:C}", ViewBag.totalRemaining)</td>
+                </tr>
+
+            </table>
+
+
+            </div>
+
+
+}
+

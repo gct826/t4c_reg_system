@@ -328,6 +328,7 @@ namespace SCRegistrationWeb.Controllers
                     ViewBag.Scholarship = false;
                     ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
                     ViewBag.RegID = FoundRegID;
+                    ViewBag.RegUID = RegUID;
                     
                     return View();
                 }
@@ -399,7 +400,7 @@ namespace SCRegistrationWeb.Controllers
                 EventHistory NewEvent = new EventHistory();
                 NewEvent.AddHistory(values.RegID, "Scholarship Request Entered", values.PaymentID);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Modify", "Register", new { RegUID = RegUID });
             }
 
             ViewBag.Found = true;
@@ -445,7 +446,96 @@ namespace SCRegistrationWeb.Controllers
                 }
             }
         }
+
+        //
+        // GET: /Register/PaymentSummary/ID
+        [ChildActionOnly]
+        public ActionResult PaymentSummary(int ID)
+        {
+            if (ID == 0)
+            {
+                ViewBag.Found = false;
+                return PartialView();
+            }
+            
+            var RegEntry = _db.RegEntries.Where(s => s.RegistrationID.Equals(ID));
+            
+            if (RegEntry != null)
+            {
+                RegistrationEntry FoundEntries = RegEntry.FirstOrDefault();
+
+                decimal totalRegPrice = FoundEntries.RegTotalPrice(ID);
+
+                var PaymentEntries = from m in _db.PaymentEntries.Where(p => p.RegID.Equals(ID))
+                                         select m;
+
+                decimal totalScholarshipPending = (decimal)0;
+                decimal totalScholarshipApproved = (decimal)0;
+                decimal totalCashRecieved = (decimal)0;
+                decimal totalCheckPending = (decimal)0;
+                decimal totalCheckApproved = (decimal)0;
+                decimal totalRefundPending = (decimal)0;
+                decimal totalRefundApproved = (decimal)0;
+
+                foreach (var item in PaymentEntries)
+                {
+                    if (item.PmtTypeID == 1 && item.PmtStatusID == 1)
+                    {
+                        totalScholarshipPending = totalScholarshipPending + item.PaymentAmt;
+                    }
+                    
+                    if (item.PmtTypeID == 1 && item.PmtStatusID == 2)
+                    {
+                        totalScholarshipApproved = totalScholarshipApproved + item.PaymentAmt;
+                    }
+                    
+                    if (item.PmtTypeID ==2 && item.PmtStatusID != 3)
+                    {
+                        totalCashRecieved = totalCashRecieved + item.PaymentAmt;
+                    }
+                    
+                    if (item.PmtTypeID == 3 && item.PmtStatusID == 1)
+                    {
+                        totalCheckPending = totalCheckPending + item.PaymentAmt;
+                    }
+                    
+                    if (item.PmtTypeID == 3 && item.PmtStatusID == 2)
+                    {
+                        totalCheckApproved = totalCheckApproved + item.PaymentAmt;
+                    }
+
+                    if (item.PmtTypeID == 4 && item.PmtStatusID == 1)
+                    {
+                        totalRefundPending = totalRefundPending + item.PaymentAmt;
+                    }
+
+                    if (item.PmtTypeID == 4 && item.PmtStatusID == 2)
+                    {
+                        totalRefundApproved = totalRefundApproved + item.PaymentAmt;
+                    }
+                }
+
+                ViewBag.Found = true;
+
+                ViewBag.totalRegPrice = totalRegPrice;
+                ViewBag.totalScholarshipPending = totalScholarshipPending;
+                ViewBag.totalScholarshipApproved = totalScholarshipApproved;
+                ViewBag.totalCashRecieved = totalCashRecieved;
+                ViewBag.totalCheckPending = totalCheckPending;
+                ViewBag.totalCheckApproved = totalCheckApproved;
+                ViewBag.totalRefundPending = totalRefundPending;
+                ViewBag.totalRefundApproved = totalRefundApproved;
+                ViewBag.totalRemaining = totalRegPrice - totalScholarshipPending - totalScholarshipApproved - totalCashRecieved - totalCheckPending - totalCheckApproved;
+                return PartialView(PaymentEntries);
+                  
+            }
+
+            ViewBag.Found = false;
+            return PartialView();
+
+        }
     }
 }
+
     
 
