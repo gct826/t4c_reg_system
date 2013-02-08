@@ -14,59 +14,152 @@
             <table>
                 <tr>
                     <td>Total Registration Price</td>
+                    <td></td>
                     <td>@String.Format("{0:C}", ViewBag.totalRegPrice)</td>
                 </tr>
                 @if (ViewBag.totalScholarshipPending > 0)
                 {
                     <tr>
-                        <td>Scholorship Requested</td>
+                        <td>Total Scholorship Requested</td>
+                        <td></td>
                         <td>@String.Format("{0:C}", ViewBag.totalScholarshipPending)</td>
                     </tr>
+                    
+                    foreach (var item in Model)
+                    {
+                        if (item.PmtTypeID == 1 && item.PmtStatusID == 1)
+                        {
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
+                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
+                            <td></td>
+                        </tr>
+                        }
+                    }
                 }
                 @if (ViewBag.totalScholarshipApproved > 0)
                 {
                     <tr>
-                        <td>Scholorship Approved</td>
+                        <td>Total Scholorship Approved</td>
+                        <td></td>
                         <td>@String.Format("{0:C}", ViewBag.totalScholarshipApproved)</td>
                     </tr>
+
+                    foreach (var item in Model)
+                    {
+                        if (item.PmtTypeID == 1 && item.PmtStatusID == 2)
+                        {
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
+                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
+                            <td></td>
+                        </tr>
+                        }
+                    }                    
                 }
                 @if (ViewBag.totalCashRecieved > 0)
                 {
                     <tr>
-                        <td>Cash Payment</td>
+                        <td>Total Cash Payment</td>
+                        <td></td>
                         <td>@String.Format("{0:C}", ViewBag.totalcashRecieved)</td>
                     </tr>
+
+                    foreach (var item in Model)
+                    {
+                        if (item.PmtTypeID == 2 && item.PmtStatusID != 3)
+                        {
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
+                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
+                            <td></td>
+                        </tr>
+                        }
+                    }                    
                 }
                 @if (ViewBag.totalCheckPending > 0)
                 {
                     <tr>
-                        <td>Check Payment (Pending)</td>
+                        <td>Total Check Payment (Pending)</td>
+                        <td></td>
                         <td>@String.Format("{0:C}", ViewBag.totalCheckPending)</td>
                     </tr>
+
+                    foreach (var item in Model)
+                    {
+                        if (item.PmtTypeID == 3 && item.PmtStatusID == 1)
+                        {
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
+                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
+                            <td></td>
+                        </tr>
+                        }
+                    }                    
                 }
                 @if (ViewBag.totalCheckApproved > 0)
                 {
                     <tr>
-                        <td>Check Payment</td>
+                        <td>Total Check Payment</td>
+                        <td></td>
                         <td>@String.Format("{0:C}", ViewBag.totalCheckApproved)</td>
                     </tr>
+
+                    foreach (var item in Model)
+                    {
+                        if (item.PmtTypeID == 3 && item.PmtStatusID == 2)
+                        {
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
+                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
+                            <td></td>
+                        </tr>
+                        }
+                    }                    
                 }                    
                 @if (ViewBag.totalRefundPending > 0)
                 {
                     <tr>
                         <td>Refund (Pending)</td>
+                        <td></td>
                         <td>@String.Format("{0:C}", ViewBag.totalRefundPending)</td>
                     </tr>
+
+                    foreach (var item in Model)
+                    {
+                        if (item.PmtTypeID == 4 && item.PmtStatusID == 1)
+                        {
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
+                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
+                            <td></td>
+                        </tr>
+                        }
+                    }                    
                 }
                 @if (ViewBag.totalRefundApproved > 0)
                 {
                     <tr>
                         <td>Refunded</td>
+                        <td></td>
                         <td>@String.Format("{0:C}", ViewBag.totalRefundApproved)</td>
                     </tr>
+
+                    foreach (var item in Model)
+                    {
+                        if (item.PmtTypeID == 4 && item.PmtStatusID == 2)
+                        {
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
+                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
+                            <td></td>
+                        </tr>
+                        }
+                    }                    
                 }                    
                 <tr>
                     <td>Total Remaining</td>
+                    <td></td>
                     <td>@String.Format("{0:C}", ViewBag.totalRemaining)</td>
                 </tr>
 
