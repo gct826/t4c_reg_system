@@ -59,12 +59,12 @@ namespace SCRegistrationWeb.Controllers
                     _db.RegEntries.Add(order);
                     _db.SaveChanges();
 
-          
-                    EventHistory NewEvent = new EventHistory();
-                    NewEvent.AddHistory(order.RegUIDtoID(order.RegistrationUID),"New Registration Created",0);
 
-          
-                    return RedirectToAction("Modify", "Participant", new { RegUID = order.RegistrationUID, isPage2=false, id=0 });
+                    EventHistory NewEvent = new EventHistory();
+                    NewEvent.AddHistory(order.RegUIDtoID(order.RegistrationUID), "New Registration Created", 0);
+
+
+                    return RedirectToAction("Modify", "Participant", new { RegUID = order.RegistrationUID, isPage2 = false, id = 0 });
                     //return RedirectToAction("Index");
                 }
             }
@@ -123,7 +123,10 @@ namespace SCRegistrationWeb.Controllers
                 var registrationentry = from m in _db.RegEntries.Where(p => p.RegistrationID.Equals(Id))
                                         select m;
 
+                RegistrationEntry FoundEntry = registrationentry.FirstOrDefault();
+
                 ViewBag.Found = true;
+                ViewBag.RegUID = FoundEntry.RegistrationUID;
                 return PartialView(registrationentry.ToList());
             }
         }
@@ -148,7 +151,7 @@ namespace SCRegistrationWeb.Controllers
                 {
                     var registrationentry = from m in _db.RegEntries.Where(p => p.RegistrationID.Equals(FoundRegID))
                                             select m;
-               
+
                     ViewBag.Found = true;
 
                     FoundEntry = registrationentry.SingleOrDefault();
@@ -265,9 +268,9 @@ namespace SCRegistrationWeb.Controllers
         public ActionResult Search(FormCollection values)
         {
             var order = new RegistrationEntry();
-            
+
             TryUpdateModel(order);
-            
+
             try
             {
                 order.Email = order.Email.ToLower();
@@ -304,19 +307,19 @@ namespace SCRegistrationWeb.Controllers
             {
                 return View(order);
             }
- 
+
         }
-    
+
         //
         // GET: /Register/Complete/RegUID
         public ActionResult Complete(string RegUID, FormCollection values)
-        {          
+        {
             if (RegUID == null)
             {
                 ViewBag.Found = false;
                 return View();
             }
-            
+
             if (values.Count == 0)
             {
                 RegistrationEntry FoundEntry = new RegistrationEntry();
@@ -329,7 +332,7 @@ namespace SCRegistrationWeb.Controllers
                     ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
                     ViewBag.RegID = FoundRegID;
                     ViewBag.RegUID = RegUID;
-                    
+
                     return View();
                 }
                 else
@@ -354,7 +357,7 @@ namespace SCRegistrationWeb.Controllers
                 ViewBag.Found = false;
                 return View();
             }
-            
+
             RegistrationEntry FoundEntry = new RegistrationEntry();
             int FoundRegID = FoundEntry.RegUIDtoID(RegUID);
 
@@ -386,7 +389,7 @@ namespace SCRegistrationWeb.Controllers
 
                 return View(values);
             }
-            
+
             if (values.RegID == FoundRegID && values.PaymentAmt > (decimal)0)
             {
                 values.RegID = (int)FoundRegID;
@@ -457,9 +460,9 @@ namespace SCRegistrationWeb.Controllers
                 ViewBag.Found = false;
                 return PartialView();
             }
-            
+
             var RegEntry = _db.RegEntries.Where(s => s.RegistrationID.Equals(ID));
-            
+
             if (RegEntry != null)
             {
                 RegistrationEntry FoundEntries = RegEntry.FirstOrDefault();
@@ -467,7 +470,7 @@ namespace SCRegistrationWeb.Controllers
                 decimal totalRegPrice = FoundEntries.RegTotalPrice(ID);
 
                 var PaymentEntries = from m in _db.PaymentEntries.Where(p => p.RegID.Equals(ID))
-                                         select m;
+                                     select m;
 
                 decimal totalScholarshipPending = (decimal)0;
                 decimal totalScholarshipApproved = (decimal)0;
@@ -483,22 +486,22 @@ namespace SCRegistrationWeb.Controllers
                     {
                         totalScholarshipPending = totalScholarshipPending + item.PaymentAmt;
                     }
-                    
+
                     if (item.PmtTypeID == 1 && item.PmtStatusID == 2)
                     {
                         totalScholarshipApproved = totalScholarshipApproved + item.PaymentAmt;
                     }
-                    
-                    if (item.PmtTypeID ==2 && item.PmtStatusID != 3)
+
+                    if (item.PmtTypeID == 2 && item.PmtStatusID != 3)
                     {
                         totalCashRecieved = totalCashRecieved + item.PaymentAmt;
                     }
-                    
+
                     if (item.PmtTypeID == 3 && item.PmtStatusID == 1)
                     {
                         totalCheckPending = totalCheckPending + item.PaymentAmt;
                     }
-                    
+
                     if (item.PmtTypeID == 3 && item.PmtStatusID == 2)
                     {
                         totalCheckApproved = totalCheckApproved + item.PaymentAmt;
@@ -527,13 +530,107 @@ namespace SCRegistrationWeb.Controllers
                 ViewBag.totalRefundApproved = totalRefundApproved;
                 ViewBag.totalRemaining = totalRegPrice - totalScholarshipPending - totalScholarshipApproved - totalCashRecieved - totalCheckPending - totalCheckApproved;
                 return PartialView(PaymentEntries);
-                  
+
             }
 
             ViewBag.Found = false;
             return PartialView();
 
         }
+
+        //
+        // GET: /Register/Edit/RegUID
+        public ActionResult Edit(string RegUID)
+        {
+            if (RegUID == null)
+            {
+                ViewBag.Found = false;
+                ViewBag.Message = RegUID;
+                return View();
+            }
+            else
+            {
+                var registrationentry = from m in _db.RegEntries.Where(p => p.RegistrationUID.Equals(RegUID))
+                                        select m;
+
+                RegistrationEntry FoundEntry = registrationentry.FirstOrDefault();
+
+                ViewBag.Found = true;
+                ViewBag.RegUID = FoundEntry.RegistrationUID;
+                return View(FoundEntry);
+
+            }
+        }
+
+        //
+        // POST: /Register/Edit/RegUID
+        [HttpPost]
+        public ActionResult Edit(string RegUID, RegistrationEntry RegEntry)
+        {
+            if (RegUID == null)
+            {
+                ViewBag.Found = false;
+                ViewBag.Message = RegUID;
+                return View();
+            }
+            else
+            {
+
+                RegEntry.Email = RegEntry.Email.ToLower();
+                RegEntry.Phone = new string(RegEntry.Phone.Where(c => char.IsDigit(c)).ToArray());
+
+                var registrationentry = from m in _db.RegEntries.Where(p => p.RegistrationUID.Equals(RegUID))
+                                        select m;
+
+                RegistrationEntry FoundEntry = registrationentry.FirstOrDefault();
+
+                var searchemail = from m in _db.RegEntries.Where(p => p.Email.Equals(RegEntry.Email))
+                                  select m;
+
+                RegistrationEntry SearchEmail = searchemail.FirstOrDefault();
+
+                var searchphone = from m in _db.RegEntries.Where(p => p.Phone.Equals(RegEntry.Phone))
+                                  select m;
+
+                RegistrationEntry SearchPhone = searchphone.FirstOrDefault();
+
+                if (FoundEntry != null && SearchEmail != null)
+                {
+                    if (FoundEntry.RegistrationID != SearchEmail.RegistrationID)
+                    {
+                        ViewBag.Found = true;
+                        ViewBag.RegUID = FoundEntry.RegistrationUID;
+                        ViewBag.Message = "Email already exist";
+                        return View(RegEntry);
+                    }
+                }
+
+                if (FoundEntry != null && SearchPhone != null)
+                {
+                    if (FoundEntry.RegistrationID != SearchPhone.RegistrationID)
+                    {
+                        ViewBag.Found = true;
+                        ViewBag.RegUID = FoundEntry.RegistrationUID;
+                        ViewBag.Message = "Phone Number already exist";
+                        return View(RegEntry);
+                    }
+                }
+
+                FoundEntry.Email = RegEntry.Email;
+                FoundEntry.Phone = RegEntry.Phone;
+
+                _db.Entry(FoundEntry).State = EntityState.Modified;
+                _db.SaveChanges();
+
+                EventHistory NewEvent = new EventHistory();
+                NewEvent.AddHistory(FoundEntry.RegistrationID, "Registration LogIn Changed", 0);
+
+                return RedirectToAction("Modify", "Register", new { RegUID = FoundEntry.RegistrationUID });
+
+            }
+        }
+
+    
     }
 }
 

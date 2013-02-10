@@ -11,11 +11,25 @@
 
 @if (ViewBag.Found)
 {
+
+using (Html.BeginForm()) {
+@Html.ValidationSummary(true)
+
 foreach (var item in Model)
 {
 <div id="banner-wrapper">
 	<div class="12u">
-		<div class="5grid-layout"><h2>Registration Information</h2>
+		<div class="5grid-layout">
+            <div class="row">
+            <div class="4u">
+            <h2>Registration Information</h2>
+                </div>
+            <div class="float-right">
+            <p>@Html.ActionLink("modify","Edit",new { RegUId = ViewBag.RegUID})
+                </p>
+            </div>
+            </div>
+        <div class="row">
             <div class="3u">
                 <table>
                     <tr class="admin1">
@@ -53,8 +67,10 @@ foreach (var item in Model)
                 </table>
             </div>
         </div>
+        </div>
     </div>
 </div>
 <div class="divider1"></div>
 }
 }   
+}
