@@ -16,14 +16,24 @@
                 @if (@ViewBag.RegIsConfirm)
                 {
 
-                    
-                    <div class="4u">                    
-                        <p>This registration has been confimed.</p>
-                        <p>Click "Edit Registration" to modify registration.</p>
-                        <input type="button" title="Edit Registration" value="Edit Registration" onclick="location.href='@Url.Action("Unlock", "Register", new {RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin})    '" />
-                        <input type="button" title="Close Registration" value="Close Registration" onclick="location.href='@Url.Action("Index", "Register")    '" />
+                    <div class="4u">
+                        @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                        {                    
+                            <p>This registration has been confirmed.</p>
+                            <p>Click "Edit Registration" to modify registration.</p>
+                            <input type="button" title="Edit Registration" value="Edit Registration" onclick="location.href='@Url.Action("Unlock", "Register", new { RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin })    '" />
+                            <input type="button" title="Close Registration" value="Close Registration" onclick="location.href='@Url.Action("Index", "Register")    '" />
+                        }
+                        
+                        @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                        {                    
+                            <p>注册已被证实。</p>
+                            <p>点击“编辑注册“进行修改登记。</p>
+                            <input type="button" title="编辑注册" value="编辑注册" onclick="location.href='@Url.Action("Unlock", "Register", new { RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin })    '" />
+                            <input type="button" title="关闭注册" value="关闭注册" onclick="location.href='@Url.Action("Index", "Register")    '" />
+                        }
                     </div>
-                    Html.RenderAction("PaymentSummary", "Register", new { ID = ViewBag.RegID });
+                        Html.RenderAction("PaymentSummary", "Register", new { ID = ViewBag.RegID });
 
                 }
 
@@ -33,17 +43,35 @@
         
                     @if (@ViewBag.RegIsComplete)
                     {
-                        <p>Select "Add Participant to add a new participant. Please click "Confirm Registration" once you're done.</p>
-                        <input type="button" title="Add New" value="Add Participant" onclick="location.href='@Url.Action("Modify", "Participant", new { RegUID = ViewBag.RegUID, isPage2=false, id=0 })    '" />
-                        <input type="button" title="Confim" value="Confirm Registration" onclick="location.href='@Url.Action("Lock", "Register", new { RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin }, "")    '" />
-                        <input type="button" title="Close" value="Close Registration" onclick="location.href='@Url.Action("Index", "Register")    '" />
+                        if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                        {                            
+                            <p>Select "Add Participant to add a new participant. Please click "Confirm Registration" once you're done.</p>
+                            <input type="button" title="Add New" value="Add Participant" onclick="location.href='@Url.Action("Modify", "Participant", new { RegUID = ViewBag.RegUID, isPage2 = false, id = 0 })    '" />
+                            <input type="button" title="Confim" value="Confirm Registration" onclick="location.href='@Url.Action("Lock", "Register", new { RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin }, "")    '" />
+                            <input type="button" title="Close" value="Close Registration" onclick="location.href='@Url.Action("Index", "Register")    '" />
+                        }
 
+                        if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                        {                            
+                            <p>请点击”加与会者“加一个新的参与者。请点击”证实注册“一旦你完成。</p>
+                            <input type="button" title="加与会者" value="加与会者" onclick="location.href='@Url.Action("Modify", "Participant", new { RegUID = ViewBag.RegUID, isPage2 = false, id = 0 })    '" />
+                            <input type="button" title="证实注册" value="证实注册" onclick="location.href='@Url.Action("Lock", "Register", new { RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin }, "")    '" />
+                            <input type="button" title="关闭注册" value="关闭注册" onclick="location.href='@Url.Action("Index", "Register")    '" />
+                        }
                     }
     
                     @if (@ViewBag.RegIsComplete == false)
                     {
                         <div class="message-error">
-                        <p>Warning, you have an Incomplete Participant entry. Please finish before continuing.</p>
+                        @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                        { 
+                            <p>Warning, you have an Incomplete Participant entry. Please finish before continuing.</p>
+                        }
+                        @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                        { 
+                            <p>警告，你有一个不完整的参与者进入。请完成，然后再继续。</p>
+                        }
+                            
                         </div>
                     }
                     </div>
@@ -53,7 +81,15 @@
             <h2>@ViewBag.PartMessage</h2>
 
             <div class="12u">
-                <h3>Registration Participants</h3>
+                @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                { 
+                    <h2>Registration Participants</h2>
+                }
+                @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                { 
+                    <h2>报名会者</h2>
+                }
+                
             @foreach (var item in Model)
             {
                 <div class="divider1"></div>
@@ -155,16 +191,31 @@
                         <p>@Html.DisplayNameFor(model => model.Statuses.Name): 
                         @Html.DisplayFor(modelItem => item.Statuses.Name)
                         </p>
+
             
                         @if (@ViewBag.RegIsConfirm == false)
                         {
-                            <p>@Html.ActionLink("Edit", "Modify", new { RegUID = ViewBag.RegUID, isPage2 = false, id = item.ParticipantID })  </p>
-                            <p>@Html.ActionLink("Remove", "Remove", new { RegUID = ViewBag.RegUID, id = item.ParticipantID })</p>
+                            if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                            { 
+                                <p>@Html.ActionLink("Edit", "Modify", new { RegUID = ViewBag.RegUID, isPage2 = false, id = item.ParticipantID })  </p>
+                                <p>@Html.ActionLink("Remove", "Remove", new { RegUID = ViewBag.RegUID, id = item.ParticipantID })</p>
 
-                            if (@ViewBag.isAdmin == true)
-                            {
-                                <p>@Html.ActionLink("Admin Edit", "TEMP", new { RegUID = ViewBag.RegUID })</p>
+                                if (@ViewBag.isAdmin == true)
+                                {
+                                    <p>@Html.ActionLink("Admin Edit", "EditParticipant","SearchRegistration", new { RegUID = ViewBag.RegUID, id = item.ParticipantID },"")</p>
+                                }
                             }
+                            if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                            { 
+                                <p>@Html.ActionLink("编辑", "Modify", new { RegUID = ViewBag.RegUID, isPage2 = false, id = item.ParticipantID })  </p>
+                                <p>@Html.ActionLink("清除", "Remove", new { RegUID = ViewBag.RegUID, id = item.ParticipantID })</p>
+
+                                if (@ViewBag.isAdmin == true)
+                                {
+                                    <p>@Html.ActionLink("Admin Edit", "EditParticipant", "SearchRegistration", new { RegUID = ViewBag.RegUID, id = item.ParticipantID},"")</p>
+                                }
+                            }
+
                         }
                     </div>  
                 </div> 

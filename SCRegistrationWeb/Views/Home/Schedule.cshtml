@@ -8,7 +8,63 @@
 		<div class="5grid-layout">
 			<div class="row">
 				<div class="8u">
-					<h2>Schedule - 2013 Summer Conference</h2>
+                @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                {
+                    <h2>Schedule</h2>
+                    <h3>Session Schedule</h3>
+                    <table>
+                        <tr>
+                            <th>Session</th>
+                            <th>Time</th>
+                        </tr>
+                        <tr>
+                            <td>Friday Evening</td>
+                            <td>7:30 - 9:15 pm</td>
+                        </tr>
+                        <tr>
+                            <td>Saturday Morning</td>
+                            <td>9:00 - 11:00 am</td>
+                        </tr>
+                        <tr>
+                            <td>Saturday Evening</td>
+                            <td>7:00 - 9:15 pm</td>
+                        </tr>
+                        <tr>
+                            <td>Sunday Morning</td>
+                            <td>9:00 - 11:00</td>
+                        </tr>
+                    </table>
+
+                }
+
+                @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                {
+                    <h2>日程</h2>
+                    <h3>信息時間表</h3>
+                    <table>
+                        <tr>
+                            <th>信息</th>
+                            <th>時間</th>
+                        </tr>
+                        <tr>
+                            <td>星期五晚上</td>
+                            <td>7:30至9:15</td>
+                        </tr>
+                        <tr>
+                            <td>星期六早上</td>
+                            <td>9:00至11:00</td>
+                        </tr>
+                        <tr>
+                            <td>星期六晚上</td>
+                            <td>7:00至9:15</td>
+                        </tr>
+                        <tr>
+                            <td>星期日早上</td>
+                            <td>9:00至11:00</td>
+                        </tr>
+                    </table>
+                }
+
 					<p></p>
 				</div>
             </div>

@@ -13,6 +13,7 @@ namespace SCRegistrationWeb.Controllers
 
         public ActionResult Index()
         {
+
             return View();
         }
 
@@ -20,6 +21,7 @@ namespace SCRegistrationWeb.Controllers
         // GET: /Home/About
         public ActionResult About()
         {
+
             return View();
         }
 

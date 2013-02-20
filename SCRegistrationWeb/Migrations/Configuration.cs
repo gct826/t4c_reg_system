@@ -103,7 +103,8 @@ namespace SCRegistrationWeb.Migrations
                 new PmtType { PmtTypeID = 1, Name = "Scholorship" },
                 new PmtType { PmtTypeID = 2, Name = "Cash" },
                 new PmtType { PmtTypeID = 3, Name = "Check" },
-                new PmtType { PmtTypeID = 4, Name = "Refund" }
+                new PmtType { PmtTypeID = 4, Name = "Refund" },
+                new PmtType { PmtTypeID = 5, Name = "Adjustmet" }
 
                 );
 

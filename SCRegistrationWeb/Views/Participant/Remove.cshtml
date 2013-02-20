@@ -24,7 +24,16 @@
 	    	    <div class="5grid-layout">
                     <div class="row">
                         <div class="12u">
-                            <h3>Are you sure you want to remove participant:</h3>
+                            @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                            {                                              
+                                <h3>Are you sure you want to remove participant?</h3>
+                            }
+                                            
+                            @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                            {                                              
+                                <h3>你确定你要删除的参与者?</h3>
+                            }
+
                         </div>
                     </div>
                     <div class="row">
@@ -186,8 +195,18 @@
                             <table>
                                 <tr class="radioselect">
                                     <td>
-                                        <input type="button" title="Cancel" value="Cancel" onclick="location.href='@Url.Action("Modify", "Register", new { RegUID = ViewBag.RegUID })    '" />        
-                                        <input type="submit" value="Confirm" />
+                                        @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                                        {                                              
+                                            <input type="button" title="Cancel" value="Cancel" onclick="location.href='@Url.Action("Modify", "Register", new { RegUID = ViewBag.RegUID })    '" />        
+                                            <input type="submit" value="Confirm" />
+                                        }
+                                            
+                                        @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                                        {                                              
+                                            <input type="button" title="取消" value="取消" onclick="location.href='@Url.Action("Modify", "Register", new { RegUID = ViewBag.RegUID })    '" />
+                                            <input type="submit" value="确认" />
+                                        }
+
                                     </td>
                                 </tr>
                             </table>

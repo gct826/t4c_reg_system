@@ -23,7 +23,7 @@ namespace SCRegistrationWeb.Controllers
         //
         // POST: /Register/Create
         [HttpPost]
-        [MultiButton(MatchFormKey = "action", MatchFormValue = "Create New")]
+        [MultiButton(MatchFormKey = "action", MatchFormValue1 = "Create New Registration", MatchFormValue2 = "创建新注册")]
         public ActionResult Create(FormCollection values)
         {
             var order = new RegistrationEntry();
@@ -37,12 +37,14 @@ namespace SCRegistrationWeb.Controllers
 
                 if (_db.RegEntries.Any(e => e.Email == order.Email))
                 {
-                    ViewBag.Message = "Registration Email already exist";
+                    ViewBag.MessageEn = "Email or Phone Number already exist";
+                    ViewBag.MessageCh = "电子邮件或电话号码已经存在";
                     return View(order);
                 }
                 else if (_db.RegEntries.Any(e => e.Phone == order.Phone))
                 {
-                    ViewBag.Message = "Registration Phone number already exist";
+                    ViewBag.MessageEn = "Email or Phone Number already exist";
+                    ViewBag.MessageCh = "电子邮件或电话号码已经存在";
                     return View(order);
                 }
                 else
@@ -82,7 +84,7 @@ namespace SCRegistrationWeb.Controllers
             {
                 ViewBag.Found = false;
                 ViewBag.Message = RegUID;
-                return View();
+                return RedirectToAction("Index", "Register");
             }
             else
             {
@@ -101,7 +103,8 @@ namespace SCRegistrationWeb.Controllers
                 else
                 {
                     ViewBag.Found = false;
-                    ViewBag.Message = "Invalid Registration Key";
+                    ViewBag.MessageEn = "Invalid Registration Key";
+                    ViewBag.MessageCh = "没有找到登记";
                     return View();
                 }
             }
@@ -115,7 +118,8 @@ namespace SCRegistrationWeb.Controllers
             if (Id == 0)
             {
                 ViewBag.Found = false;
-                ViewBag.Message = "Participant not found";
+                ViewBag.MessageEn = "Participant not found";
+                ViewBag.MessageCh = "没有找到登记";
                 return PartialView();
             }
             else
@@ -190,7 +194,8 @@ namespace SCRegistrationWeb.Controllers
                 else
                 {
                     ViewBag.Found = false;
-                    ViewBag.Message = "Invalid Registration Key";
+                    ViewBag.MessageEn = "Invalid Registration Key";
+                    ViewBag.MessageCh = "没有找到登记";
                     return View();
                 }
             }
@@ -255,7 +260,8 @@ namespace SCRegistrationWeb.Controllers
                 else
                 {
                     ViewBag.Found = false;
-                    ViewBag.Message = "Invalid Registration Key";
+                    ViewBag.MessageEn = "Invalid Registration Key";
+                    ViewBag.MessageCh = "没有找到登记";
                     return View();
                 }
             }
@@ -264,7 +270,7 @@ namespace SCRegistrationWeb.Controllers
         //
         // POST: /Register/Search
         [HttpPost]
-        [MultiButton(MatchFormKey = "action", MatchFormValue = "Open Existing")]
+        [MultiButton(MatchFormKey = "action", MatchFormValue1 = "Modify Registration", MatchFormValue2 = "修改注册")]
         public ActionResult Search(FormCollection values)
         {
             var order = new RegistrationEntry();
@@ -280,13 +286,14 @@ namespace SCRegistrationWeb.Controllers
                 {
                     var registers = from m in _db.RegEntries
                                     select m;
-
+                    
                     registers = registers.Where(s => s.Email.Equals(order.Email) && s.Phone.Equals(order.Phone));
 
                     RegistrationEntry FoundReg = registers.FirstOrDefault();
                     if (FoundReg == null)
                     {
-                        ViewBag.Message = "Registration Not Found";
+                        ViewBag.MessageEn = "Registration Not Found";
+                        ViewBag.MessageCh = "没有找到登记";
                         return View();
                     }
                     else
@@ -299,7 +306,6 @@ namespace SCRegistrationWeb.Controllers
 
                 else
                 {
-                    ViewBag.Message = "Please enter search string";
                     return View();
                 }
             }
@@ -338,7 +344,8 @@ namespace SCRegistrationWeb.Controllers
                 else
                 {
                     ViewBag.Found = false;
-                    ViewBag.Message = "Invalid Registration Key";
+                    ViewBag.MessageEn = "Invalid Registration Key";
+                    ViewBag.MessageCh = "没有找到登记";
                     return View();
                 }
             }
@@ -367,6 +374,7 @@ namespace SCRegistrationWeb.Controllers
                 ViewBag.Scholarship = true;
                 ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
                 ViewBag.RegID = FoundRegID;
+                ViewBag.RegUID = RegUID;
                 values.RegID = (int)FoundRegID;
                 values.PaymentDate = DateTime.Now;
                 values.PmtTypeID = (int)1;
@@ -381,7 +389,9 @@ namespace SCRegistrationWeb.Controllers
                 ViewBag.Scholarship = true;
                 ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
                 ViewBag.RegID = FoundRegID;
-                ViewBag.Message = "Please enter an Amount greater then 0";
+                ViewBag.RegUID = RegUID;
+                ViewBag.MessageEn = "Please enter an Amount greater then 0";
+                ViewBag.MessageCh = "请输入一个数目大于0";
                 values.RegID = (int)FoundRegID;
                 values.PaymentDate = DateTime.Now;
                 values.PmtTypeID = (int)1;
@@ -419,36 +429,37 @@ namespace SCRegistrationWeb.Controllers
         //
         // GET: /Register/Scholarship/RegUID
 
-        public ActionResult Scholarship(string RegUID)
-        {
-            {
-                if (RegUID == null)
-                {
-                    ViewBag.Found = false;
-                    return View();
-                }
-                else
-                {
-                    RegistrationEntry FoundEntry = new RegistrationEntry();
-                    int FoundRegID = FoundEntry.RegUIDtoID(RegUID);
+        //public ActionResult Scholarship(string RegUID)
+        //{
+        //    {
+        //        if (RegUID == null)
+        //        {
+        //            ViewBag.Found = false;
+        //            return View();
+        //        }
+        //        else
+        //        {
+        //            RegistrationEntry FoundEntry = new RegistrationEntry();
+        //            int FoundRegID = FoundEntry.RegUIDtoID(RegUID);
 
-                    if (FoundRegID != 0)
-                    {
-                        ViewBag.Found = true;
-                        ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
-                        ViewBag.RegID = FoundRegID;
+        //            if (FoundRegID != 0)
+        //            {
+        //                ViewBag.Found = true;
+        //                ViewBag.TotalPrice = FoundEntry.RegTotalPrice(FoundRegID);
+        //                ViewBag.RegID = FoundRegID;
 
-                        return View();
-                    }
-                    else
-                    {
-                        ViewBag.Found = false;
-                        ViewBag.Message = "Invalid Registration Key";
-                        return View();
-                    }
-                }
-            }
-        }
+        //                return View();
+        //            }
+        //            else
+        //            {
+        //                ViewBag.Found = false;
+        //                ViewBag.MessageEn = "Invalid Registration Key";
+        //                ViewBag.MessageCh = "没有找到登记";
+        //                return View();
+        //            }
+        //        }
+        //    }
+        //}
 
         //
         // GET: /Register/PaymentSummary/ID
@@ -479,6 +490,7 @@ namespace SCRegistrationWeb.Controllers
                 decimal totalCheckApproved = (decimal)0;
                 decimal totalRefundPending = (decimal)0;
                 decimal totalRefundApproved = (decimal)0;
+                decimal totalAdjustment = (decimal)0;
 
                 foreach (var item in PaymentEntries)
                 {
@@ -516,6 +528,12 @@ namespace SCRegistrationWeb.Controllers
                     {
                         totalRefundApproved = totalRefundApproved + item.PaymentAmt;
                     }
+
+                    if (item.PmtTypeID == 5 && item.PmtStatusID != 3)
+                    {
+                        totalAdjustment = totalAdjustment + item.PaymentAmt;
+                    }
+
                 }
 
                 ViewBag.Found = true;
@@ -528,7 +546,8 @@ namespace SCRegistrationWeb.Controllers
                 ViewBag.totalCheckApproved = totalCheckApproved;
                 ViewBag.totalRefundPending = totalRefundPending;
                 ViewBag.totalRefundApproved = totalRefundApproved;
-                ViewBag.totalRemaining = totalRegPrice - totalScholarshipPending - totalScholarshipApproved - totalCashRecieved - totalCheckPending - totalCheckApproved;
+                ViewBag.totalAdjustment = totalAdjustment;
+                ViewBag.totalRemaining = totalRegPrice - totalScholarshipPending - totalScholarshipApproved - totalCashRecieved - totalCheckPending - totalCheckApproved - totalRefundPending - totalRefundApproved - totalAdjustment;
                 return PartialView(PaymentEntries);
 
             }
@@ -600,7 +619,8 @@ namespace SCRegistrationWeb.Controllers
                     {
                         ViewBag.Found = true;
                         ViewBag.RegUID = FoundEntry.RegistrationUID;
-                        ViewBag.Message = "Email already exist";
+                        ViewBag.MessageEn = "Email already exist";
+                        ViewBag.MessageCh = "电子邮件已经存在";
                         return View(RegEntry);
                     }
                 }
@@ -611,7 +631,8 @@ namespace SCRegistrationWeb.Controllers
                     {
                         ViewBag.Found = true;
                         ViewBag.RegUID = FoundEntry.RegistrationUID;
-                        ViewBag.Message = "Phone Number already exist";
+                        ViewBag.MessageEn = "Phone Number already exist";
+                        ViewBag.MessageCh = "电话号码已经存在";
                         return View(RegEntry);
                     }
                 }

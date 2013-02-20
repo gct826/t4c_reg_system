@@ -357,11 +357,20 @@ tr.pager > td {
 }
 
 tr.admin1 > th {
-    width: 100px;
+    width: 125px;
 }
 
 tr.partview > th {
     width: 175px;
+}
+
+tr.priceview > th {
+    width: 400px;
+}
+
+tr.dateview > th {
+    width:300px;
+    padding-left:50px;
 }
 
 /* forms */

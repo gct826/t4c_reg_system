@@ -352,13 +352,32 @@
                                     <td>
                                         @if (ViewBag.isPage2)
                                         {
-                                            <input type="button" title="Back" value="Back" onclick="location.href='@Url.Action("Modify", new {RegUID = ViewBag.RegUID, isPage2=false, id = ViewBag.ParticipantID })    '" />
-                                            <input type="submit" value="Save" />                                        
+                                            if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                                            {    
+                                                <input type="button" title="Back" value="Back" onclick="location.href='@Url.Action("Modify", new {RegUID = ViewBag.RegUID, isPage2=false, id = ViewBag.ParticipantID })    '" />
+                                                <input type="submit" value="Save" />
+                                            }
+                                            
+                                            if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                                            {    
+                                                <input type="button" title="向后" value="向后" onclick="location.href='@Url.Action("Modify", new {RegUID = ViewBag.RegUID, isPage2=false, id = ViewBag.ParticipantID })    '" />
+                                                <input type="submit" value="保存" />
+                                            }                                        
                                         }
                                         else
                                         {
-                                            <input type="submit" value="Next" />
-                                            <input type="button" title="Cancel" value="Cancel" onclick="location.href='@Url.Action("Modify", "Register", new { RegUID = ViewBag.RegUID })    '" />
+                                            if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                                            {                                              
+                                                <input type="submit" value="Next" />
+                                                <input type="button" title="Cancel" value="Cancel" onclick="location.href='@Url.Action("Modify", "Register", new { RegUID = ViewBag.RegUID })    '" />
+                                            }
+                                            
+                                            if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                                            {                                              
+                                                <input type="submit" value="下页" />
+                                                <input type="button" title="取消" value="取消" onclick="location.href='@Url.Action("Modify", "Register", new { RegUID = ViewBag.RegUID })    '" />
+                                            }
+                                        
                                         }                                                                       
                                     </td>
                                 </tr>

@@ -16,39 +16,85 @@
 <div id="main-wrapper">
 	<div class="12u" id="main-content">
 		<div class="5grid-layout">
-            <h2>Thank You</h2>
+            
+            @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+            {
+                <h2>Thank You</h2>
 
-            <p>
-                Your Registration has now been confirmed. Please remember the e-mail and phone number you used for the registration.
-                This will allow you to go back and check or modify your registration at any time. 
-            </p>
-            <p>
-                Your total price for summer conference is @String.Format("{0:C}", ViewBag.TotalPrice).
-            </p>
+                <p>
+                    Your Registration has now been confirmed. Please remember the e-mail and phone number you used for the registration.
+                    This will allow you to go back and check or modify your registration at any time. 
+                </p>
+                <p>
+                    Your total price for summer conference is @String.Format("{0:C}", ViewBag.TotalPrice).
+                </p>
+            }
+            @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+            {
+                <h2>谢谢</h2>
+
+                <p>
+                    您的注册现在已经得到了证实。请记住您用于注册的e-mail和电话号码。
+                    这将允许你回去，并在任何时候检查或修改您的注册。
+                </p>
+                <p>
+                    你的夏季会总价格为是 @String.Format("{0:C}", ViewBag.TotalPrice).
+                </p>
+            }
 
     @if (ViewBag.Scholarship == false)
     {
-    using (Html.BeginForm()) {
+        using (Html.BeginForm())
+        {
         @Html.ValidationSummary(true)
 
-        <p>
-            Please remember to write a check payable to T4C, and your Registration Number @ViewBag.RegID in the Memo line.
-        </p>
-        <p>
-            If you need scholorships select Request Scholorship to apply.
-        </p>
+            if (ViewContext.RouteData.Values["language"].ToString() == "en")
+            {
+                <p>
+                    Please remember to write a check payable to T4C, and your Registration Number @ViewBag.RegID in the Memo line.
+                </p>
+                <p>
+                    If you need scholorships select Request Scholorship to apply.
+                </p>
                                         
-        <input type="submit" value="Request Scholorship" />
+                <input type="submit" value="Request Scholarship" />
+                <input type="button" title="Back to Home" value="Back to Home" onclick="location.href='@Url.Action("Index", "Home")'" />
+                }
+            }
+            if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+            {
+                <p>
+                    请记得写一张支票支付给T4C, 和你的注册号码 @ViewBag.RegID 在“备忘录”行。
+                </p>
+                <p>
+                    如果你需要奖学金，选择申请奖学金。
+                </p>
+                                        
+                <input type="submit" value="申请奖学金" />
+                <input type="button" title="返回主页" value="返回主页" onclick="location.href='@Url.Action("Index", "Home")    '" />
 
-        }                              
-    }
+            }
+
+
+        }
+    
 
     @if (ViewBag.Scholarship)
     {
-    using (Html.BeginForm()) {
+        using (Html.BeginForm())
+        {
         @Html.ValidationSummary(true)    
-    
-        <p>Please enter Scholarship request amount</p>                
+
+            if (ViewContext.RouteData.Values["language"].ToString() == "en")
+            {
+            <p>Please enter Scholarship request amount.</p>                
+            }
+            if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+            {
+            <p>请输入奖学金申请量。</p>                
+            }
+        
+        
         <fieldset>
             <legend>PaymentEntry</legend>
             <div class="editor-label">
@@ -64,17 +110,29 @@
                 @Html.HiddenFor(model => model.PmtStatusID)
                 @Html.HiddenFor(model => model.RegID)
         
-            <input type="submit" value="Enter Request" />
+            @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+            {
+                <input type="submit" value="Submit Request" />
+                <input type="button" title="Cancel Request" value="Cancel Request" onclick="location.href='@Url.Action("Complete", "Register", new { RegUID = ViewBag.RegUID })    '" />
+
+            }
+            @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+            {
+                <input type="submit" value="提交申请" />
+                <input type="button" title="取消申请" value="取消申请" onclick="location.href='@Url.Action("Complete", "Register", new { RegUID = ViewBag.RegUID })    '" />
+            }
+
+
             <div class="message-error">
-                @if(ViewBag.Message != null)
+                @if (ViewBag.Message != null)
                 {
                     @ViewBag.Message
                 }
             </div>
         </fieldset>
-        }            
+        }
     }
-            <input type="button" title="Back" value="Back" onclick="location.href='@Url.Action("Modify", new { RegUID = ViewBag.RegUID })    '" />
+
  
         </div>
     </div>

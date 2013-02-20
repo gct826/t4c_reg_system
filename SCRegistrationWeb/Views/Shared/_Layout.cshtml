@@ -29,18 +29,35 @@
 
                     <div class="float-right">
                     <section id="login">
-                        @Html.Partial("_LoginPartial")
+                        @Html.Partial("_LoginPartial") 
+
+
                     </section>
                     </div>
 
                     <!-- Nav -->
                     <nav class="mobileUI-site-nav">
-                        @Html.ActionLink("Home", "Index", "Home")
-                        @Html.ActionLink("About", "About", "Home")
-                        @Html.ActionLink("Schedule", "Schedule", "Home")
-                        @Html.ActionLink("Location", "Location", "Home")                        
-                        @Html.ActionLink("Register", "Index", "Register")
-                        @Html.ActionLink("Admin", "Index", "Admin")
+
+                        @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                        {
+                            @Html.ActionLink("Home", "Index", "Home")
+                            @Html.ActionLink("About", "About", "Home")
+                            @Html.ActionLink("Schedule", "Schedule", "Home")                
+                            @Html.ActionLink("Register", "Index", "Register")
+                            @Html.ActionLink("Admin", "Index", "Admin")
+                            @Html.ActionLink("中文", ViewContext.RouteData.Values["action"].ToString(), new { language = "ch" })
+                        }
+                        @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                        {
+                            @Html.ActionLink("主页", "Index", "Home")
+                            @Html.ActionLink("簡介", "About", "Home")
+                            @Html.ActionLink("日程", "Schedule", "Home")                       
+                            @Html.ActionLink("注册", "Index", "Register")
+                            @Html.ActionLink("管理", "Index", "Admin")
+                            @Html.ActionLink("English", ViewContext.RouteData.Values["action"].ToString(), new { language = "en" })
+                        }
+ 
+
                     </nav>
                 </div>
             </div>

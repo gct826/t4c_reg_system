@@ -8,20 +8,24 @@
 @if (ViewBag.Found)
 {
 
-    	<div class="5u">
-            <h2>Payment Summary</h2>
-            
+    	<div class="6u">
+            @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+            {
+                <h2>Payment Summary</h2>
+            }
+            @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+            {
+                <h2>支付总结</h2>
+            }
             <table>
-                <tr>
-                    <td>Total Registration Price</td>
-                    <td></td>
+                <tr class="priceview">
+                    <th>Registration Price 注册价格</th>
                     <td>@String.Format("{0:C}", ViewBag.totalRegPrice)</td>
                 </tr>
                 @if (ViewBag.totalScholarshipPending > 0)
                 {
-                    <tr>
-                        <td>Total Scholorship Requested</td>
-                        <td></td>
+                    <tr class="priceview">
+                        <th>Scholarship Requested 奖学金申请</th>
                         <td>@String.Format("{0:C}", ViewBag.totalScholarshipPending)</td>
                     </tr>
                     
@@ -29,19 +33,19 @@
                     {
                         if (item.PmtTypeID == 1 && item.PmtStatusID == 1)
                         {
-                        <tr>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
-                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
-                            <td></td>
+                        <tr class="dateview">
+                            <th>
+                                @string.Format("{0:d}", item.PaymentDate) - 
+                                @String.Format("{0:C}", item.PaymentAmt)
+                            </th>
                         </tr>
                         }
                     }
                 }
                 @if (ViewBag.totalScholarshipApproved > 0)
                 {
-                    <tr>
-                        <td>Total Scholorship Approved</td>
-                        <td></td>
+                    <tr class="priceview">
+                        <th>Scholarship Applied 奖学金应用</th>
                         <td>@String.Format("{0:C}", ViewBag.totalScholarshipApproved)</td>
                     </tr>
 
@@ -49,19 +53,19 @@
                     {
                         if (item.PmtTypeID == 1 && item.PmtStatusID == 2)
                         {
-                        <tr>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
-                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
-                            <td></td>
+                        <tr class="dateview">
+                            <th>
+                                @string.Format("{0:d}", item.PaymentDate) - 
+                                @String.Format("{0:C}", item.PaymentAmt)
+                            </th>
                         </tr>
                         }
                     }                    
                 }
                 @if (ViewBag.totalCashRecieved > 0)
                 {
-                    <tr>
-                        <td>Total Cash Payment</td>
-                        <td></td>
+                    <tr class="priceview">
+                        <th>Total Cash Payment 总现金付款</th>
                         <td>@String.Format("{0:C}", ViewBag.totalcashRecieved)</td>
                     </tr>
 
@@ -69,19 +73,19 @@
                     {
                         if (item.PmtTypeID == 2 && item.PmtStatusID != 3)
                         {
-                        <tr>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
-                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
-                            <td></td>
+                        <tr class="dateview">
+                            <th>
+                                @string.Format("{0:d}", item.PaymentDate) - 
+                                @String.Format("{0:C}", item.PaymentAmt)
+                            </th>
                         </tr>
                         }
                     }                    
                 }
                 @if (ViewBag.totalCheckPending > 0)
                 {
-                    <tr>
-                        <td>Total Check Payment (Pending)</td>
-                        <td></td>
+                    <tr class="priceview">
+                        <th>Total Check Payment 支票付款</th>
                         <td>@String.Format("{0:C}", ViewBag.totalCheckPending)</td>
                     </tr>
 
@@ -89,19 +93,19 @@
                     {
                         if (item.PmtTypeID == 3 && item.PmtStatusID == 1)
                         {
-                        <tr>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
-                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
-                            <td></td>
+                        <tr class="dateview">
+                            <th>
+                                @string.Format("{0:d}", item.PaymentDate) - 
+                                @String.Format("{0:C}", item.PaymentAmt)
+                            </th>
                         </tr>
                         }
                     }                    
                 }
                 @if (ViewBag.totalCheckApproved > 0)
                 {
-                    <tr>
-                        <td>Total Check Payment</td>
-                        <td></td>
+                    <tr class="priceview">
+                        <th>Total Check Payment 支票付款</th>
                         <td>@String.Format("{0:C}", ViewBag.totalCheckApproved)</td>
                     </tr>
 
@@ -109,19 +113,19 @@
                     {
                         if (item.PmtTypeID == 3 && item.PmtStatusID == 2)
                         {
-                        <tr>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
-                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
-                            <td></td>
+                        <tr class="dateview">
+                            <th>
+                                @string.Format("{0:d}", item.PaymentDate) - 
+                                @String.Format("{0:C}", item.PaymentAmt)
+                            </th>
                         </tr>
                         }
                     }                    
                 }                    
                 @if (ViewBag.totalRefundPending > 0)
                 {
-                    <tr>
-                        <td>Refund (Pending)</td>
-                        <td></td>
+                    <tr class="priceview">
+                        <th>Refund Processing 退款处理</th>
                         <td>@String.Format("{0:C}", ViewBag.totalRefundPending)</td>
                     </tr>
 
@@ -129,19 +133,19 @@
                     {
                         if (item.PmtTypeID == 4 && item.PmtStatusID == 1)
                         {
-                        <tr>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
-                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
-                            <td></td>
+                        <tr class="dateview">
+                            <th>
+                                @string.Format("{0:d}", item.PaymentDate) - 
+                                @String.Format("{0:C}", item.PaymentAmt)
+                            </th>
                         </tr>
                         }
                     }                    
                 }
                 @if (ViewBag.totalRefundApproved > 0)
                 {
-                    <tr>
-                        <td>Refunded</td>
-                        <td></td>
+                    <tr class="priceview">
+                        <th>Refunded Amount 退款</th>
                         <td>@String.Format("{0:C}", ViewBag.totalRefundApproved)</td>
                     </tr>
 
@@ -149,20 +153,40 @@
                     {
                         if (item.PmtTypeID == 4 && item.PmtStatusID == 2)
                         {
-                        <tr>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;@string.Format("{0:d}", item.PaymentDate)</td>
-                            <td>@String.Format("{0:C}", item.PaymentAmt)</td>
-                            <td></td>
+                        <tr class="dateview">
+                            <th>
+                                @string.Format("{0:d}", item.PaymentDate) - 
+                                @String.Format("{0:C}", item.PaymentAmt)
+                            </th>
                         </tr>
                         }
                     }                    
-                }                    
-                <tr>
-                    <td>Total Remaining</td>
-                    <td></td>
+                }
+                @if (ViewBag.totalAdjustment > 0)
+                {
+                    <tr class="priceview">
+                        <th>Total Adjustment 总现金付款</th>
+                        <td>@String.Format("{0:C}", ViewBag.totalAdjustment)</td>
+                    </tr>
+
+                    foreach (var item in Model)
+                    {
+                        if (item.PmtTypeID == 5 && item.PmtStatusID != 3)
+                        {
+                        <tr class="dateview">
+                            <th>
+                                @string.Format("{0:d}", item.PaymentDate) - 
+                                @String.Format("{0:C}", item.PaymentAmt)
+                            </th>
+                        </tr>
+                        }
+                    }                    
+                }
+                    
+                <tr class="priceview">
+                    <th>Remaining Balance 总剩余</th>
                     <td>@String.Format("{0:C}", ViewBag.totalRemaining)</td>
                 </tr>
-
             </table>
 
 
