@@ -1,0 +1,59 @@
+﻿@model SCRegistrationWeb.Models.SmallGroup
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@if (ViewBag.isFound)
+{
+
+Html.RenderAction("Details", "Participant", new { Id = ViewBag.PartID });
+
+<div id="main-wrapper">
+    <div class="12u" id="main-content">
+	    <div class="5grid-layout">
+            <div class="row">
+                <h2>Small Group Assignment</h2>
+            </div>
+            <div class="row">
+            
+                @using (Html.BeginForm()) {
+                    @Html.ValidationSummary(true)
+
+                    <fieldset>
+                        <legend>SmallGroup</legend>
+
+                        @Html.HiddenFor(model => model.PartID)
+                        @Html.HiddenFor(model => model.ServiceID)
+
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.SmallGroupName)
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownList("SmallGroupName", String.Empty)
+                            @Html.ValidationMessageFor(model => model.SmallGroupName)
+                        </div>
+
+                        <p>
+                            <input type="submit" value="Create" />
+                        </p>
+                    </fieldset>
+                }
+
+ 
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index", "AdminCongregation", new { SerID = Model.ServiceID }, "")
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+}
+   
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

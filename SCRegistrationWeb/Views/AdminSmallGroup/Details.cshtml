@@ -1,0 +1,11 @@
+﻿@model SCRegistrationWeb.Models.SmallGroup
+
+@if (ViewBag.isFound)
+{
+    @Html.DisplayFor(model => model.SmallGroupName)
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SmallGroupID })
+}
+@if (ViewBag.isFound == false)
+{
+    @Html.ActionLink("Assign", "Create", new { id=ViewBag.PartID })
+}    

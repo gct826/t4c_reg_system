@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.SmallGroup>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PartID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Services.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SmallGroupName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Services.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SmallGroupName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SmallGroupID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SmallGroupID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SmallGroupID })
+        </td>
+    </tr>
+}
+
+</table>

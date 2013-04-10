@@ -701,6 +701,27 @@ namespace SCRegistrationWeb.Controllers
 
             return View(participantentry);
         }
-    
+
+        //
+        // GET: /Participant/Details/5
+
+        [ChildActionOnly]
+        public ActionResult Details(int id = 0)
+        {
+            var participant = from m in db.ParticipantEntries.Include(p => p.Services).Include(p => p.AgeRanges).
+                    Include(p => p.Genders).Where(p => p.ParticipantID.Equals(id))
+                                           select m;
+            if (participant == null)
+            {
+                ViewBag.isFound = false;
+                return PartialView();
+            }
+
+            ParticipantEntry foundParticipant = participant.FirstOrDefault();
+
+            ViewBag.isFound = true;
+            return PartialView(foundParticipant);
+        }
+
     }
 }

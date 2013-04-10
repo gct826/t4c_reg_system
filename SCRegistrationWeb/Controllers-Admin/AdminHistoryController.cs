@@ -21,5 +21,28 @@ namespace SCRegistrationWeb.Controllers_Admin
         {
             return View(db.EventHistory.ToList());
         }
+
+        //
+        // GET: /AdminHistory/Reg/ID
+
+        public ActionResult Reg(int id =0 )
+        {
+            if (id == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            
+            var eventhistories = from m in db.EventHistory.Where(p => p.RegHistID.Equals(id))
+                select m;
+
+            if (eventhistories != null)
+            {
+                return View(eventhistories.ToList());
+            }
+
+            return RedirectToAction("Index");
+            
+        }
+
     }
 }

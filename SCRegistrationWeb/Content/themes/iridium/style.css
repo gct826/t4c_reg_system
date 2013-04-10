@@ -37,8 +37,14 @@ h2, h3, h4 {
 	color: #1d1d1d;
 }
 
-h2, h3 {
+h2 {
 	font-size: 2em;
+	letter-spacing: -1px;
+	margin: 0 0 0.75em 0;
+}
+
+h3 {
+	font-size: 1.5em;
 	letter-spacing: -1px;
 	margin: 0 0 0.75em 0;
 }
@@ -371,6 +377,10 @@ tr.priceview > th {
 tr.dateview > th {
     width:300px;
     padding-left:50px;
+}
+
+tr.spacer > td {
+    color: white;
 }
 
 /* forms */

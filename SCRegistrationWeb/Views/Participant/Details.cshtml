@@ -1,0 +1,53 @@
+﻿@model SCRegistrationWeb.Models.ParticipantEntry
+
+<div id="banner-wrapper">
+	<div class="12u">
+		<div class="5grid-layout">
+            <div class="row">
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ChineseName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Services.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AgeRanges.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Genders.Name)
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.ChineseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Services.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.AgeRanges.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Genders.Name)
+                    </td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="divider1"></div>

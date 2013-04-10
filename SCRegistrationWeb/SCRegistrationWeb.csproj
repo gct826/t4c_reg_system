@@ -126,8 +126,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers-Admin\AdminCongregationController.cs" />
     <Compile Include="Controllers-Admin\AdminHistoryController.cs" />
     <Compile Include="Controllers-Admin\AdminRegistrationController.cs" />
+    <Compile Include="Controllers-Admin\AdminSmallGroupController.cs" />
     <Compile Include="Controllers-Admin\AdminStatusController.cs" />
     <Compile Include="Controllers-Admin\SearchRegistrationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -180,6 +182,14 @@
     <Compile Include="Migrations\201301312003580_Jan31.Designer.cs">
       <DependentUpon>201301312003580_Jan31.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201303091705195_SmallGroupChange.cs" />
+    <Compile Include="Migrations\201303091705195_SmallGroupChange.Designer.cs">
+      <DependentUpon>201303091705195_SmallGroupChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201303160158254_SmallGroupChange1.cs" />
+    <Compile Include="Migrations\201303160158254_SmallGroupChange1.Designer.cs">
+      <DependentUpon>201303160158254_SmallGroupChange1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Helpers\MultiButtonAttribute.cs" />
@@ -191,6 +201,7 @@
     <Compile Include="Models\RadioButtonList.cs" />
     <Compile Include="Models\RegistrationEntry.cs" />
     <Compile Include="Models\SCRegistrationContext.cs" />
+    <Compile Include="Models\SmallGroupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -372,6 +383,17 @@
     <Content Include="Views\Home\Copyright.cshtml" />
     <Content Include="Views\Register\PaymentSummary.cshtml" />
     <Content Include="Views\Register\Edit.cshtml" />
+    <Content Include="Views\AdminSmallGroup\Index.cshtml" />
+    <Content Include="Views\AdminSmallGroup\Details.cshtml" />
+    <Content Include="Views\AdminSmallGroup\Create.cshtml" />
+    <Content Include="Views\AdminSmallGroup\Edit.cshtml" />
+    <Content Include="Views\AdminCongregation\Index.cshtml" />
+    <Content Include="Views\AdminCongregation\Details.cshtml" />
+    <Content Include="Views\AdminCongregation\Create.cshtml" />
+    <Content Include="Views\AdminCongregation\Edit.cshtml" />
+    <Content Include="Views\AdminCongregation\Delete.cshtml" />
+    <Content Include="Views\Participant\Details.cshtml" />
+    <Content Include="Views\AdminHistory\Reg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -406,6 +428,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201301312003580_Jan31.resx">
       <DependentUpon>201301312003580_Jan31.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201303091705195_SmallGroupChange.resx">
+      <DependentUpon>201303091705195_SmallGroupChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201303160158254_SmallGroupChange1.resx">
+      <DependentUpon>201303160158254_SmallGroupChange1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

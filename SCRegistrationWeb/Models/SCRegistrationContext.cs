@@ -31,5 +31,7 @@ namespace SCRegistrationWeb.Models
         public DbSet<PmtStatus> PmtStatuses { get; set; }
         public DbSet<PmtType> PmtTypes { get; set; }
 
+        public DbSet<SmallGroup> SmallGroups { get; set; }
+
     }
 }

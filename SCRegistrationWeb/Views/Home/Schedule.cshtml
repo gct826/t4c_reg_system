@@ -7,62 +7,309 @@
 	<div class="12u" id="main-content">
 		<div class="5grid-layout">
 			<div class="row">
-				<div class="8u">
+                    <h2>Schedule 日程</h2>
+            </div>
+	
                 @if (ViewContext.RouteData.Values["language"].ToString() == "en")
                 {
-                    <h2>Schedule</h2>
-                    <h3>Session Schedule</h3>
+            <div class="row">
+                <div class="4u">
+                    <h3>Friday 6/7</h3>
                     <table>
                         <tr>
-                            <th>Session</th>
                             <th>Time</th>
+                            <th>Activity</th>
                         </tr>
                         <tr>
-                            <td>Friday Evening</td>
-                            <td>7:30 - 9:15 pm</td>
+                            <td>6:00 pm</td>
+                            <td>Check In</td>
                         </tr>
                         <tr>
-                            <td>Saturday Morning</td>
-                            <td>9:00 - 11:00 am</td>
+                            <td>8:00 pm</td>
+                            <td>Friday Evening Session</td>
                         </tr>
                         <tr>
-                            <td>Saturday Evening</td>
-                            <td>7:00 - 9:15 pm</td>
+                            <td>9:00 pm</td>
+                            <td>Announcement</td>
                         </tr>
                         <tr>
-                            <td>Sunday Morning</td>
-                            <td>9:00 - 11:00</td>
+                            <td>9:15 pm</td>
+                            <td>Refreshments</td>
                         </tr>
+                        <tr>
+                            <td>10:00 pm</td>
+                            <td>Free Time</td>
+                        </tr>
+                        <tr>
+                            <td>12:00 am</td>
+                            <td>Lights Off</td>
+                        </tr>
+	                    <tr class="spacer"><td>1</td></tr>
                     </table>
 
+                </div>
+                <div class="4u">
+                    <h3>Saturday 6/8</h3>
+                    <table>
+                        <tr>
+                            <th>Time</th>
+                            <th>Activity</th>
+                        </tr>
+                        <tr>
+                            <td>7:00 am</td>
+                            <td>Devotional Time</td>
+                        </tr>
+                        <tr>
+                            <td>7:30 am</td>
+                            <td>Breakfast</td>
+                        </tr>                         
+                        <tr>
+                            <td>9:00 am</td>
+                            <td>Saturday Morning Session</td>
+                        </tr>
+                        <tr>
+                            <td>10:30 am</td>
+                            <td>Small Group Sharing</td>
+                        </tr>
+                        <tr>
+                            <td>11:00 pm</td>
+                            <td>Early Lunch*</td>
+                        </tr>
+                        <tr>
+                            <td>11:30 pm</td>
+                            <td>Lunch</td>
+                        </tr>
+                        <tr>
+                            <td>1:00 pm</td>
+                            <td>Workshops</td>
+                        </tr>
+                        <tr>
+                            <td>2:30 pm</td>
+                            <td>Free Time</td>
+                        </tr>
+                        <tr>
+                            <td>5:00 pm</td>
+                            <td>Early Dinner*</td>
+                        </tr>
+                        <tr>
+                            <td>5:30 pm</td>
+                            <td>Dinner</td>
+                        </tr>
+                        <tr>
+                            <td>7:00 pm</td>
+                            <td>Saturday Evening Session</td>
+                        </tr>
+                        <tr>
+                            <td>8:30 pm</td>
+                            <td>Small Group Sharing</td>
+                        </tr>
+                        <tr>
+                            <td>9:15 pm</td>
+                            <td>Refreshments</td>
+                        </tr>
+                        <tr>
+                            <td>10:00 pm</td>
+                            <td>Free Time</td>
+                        </tr>
+                        <tr>
+                            <td>12:00 am</td>
+                            <td>Lights Off</td>
+                        </tr>
+	                    <tr class="spacer"><td>1</td></tr>
+                    </table>
+                </div>
+                <div class="4u">
+                    <h3>Sunday 6/9</h3>
+                    <table>
+                        <tr>
+                            <th>Time</th>
+                            <th>Activity</th>
+                        </tr>
+                        <tr>
+                            <td>7:00 am</td>
+                            <td>Devotional Time</td>
+                        </tr>
+                        <tr>
+                            <td>7:30 am</td>
+                            <td>Breakfast</td>
+                        </tr>                         
+                        <tr>
+                            <td>9:00 am</td>
+                            <td>Sunday Morning Session</td>
+                        </tr>
+                        <tr>
+                            <td>10:45 am</td>
+                            <td>Group Photo</td>
+                        </tr>
+                        <tr>
+                            <td>11:00 pm</td>
+                            <td>Early Lunch*</td>
+                        </tr>
+                        <tr>
+                            <td>11:30 pm</td>
+                            <td>Lunch</td>
+                        </tr>
+                        <tr>
+                            <td>1:00 pm</td>
+                            <td>Check-Out</td>
+                        </tr>
+	                    <tr class="spacer"><td>1</td></tr>
+                    </table>
+                    </div>
+                </div>  
+                <p>*For Elderly and Families with young children</p>
                 }
 
                 @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
                 {
-                    <h2>日程</h2>
-                    <h3>信息時間表</h3>
+
+                <div class="row">
+                <div class="4u">
+                    <h3>星期五 6/7</h3>
                     <table>
                         <tr>
-                            <th>信息</th>
-                            <th>時間</th>
+                            <th>时间</th>
+                            <th>活动</th>
                         </tr>
                         <tr>
-                            <td>星期五晚上</td>
-                            <td>7:30至9:15</td>
+                            <td>6:00 pm</td>
+                            <td>報到註冊</td>
                         </tr>
                         <tr>
-                            <td>星期六早上</td>
-                            <td>9:00至11:00</td>
+                            <td>8:00 pm</td>
+                            <td>星期五晚上信息</td>
                         </tr>
                         <tr>
-                            <td>星期六晚上</td>
-                            <td>7:00至9:15</td>
+                            <td>9:00 pm</td>
+                            <td>歡迎/報告</td>
                         </tr>
                         <tr>
-                            <td>星期日早上</td>
-                            <td>9:00至11:00</td>
+                            <td>9:15 pm</td>
+                            <td>茶点</td>
                         </tr>
+                        <tr>
+                            <td>10:00 pm</td>
+                            <td>自由時間</td>
+                        </tr>
+                        <tr>
+                            <td>12:00 am</td>
+                            <td>灯关</td>
+                        </tr>
+	                    <tr class="spacer"><td>1</td></tr>
                     </table>
+
+                </div>
+                <div class="4u">
+                    <h3>星期六 6/8</h3>
+                    <table>
+                        <tr>
+                            <th>时间</th>
+                            <th>活动</th>
+                        </tr>
+                        <tr>
+                            <td>7:00 am</td>
+                            <td>灵修时间</td>
+                        </tr>
+                        <tr>
+                            <td>7:30 am</td>
+                            <td>早餐</td>
+                        </tr>                         
+                        <tr>
+                            <td>9:00 am</td>
+                            <td>星期六早上信息</td>
+                        </tr>
+                        <tr>
+                            <td>10:30 am</td>
+                            <td>小组讨论</td>
+                        </tr>
+                        <tr>
+                            <td>11:00 pm</td>
+                            <td>早午餐*</td>
+                        </tr>
+                        <tr>
+                            <td>11:30 pm</td>
+                            <td>午餐</td>
+                        </tr>
+                        <tr>
+                            <td>1:00 pm</td>
+                            <td>段讲座</td>
+                        </tr>
+                        <tr>
+                            <td>2:30 pm</td>
+                            <td>自由時間</td>
+                        </tr>
+                        <tr>
+                            <td>5:00 pm</td>
+                            <td>早晚餐*</td>
+                        </tr>
+                        <tr>
+                            <td>5:30 pm</td>
+                            <td>晚餐</td>
+                        </tr>
+                        <tr>
+                            <td>7:00 pm</td>
+                            <td>星期六晚上信息</td>
+                        </tr>
+                        <tr>
+                            <td>8:30 pm</td>
+                            <td>小组讨论</td>
+                        </tr>
+                        <tr>
+                            <td>9:15 pm</td>
+                            <td>茶点</td>
+                        </tr>
+                        <tr>
+                            <td>10:00 pm</td>
+                            <td>自由時間</td>
+                        </tr>
+                        <tr>
+                            <td>12:00 am</td>
+                            <td>灯关</td>
+                        </tr>
+	                    <tr class="spacer"><td>1</td></tr>
+                    </table>
+                </div>
+                <div class="4u">
+                    <h3>星期日 6/9</h3>
+                    <table>
+                        <tr>
+                            <th>时间</th>
+                            <th>活动</th>
+                        </tr>
+                        <tr>
+                            <td>7:00 am</td>
+                            <td>灵修时间</td>
+                        </tr>
+                        <tr>
+                            <td>7:30 am</td>
+                            <td>早餐</td>
+                        </tr>                         
+                        <tr>
+                            <td>9:00 am</td>
+                            <td>星期日早上信息</td>
+                        </tr>
+                        <tr>
+                            <td>10:45 am</td>
+                            <td>团体照</td>
+                        </tr>
+                        <tr>
+                            <td>11:00 pm</td>
+                            <td>早午餐*</td>
+                        </tr>
+                        <tr>
+                            <td>11:30 pm</td>
+                            <td>午餐</td>
+                        </tr>
+                        <tr>
+                            <td>1:00 pm</td>
+                            <td>Check-Out</td>
+                        </tr>
+	                    <tr class="spacer"><td>1</td></tr>
+                    </table>
+                </div>
+
+                </div>  
+                <p>*有小孩的家庭与年长者</p>
                 }
 
 					<p></p>
