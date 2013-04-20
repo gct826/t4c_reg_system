@@ -10,7 +10,7 @@
         @Styles.Render("~/Content/themes/iridium/5grid/core-1200px.css")
         @Styles.Render("~/Content/themes/iridium/5grid/core-noscript.css")
         @Styles.Render("~/Content/themes/iridium/style.css")
-        @Styles.Render("~/Content/themes/iridium/style-desktop.css")        
+        @Styles.Render("~/Content/themes/iridium/style-desktop.css") 
         
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/modernizr")
@@ -28,11 +28,9 @@
                     </h1>
 
                     <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial") 
-
-
-                    </section>
+                        <section id="login">
+                            @Html.Partial("_LoginPartial") 
+                        </section>
                     </div>
 
                     <!-- Nav -->
@@ -44,7 +42,7 @@
                             @Html.ActionLink("About", "About", "Home")
                             @Html.ActionLink("Schedule", "Schedule", "Home")                
                             @Html.ActionLink("Register", "Index", "Register")
-                            @Html.ActionLink("Admin", "Index", "Admin")
+                            <!-- Html.ActionLink("Admin", "Index", "Admin") -->
                             @Html.ActionLink("中文", ViewContext.RouteData.Values["action"].ToString(), new { language = "ch" })
                         }
                         @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
@@ -53,7 +51,7 @@
                             @Html.ActionLink("簡介", "About", "Home")
                             @Html.ActionLink("日程", "Schedule", "Home")                       
                             @Html.ActionLink("注册", "Index", "Register")
-                            @Html.ActionLink("管理", "Index", "Admin")
+                            <!-- Html.ActionLink("管理", "Index", "Admin") -->
                             @Html.ActionLink("English", ViewContext.RouteData.Values["action"].ToString(), new { language = "en" })
                         }
  
@@ -76,7 +74,11 @@
         <div class="divider2"></div>
         <footer>
             <div id="copyright">
-                <p><a href="/Home/Copyright">&copy;@DateTime.Now.Year - GCT826 Design</a></p>
+                <p>
+                    &copy;@DateTime.Now.Year - 
+                    <a href="/Home/Copyright">GCT826 Design</a>  -    
+                    @Html.ActionLink("Admin", "Index", "Admin")
+                </p>
             </div>
         </footer>
 

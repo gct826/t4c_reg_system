@@ -40,11 +40,11 @@ namespace SCRegistrationWeb.Models
                 if (RegPrice != null)
                 {
                     RegPrice FoundRegPrice = RegPrice.First();
-                    if (FoundRegPrice != null && RTypeID == 1)
+                    if (FoundRegPrice != null && RTypeID == 2)
                     {
                         return FoundRegPrice.PartTimePrice;
                     }                     
-                    if (FoundRegPrice != null && RTypeID == 2)
+                    if (FoundRegPrice != null && RTypeID == 1)
                     {
                         return FoundRegPrice.FullTimePrice;
                     }

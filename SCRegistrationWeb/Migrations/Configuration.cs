@@ -1,4 +1,4 @@
-namespace SCRegistrationWeb.Migrations
+﻿namespace SCRegistrationWeb.Migrations
 {
     using System;
     using System.Data.Entity;
@@ -18,10 +18,10 @@ namespace SCRegistrationWeb.Migrations
         {
             context.Statuses.AddOrUpdate(
                  s => s.StatusID,
-                 new Status { StatusID = 1, Name = "Incomplete" },
-                 new Status { StatusID = 2, Name = "Pending" },
-                 new Status { StatusID = 3, Name = "Confirmed" },
-                 new Status { StatusID = 4, Name = "Cancelled" },
+                 new Status { StatusID = 1, Name = "Incomplete 不完整" },
+                 new Status { StatusID = 2, Name = "Pending 待完成" },
+                 new Status { StatusID = 3, Name = "Confirmed 证实了" },
+                 new Status { StatusID = 4, Name = "Cancelled 取消了" },
                  new Status { StatusID = 5, Name = "Checked In" },
                  new Status { StatusID = 6, Name = "Checked Out" }
                  );
@@ -29,9 +29,9 @@ namespace SCRegistrationWeb.Migrations
             context.Services.AddOrUpdate(
                 v => v.ServiceID,
                 new Service { ServiceID = 1, Name = "English" },
-                new Service { ServiceID = 2, Name = "Mandarian" },
-                new Service { ServiceID = 3, Name = "Cantonese" },
-                new Service { ServiceID = 4, Name = "T4C West" },
+                new Service { ServiceID = 2, Name = "Mandarin 普通话" },
+                new Service { ServiceID = 3, Name = "Cantonese 广东话" },
+                new Service { ServiceID = 4, Name = "T4C West 西区分堂" },
                 new Service { ServiceID = 5, Name = "Youth Group" },
                 new Service { ServiceID = 6, Name = "Children" },
                 new Service { ServiceID = 7, Name = "Nursery" }
@@ -49,45 +49,65 @@ namespace SCRegistrationWeb.Migrations
 
             context.Genders.AddOrUpdate(
                  a => a.GenderID,
-                 new Gender { GenderID = 1, Name = "Male" },
-                 new Gender { GenderID = 2, Name = "Female" }
+                 new Gender { GenderID = 1, Name = "Male 男" },
+                 new Gender { GenderID = 2, Name = "Female 女" }
                  );
 
             context.Fellowships.AddOrUpdate(
                 a => a.FellowshipID,
                 new Fellowship { FellowshipID = 1, ServiceID = 1, Name = "No Fellowship Selected" },
-                new Fellowship { FellowshipID = 2, ServiceID = 2, Name = "No Fellowship Selected" },
-                new Fellowship { FellowshipID = 3, ServiceID = 3, Name = "No Fellowship Selected" },
-                new Fellowship { FellowshipID = 4, ServiceID = 4, Name = "No Fellowship Selected" },
+                new Fellowship { FellowshipID = 2, ServiceID = 2, Name = "None Selected 没有选择" },
+                new Fellowship { FellowshipID = 3, ServiceID = 3, Name = "None Selected 没有选择" },
+                new Fellowship { FellowshipID = 4, ServiceID = 4, Name = "None Selected 没有选择" },
                 new Fellowship { FellowshipID = 5, ServiceID = 5, Name = "No Fellowships" },
                 new Fellowship { FellowshipID = 6, ServiceID = 6, Name = "No Fellowships" },
-                new Fellowship { FellowshipID = 7, ServiceID = 7, Name = "No Fellowships" }
+                new Fellowship { FellowshipID = 7, ServiceID = 7, Name = "No Fellowships" },
+                new Fellowship { FellowshipID = 8, ServiceID = 1, Name = "Couples Group South" },
+                new Fellowship { FellowshipID = 9, ServiceID = 1, Name = "College Group" },
+                new Fellowship { FellowshipID = 10, ServiceID = 1, Name = "English District" },
+                new Fellowship { FellowshipID = 11, ServiceID = 1, Name = "Plymouth Fellowship" },
+                new Fellowship { FellowshipID = 12, ServiceID = 1, Name = "Young Profs/Grad Student" },
+                new Fellowship { FellowshipID = 13, ServiceID = 1, Name = "Others" },
+                new Fellowship { FellowshipID = 14, ServiceID = 2, Name = "Joy 喜樂" },
+                new Fellowship { FellowshipID = 15, ServiceID = 2, Name = "Living Water 活水" },
+                new Fellowship { FellowshipID = 16, ServiceID = 2, Name = "New Life 新生命" },
+                new Fellowship { FellowshipID = 17, ServiceID = 2, Name = "West 西區" },
+                new Fellowship { FellowshipID = 18, ServiceID = 2, Name = "Agape 仁愛" },
+                new Fellowship { FellowshipID = 19, ServiceID = 2, Name = "Others 另外" },
+                new Fellowship { FellowshipID = 20, ServiceID = 3, Name = "Cantonese Career 粵語就業" },
+                new Fellowship { FellowshipID = 21, ServiceID = 3, Name = "Cantonese Student 粵語學生" },
+                new Fellowship { FellowshipID = 22, ServiceID = 3, Name = "Chong Yuen 狀元" },
+                new Fellowship { FellowshipID = 23, ServiceID = 3, Name = "Fung Sing 豐盛" },
+                new Fellowship { FellowshipID = 24, ServiceID = 3, Name = "Grace 加恩" },
+                new Fellowship { FellowshipID = 24, ServiceID = 3, Name = "Life 生命" },
+                new Fellowship { FellowshipID = 24, ServiceID = 3, Name = "Song of Songs 雅歌" },
+                new Fellowship { FellowshipID = 25, ServiceID = 3, Name = "Others 另外" }
                 );
 
             context.RegTypes.AddOrUpdate(
-                 a => a.Name,
-                 new RegType { Name = "Full Time" },
-                 new RegType { Name = "Part Time" }
+                 a => a.RegTypeID,
+                 new RegType { RegTypeID = 1, Name = "Full Time 全职" },
+                 new RegType { RegTypeID = 2, Name = "Part Time 兼职" }
                  );
 
             context.RegPrices.AddOrUpdate(
                 a => a.AgeRangeID,
-                new RegPrice { AgeRangeID = 1, PartTimePrice = (decimal)5, FullTimePrice = (decimal)5},
-                new RegPrice { AgeRangeID = 2, PartTimePrice = (decimal)45, FullTimePrice = (decimal)25},
-                new RegPrice { AgeRangeID = 3, PartTimePrice = (decimal)85, FullTimePrice = (decimal)45},
-                new RegPrice { AgeRangeID = 4, PartTimePrice = (decimal)85, FullTimePrice = (decimal)45},
-                new RegPrice { AgeRangeID = 5, PartTimePrice = (decimal)85, FullTimePrice = (decimal)45},
-                new RegPrice { AgeRangeID = 6, PartTimePrice = (decimal)85, FullTimePrice = (decimal)45}
+                new RegPrice { AgeRangeID = 1, PartTimePrice = (decimal)10, FullTimePrice = (decimal)10},
+                new RegPrice { AgeRangeID = 2, PartTimePrice = (decimal)25, FullTimePrice = (decimal)45},
+                new RegPrice { AgeRangeID = 3, PartTimePrice = (decimal)40, FullTimePrice = (decimal)70},
+                new RegPrice { AgeRangeID = 4, PartTimePrice = (decimal)55, FullTimePrice = (decimal)95},
+                new RegPrice { AgeRangeID = 5, PartTimePrice = (decimal)55, FullTimePrice = (decimal)95},
+                new RegPrice { AgeRangeID = 6, PartTimePrice = (decimal)55, FullTimePrice = (decimal)95}
                 );
 
             context.RoomTypes.AddOrUpdate(
                 a => a.RoomTypeID,
-                new RoomType { RoomTypeID = 1, RegTypeID = 1, Name = "No Preference"},
-                new RoomType { RoomTypeID = 2, RegTypeID = 2, Name = "Part Time - No Room" },
-                new RoomType { RoomTypeID = 3, RegTypeID = 1, Name = "Family Room" },
-                new RoomType { RoomTypeID = 4, RegTypeID = 1, Name = "Small Children/Senior" },
-                new RoomType { RoomTypeID = 5, RegTypeID = 1, Name = "Dormatory" },
-                new RoomType { RoomTypeID = 6, RegTypeID = 1, Name = "Handicap Accessible" }
+                new RoomType { RoomTypeID = 1, RegTypeID = 1, Name = "No Preference 没有偏好" },
+                new RoomType { RoomTypeID = 2, RegTypeID = 2, Name = "No Room 无房必要" },
+                new RoomType { RoomTypeID = 3, RegTypeID = 1, Name = "Family Room 家庭房" },
+                new RoomType { RoomTypeID = 4, RegTypeID = 1, Name = "AC Room 交流室" },
+                new RoomType { RoomTypeID = 5, RegTypeID = 1, Name = "Dormatory 宿舍" },
+                new RoomType { RoomTypeID = 6, RegTypeID = 1, Name = "Handicapped 残废" }
                 );
 
 

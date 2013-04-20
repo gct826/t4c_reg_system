@@ -205,6 +205,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\Poster\Poster1.jpg" />
+    <Content Include="Content\images\Poster\Poster2.jpg" />
+    <Content Include="Content\images\Poster\Poster3.jpg" />
     <Content Include="Content\themes\iridium\images\banner-shadow-bg.png" />
     <Content Include="Content\themes\iridium\images\banner-wrapper-bg.png" />
     <Content Include="Content\themes\iridium\images\copyright-bg.png" />

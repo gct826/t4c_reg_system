@@ -57,33 +57,7 @@ namespace SCRegistrationWeb.Controllers_Admin
             return View(registrationentry);
         }
 
-        //
-        // GET: /AdminRegistration/Edit/5
 
-        public ActionResult Edit(int id = 0)
-        {
-            RegistrationEntry registrationentry = db.RegEntries.Find(id);
-            if (registrationentry == null)
-            {
-                return HttpNotFound();
-            }
-            return View(registrationentry);
-        }
-
-        //
-        // POST: /AdminRegistration/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(RegistrationEntry registrationentry)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(registrationentry).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(registrationentry);
-        }
 
         //
         // GET: /AdminRegistration/Delete/5
