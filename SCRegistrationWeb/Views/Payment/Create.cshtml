@@ -38,10 +38,18 @@
                     @Html.LabelFor(model => model.RegID)
                 </div>
                 <div class="editor-field">
-                    @Html.TextBoxFor(model => model.RegID)
+                    @if (ViewBag.tempID != 0)
+                    {
+                        @Html.TextBoxFor(model => model.RegID, new { @Value = ViewBag.tempID})
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.RegID)
+                    }
+                    
                     @Html.ValidationMessageFor(model => model.RegID)
                 </div>
-                
+                                    
                 <p>
                     <input type="submit" value="Open Registration" />
                 </p>

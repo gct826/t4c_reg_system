@@ -5,30 +5,42 @@
 <div id="main-wrapper">
 	<div class="12u" id="main-content">
 		<div class="5grid-layout">
-			<div class="row">
-                <h2>Site Administration</h2>
-            </div>
+		    <div class="row">
+		        <h2>Conference Administration</h2>
+		    </div>
+
+		    <div class="row">
+		        <h4>
+		            @Html.ActionLink("Registrations", "Index", "AdminRegistration")
+		        </h4>
+		    </div>
+		    <div class="row">
+		        <h4>
+		            @Html.ActionLink("Search Participant", "Index", "SearchRegistration")
+		        </h4>
+		    </div>
+		    <div class="row">
+		        <h4>
+		            @Html.ActionLink("Congregation Admin", "Index", "AdminCongregation")
+		        </h4>
+		    </div>
             <div class="row">
-                <p>
-                    @Html.ActionLink("Search Registration", "Index", "SearchRegistration")
-                </p>
-            </div>
-            <div class="row">
-                <p>
+                <h4>
                     @Html.ActionLink("Manage Payment", "Index", "Payment")
-                </p>
+                </h4>
             </div>
             <div class="row">
+                <h4>
+                    @Html.ActionLink("Headset Request", "Index", "Headset")
+                </h4>
+            </div>
+@*            <div class="row">
                 <p>
                     @Html.ActionLink("Event History", "Index", "AdminHistory")
                 </p>
-            </div>
+            </div>*@
 
-            <div class="row">
-                <p>
-                    @Html.ActionLink("Modify Registration Properties", "TableModification")
-                </p>
-            </div>
+
 
         </div>
     </div>

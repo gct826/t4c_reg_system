@@ -33,5 +33,6 @@ namespace SCRegistrationWeb.Models
 
         public DbSet<SmallGroup> SmallGroups { get; set; }
 
+        public DbSet<Headset> Headsets { get; set; }
     }
 }

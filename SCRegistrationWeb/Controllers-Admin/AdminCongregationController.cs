@@ -9,6 +9,7 @@ using SCRegistrationWeb.Models;
 
 namespace SCRegistrationWeb.Controllers_Admin
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminCongregationController : Controller
     {
         private SCRegistrationContext db = new SCRegistrationContext();
@@ -24,8 +25,10 @@ namespace SCRegistrationWeb.Controllers_Admin
 
                 var participantentries = db.ParticipantEntries.Include(p => p.RegistrationEntries).Include(p => p.Statuses).
                     Include(p => p.Services).Include(p => p.AgeRanges).Include(p => p.Genders).Include(p => p.RegTypes).
-                    Include(p => p.Fellowships).Include(p => p.RoomTypes).Where(p => p.ServiceID.Equals(SerID));
-                return View(participantentries.ToList());
+                    Include(p => p.Fellowships).Include(p => p.RoomTypes).
+                    Where(p => p.ServiceID.Equals(SerID)).Where(s => s.AgeRangeID.Equals((int)5) || s.AgeRangeID.Equals((int)6));
+
+                return View(participantentries.Where(p => p.StatusID != 4).ToList());
             }
             
             ViewBag.Selected = false;

@@ -1,0 +1,120 @@
+﻿@*//Participant/HeadsetRequest/5?RegUID=xxx*@
+
+@model SCRegistrationWeb.Models.ParticipantEntry
+
+@{
+    ViewBag.Title = "Headset Request";
+}
+
+@if (ViewBag.Found == false)
+{
+    <p>@ViewBag.Message</p>
+}
+
+@if (ViewBag.Found)
+{
+    Html.RenderAction("Summary", "Register", new { Id = ViewBag.RegistrationID });
+
+    using (Html.BeginForm())
+    {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Headset Request</legend>
+
+        <div id="main-wrapper">
+    	    <div class="12u" id="main-content">
+	    	    <div class="5grid-layout">
+   
+                    <div class="row">
+                        <div class="4u">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="editor-label readonly">
+                                            @Html.LabelFor(model => model.FirstName)
+                                        </div>
+                                        <div class="editor-field readonly">
+                                            @Html.TextBoxFor(model => model.FirstName, new { disabled = "disabled", @readonly = "readonly" })
+                                            @Html.HiddenFor(model => model.FirstName)
+                                        </div>                                            
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="4u">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="editor-label readonly">
+                                            @Html.LabelFor(model => model.LastName)
+                                        </div>
+                                        <div class="editor-field readonly">
+                                            @Html.TextBoxFor(model => model.LastName, new { disabled = "disabled", @readonly = "readonly" })
+                                            @Html.HiddenFor(model => model.LastName)
+                                        </div>                                           
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="4u">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="editor-label readonly">
+                                            @Html.LabelFor(model => model.ChineseName)
+                                        </div>
+                                        <div class="editor-field readonly">
+                                            @Html.TextBoxFor(model => model.ChineseName, new { disabled = "disabled", @readonly = "readonly" })
+                                            @Html.HiddenFor(model => model.ChineseName)
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+		            
+		            <div class="row">
+		                <div class="7u">
+		                    @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+		                    {                                              
+		                        <h3>Rev. Tan will be speaking in English with Cantonese translation on stage. Does the participant require Mandarin translation headset?</h3>
+		                    }
+                                            
+		                    @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+		                    {                                              
+		                        <h3>谭牧师讲道英语，粤语翻译在舞台上。参与者是否需要普通话翻译耳机？</h3>
+		                    }
+
+		                </div>
+
+		                <div class="3u">
+		                    @Html.HiddenFor(model => model.RegistrationID)
+
+		                    @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+		                    {                                              
+		                        <input type="button" title="No" value="No" onclick="location.href='@Url.Action("Modify", "Register", new { RegUID = ViewBag.RegUID })    '" />        
+		                        <input type="submit" title="Yes" value="Yes" name="headsetrequest" />      
+
+		                    }
+                                            
+		                    @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+		                    {                                              
+		                        <input type="button" title="不需要" value="不需要" onclick="location.href='@Url.Action("Modify", "Register", new { RegUID = ViewBag.RegUID })    '" />
+		                        <input type="submit" title="需要" value="需要" name="headsetrequest" />
+		                    }
+
+		                </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+
+    </fieldset>
+    }
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

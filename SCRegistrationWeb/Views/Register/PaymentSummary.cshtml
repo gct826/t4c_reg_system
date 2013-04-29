@@ -162,6 +162,26 @@
                         }
                     }                    
                 }
+                @if (ViewBag.totalCreditCard > 0)
+                {
+                    <tr class="priceview">
+                        <th>Total Credit Card </th>
+                        <td>@String.Format("{0:C}", ViewBag.totalCreditCard)</td>
+                    </tr>
+
+                    foreach (var item in Model)
+                    {
+                        if (item.PmtTypeID == 6 && item.PmtStatusID != 3)
+                        {
+                            <tr class="dateview">
+                                <th>
+                                    @string.Format("{0:d}", item.PaymentDate) - 
+                                    @String.Format("{0:C}", item.PaymentAmt)
+                                </th>
+                            </tr>
+                        }
+                    }
+                }   
                 @if (ViewBag.totalAdjustment > 0)
                 {
                     <tr class="priceview">
@@ -180,9 +200,10 @@
                             </th>
                         </tr>
                         }
-                    }                    
+                    }
+                                        
                 }
-                    
+ 
                 <tr class="priceview">
                     <th>Remaining Balance 总剩余</th>
                     <td>@String.Format("{0:C}", ViewBag.totalRemaining)</td>

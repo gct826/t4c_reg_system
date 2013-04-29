@@ -203,6 +203,30 @@ namespace SCRegistrationWeb.Models
             }
         }     
     
+        public bool RegIsAllowed()
+        {
+            var regStartDate = new DateTime(2013, 4, 28); //the date registration is opened.
+            var regEndDate = new DateTime(2013,5,20); //the day registration is closed.
+            bool adminTurnOff = false;
+
+            if (adminTurnOff)
+            {
+                return false;
+            }
+
+            if (DateTime.Now <= regStartDate)
+            {
+                return false;
+            }
+
+            if (DateTime.Now >= regEndDate)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
 
     }
 }

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.RegistrationEntry>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div id="main-wrapper">
+    <div class="12u" id="main-content">
+        <div class="5grid-layout">
+            <h2>Registration List</h2>
+
+            @*<p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>*@
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegistrationID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsConfirmed)
+                    </th>
+                    <th>
+                        Num of Participants
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegistrationID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsConfirmed)
+                        </td>
+                        <td>
+                            @Html.Action("PartCount","Participant",new { id = item.RegistrationID})
+                        </td>
+                            
+                        <td>
+                            @Html.ActionLink("Open", "Detail", "SearchRegistration", new { Id=item.RegistrationID },"") | 
+                            @Html.ActionLink("Payment", "Create", "Payment", new {id = item.RegistrationID},"") |
+                            @Html.ActionLink("History", "Reg", "AdminHistory", new {Id = item.RegistrationID},"")
+
+@*                            @Html.ActionLink("Edit", "Edit", new { id=item.RegistrationID }) |
+                            @Html.ActionLink("Details", "Details", new { id=item.RegistrationID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id=item.RegistrationID })*@
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+

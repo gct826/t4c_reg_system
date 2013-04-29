@@ -1,0 +1,24 @@
+﻿@model SCRegistrationWeb.Models.Headset
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div id="main-wrapper">
+    <div class="12u" id="main-content">
+        <div class="5grid-layout">
+            <h2>Remove Headset Request</h2>
+
+            <h3>Are you sure you want to remove headset request for</h3>
+            <h3>@ViewBag.FirstName &nbsp; @ViewBag.LastName</h3>
+
+            @using (Html.BeginForm()) {
+                @Html.AntiForgeryToken()
+                <p>
+                    <input type="submit" value="Delete" /> |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            }
+        </div>
+    </div>
+</div>
+

@@ -81,13 +81,19 @@
                 new Fellowship { FellowshipID = 24, ServiceID = 3, Name = "Grace 加恩" },
                 new Fellowship { FellowshipID = 24, ServiceID = 3, Name = "Life 生命" },
                 new Fellowship { FellowshipID = 24, ServiceID = 3, Name = "Song of Songs 雅歌" },
-                new Fellowship { FellowshipID = 25, ServiceID = 3, Name = "Others 另外" }
+                new Fellowship { FellowshipID = 25, ServiceID = 3, Name = "Others 另外" },
+                new Fellowship { FellowshipID = 26, ServiceID = 4, Name = "Albert He"},
+                new Fellowship { FellowshipID = 27, ServiceID = 4, Name = "Longfei Hu" },
+                new Fellowship { FellowshipID = 28, ServiceID = 4, Name = "Jie Gong" },
+                new Fellowship { FellowshipID = 29, ServiceID = 4, Name = "Richard He" },
+                new Fellowship { FellowshipID = 30, ServiceID = 4, Name = "Bingwen Hao" },
+                new Fellowship { FellowshipID = 31, ServiceID = 4, Name = "Sherman Chan" }
                 );
 
             context.RegTypes.AddOrUpdate(
                  a => a.RegTypeID,
-                 new RegType { RegTypeID = 1, Name = "Full Time 全职" },
-                 new RegType { RegTypeID = 2, Name = "Part Time 兼职" }
+                 new RegType { RegTypeID = 1, Name = "Full Time 全時間" },
+                 new RegType { RegTypeID = 2, Name = "Part Time 部分時間" }
                  );
 
             context.RegPrices.AddOrUpdate(
@@ -104,9 +110,9 @@
                 a => a.RoomTypeID,
                 new RoomType { RoomTypeID = 1, RegTypeID = 1, Name = "No Preference 没有偏好" },
                 new RoomType { RoomTypeID = 2, RegTypeID = 2, Name = "No Room 无房必要" },
-                new RoomType { RoomTypeID = 3, RegTypeID = 1, Name = "Family Room 家庭房" },
-                new RoomType { RoomTypeID = 4, RegTypeID = 1, Name = "AC Room 交流室" },
-                new RoomType { RoomTypeID = 5, RegTypeID = 1, Name = "Dormatory 宿舍" },
+                new RoomType { RoomTypeID = 3, RegTypeID = 1, Name = "Family Room" },
+                new RoomType { RoomTypeID = 4, RegTypeID = 1, Name = "Couple Room " },
+                new RoomType { RoomTypeID = 5, RegTypeID = 1, Name = "Single-sex Dorm" },
                 new RoomType { RoomTypeID = 6, RegTypeID = 1, Name = "Handicapped 残废" }
                 );
 
@@ -124,7 +130,8 @@
                 new PmtType { PmtTypeID = 2, Name = "Cash" },
                 new PmtType { PmtTypeID = 3, Name = "Check" },
                 new PmtType { PmtTypeID = 4, Name = "Refund" },
-                new PmtType { PmtTypeID = 5, Name = "Adjustmet" }
+                new PmtType { PmtTypeID = 5, Name = "Adjustmet" },
+                new PmtType { PmtTypeID = 6, Name = "Credit Card"}
 
                 );
 

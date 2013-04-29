@@ -49,6 +49,12 @@ h3 {
 	margin: 0 0 0.75em 0;
 }
 
+h4 {
+	font-size: 1.3em;
+	letter-spacing: -1px;
+	margin: 0 0 0.75em 0;
+}
+
 strong {
 	font-weight: 700;
 	color: #1d1d1d;
@@ -67,6 +73,9 @@ p {
 	margin-bottom: 10px;
 }
 
+.about {
+    margin-left: 20px;
+}
 .float-left {
     float: left;
 }

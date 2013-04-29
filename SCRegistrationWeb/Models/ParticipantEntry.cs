@@ -46,7 +46,7 @@ namespace SCRegistrationWeb.Models
         [DisplayName("Fellowship 所屬團契")]
         public int FellowshipID { get; set; }
 
-        [DisplayName("Room 所屬團契")]
+        [DisplayName("Rooming Preference 房型偏好")]
         public int RoomTypeID { get; set; }
 
         [Required(ErrorMessage = "First Name is required")]

@@ -17,6 +17,22 @@ namespace SCRegistrationWeb.Controllers
         // GET: /Register/
         public ActionResult Index()
         {
+            var order = new RegistrationEntry();
+            ViewBag.RegIsAllowed = order.RegIsAllowed();
+            
+            if (Equals(ViewBag.RegIsAllowed, false))
+            {
+                ViewBag.MessageEn = "Registration is currently Closed. Registration starts on Sunday 4/28th";
+                ViewBag.MessageCh = "目前注册关闭. 四月二十八日（星期日）开始登记.";
+            }
+
+            var test = HttpContext.User.Identity.IsAuthenticated;
+
+            if (test)
+            {
+                ViewBag.RegIsAllowed = true;
+            }
+    
             return View();
         }
 
@@ -39,12 +55,14 @@ namespace SCRegistrationWeb.Controllers
                 {
                     ViewBag.MessageEn = "Email or Phone Number already exist";
                     ViewBag.MessageCh = "电子邮件或电话号码已经存在";
+                    ViewBag.RegIsAllowed = true;
                     return View(order);
                 }
                 else if (_db.RegEntries.Any(e => e.Phone == order.Phone))
                 {
                     ViewBag.MessageEn = "Email or Phone Number already exist";
                     ViewBag.MessageCh = "电子邮件或电话号码已经存在";
+                    ViewBag.RegIsAllowed = true;
                     return View(order);
                 }
                 else
@@ -294,6 +312,7 @@ namespace SCRegistrationWeb.Controllers
                     {
                         ViewBag.MessageEn = "Registration Not Found";
                         ViewBag.MessageCh = "没有找到登记";
+                        ViewBag.RegIsAllowed = true;
                         return View();
                     }
                     else
@@ -491,6 +510,7 @@ namespace SCRegistrationWeb.Controllers
                 decimal totalRefundPending = (decimal)0;
                 decimal totalRefundApproved = (decimal)0;
                 decimal totalAdjustment = (decimal)0;
+                decimal totalCreditCard = (decimal)0;
 
                 foreach (var item in PaymentEntries)
                 {
@@ -534,6 +554,10 @@ namespace SCRegistrationWeb.Controllers
                         totalAdjustment = totalAdjustment + item.PaymentAmt;
                     }
 
+                    if (item.PmtTypeID == 6 && item.PmtStatusID != 3)
+                    {
+                        totalCreditCard = totalCreditCard + item.PaymentAmt;
+                    }
                 }
 
                 ViewBag.Found = true;
@@ -547,7 +571,8 @@ namespace SCRegistrationWeb.Controllers
                 ViewBag.totalRefundPending = totalRefundPending;
                 ViewBag.totalRefundApproved = totalRefundApproved;
                 ViewBag.totalAdjustment = totalAdjustment;
-                ViewBag.totalRemaining = totalRegPrice - totalScholarshipPending - totalScholarshipApproved - totalCashRecieved - totalCheckPending - totalCheckApproved - totalRefundPending - totalRefundApproved - totalAdjustment;
+                ViewBag.totalCreditCard = totalCreditCard;
+                ViewBag.totalRemaining = totalRegPrice - totalScholarshipPending - totalScholarshipApproved - totalCashRecieved - totalCheckPending - totalCheckApproved - totalRefundPending - totalRefundApproved - totalAdjustment - totalCreditCard;
                 return PartialView(PaymentEntries);
 
             }

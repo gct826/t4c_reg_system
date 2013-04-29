@@ -7,17 +7,19 @@ using System.Web;
 using System.Web.Mvc;
 using SCRegistrationWeb.Models;
 
-namespace SCRegistrationWeb.Controllers_Admin
+namespace SCRegistrationWeb.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminRegistrationController : Controller
     {
         private SCRegistrationContext db = new SCRegistrationContext();
 
         //
         // GET: /AdminRegistration/
+
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Home");
+            return View(db.RegEntries.ToList());
         }
 
         //
@@ -45,6 +47,7 @@ namespace SCRegistrationWeb.Controllers_Admin
         // POST: /AdminRegistration/Create
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(RegistrationEntry registrationentry)
         {
             if (ModelState.IsValid)
@@ -57,7 +60,34 @@ namespace SCRegistrationWeb.Controllers_Admin
             return View(registrationentry);
         }
 
+        //
+        // GET: /AdminRegistration/Edit/5
 
+        public ActionResult Edit(int id = 0)
+        {
+            RegistrationEntry registrationentry = db.RegEntries.Find(id);
+            if (registrationentry == null)
+            {
+                return HttpNotFound();
+            }
+            return View(registrationentry);
+        }
+
+        //
+        // POST: /AdminRegistration/Edit/5
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(RegistrationEntry registrationentry)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(registrationentry).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(registrationentry);
+        }
 
         //
         // GET: /AdminRegistration/Delete/5
@@ -76,6 +106,7 @@ namespace SCRegistrationWeb.Controllers_Admin
         // POST: /AdminRegistration/Delete/5
 
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             RegistrationEntry registrationentry = db.RegEntries.Find(id);

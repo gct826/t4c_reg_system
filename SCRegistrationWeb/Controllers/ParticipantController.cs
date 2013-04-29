@@ -223,7 +223,17 @@ namespace SCRegistrationWeb.Controllers
                         EventHistory NewEvent = new EventHistory();
                         NewEvent.AddHistory(RegID, "Participant Confirmed", participantentry.ParticipantID);
 
-                        return RedirectToAction("Modify", "Register", new { RegUID = RegUID });
+                        //return RedirectToAction("Modify", "Register", new { RegUID = RegUID });
+
+                        if (participantentry.ServiceID == (int) 2 || participantentry.ServiceID == (int) 4)
+                        {
+                            return RedirectToAction("HeadsetRequest", "Participant",
+                                             new {RegUID = RegUID, id = participantentry.ParticipantID});
+                        }
+                        else
+                        {
+                            return RedirectToAction("Modify", "Register", new { RegUID = RegUID });
+                        }
                     }
 
                     ViewBag.ServiceID = new SelectList(db.Services.Where(p => p.ServiceID.Equals(participantentry.ServiceID)), "ServiceID", "Name", participantentry.ServiceID);
@@ -723,5 +733,143 @@ namespace SCRegistrationWeb.Controllers
             return PartialView(foundParticipant);
         }
 
+        //
+        // GET: /Participant/PartCount/5
+        [ChildActionOnly]
+        public ActionResult PartCount(int id = 0)
+        {
+            var partCount = db.ParticipantEntries.Where(a => a.StatusID != (int) 4).Count(a => a.RegistrationID.Equals(id));
+
+            //db.Borrow.Where(x => x.UserID == 1).Select(x => x.BookId).Distinct().Count();
+
+            ViewBag.partCount = partCount;
+
+            return PartialView();
+
+
+        }
+
+        //
+        // GET: /Participant/HeadsetRequest/5?RegUID=xxx
+
+        public ActionResult HeadsetRequest(string RegUID, int id = 0)
+        {
+            if (RegUID == null || id == 0)
+            {
+                ViewBag.Found = false;
+                ViewBag.PartMessage = "Missing Necessary Parameters";
+                return View();
+
+            }
+            else
+            {
+                var participantentry = from m in db.ParticipantEntries.Include(p => p.RegistrationEntries).
+                    Include(p => p.Statuses).Include(p => p.Services).Include(p => p.AgeRanges).
+                    Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships).Include(p => p.RoomTypes).
+                    Where(p => p.ParticipantID.Equals(id))
+                                       select m;
+
+                if (participantentry == null)
+                {
+                    ViewBag.Found = false;
+                    ViewBag.PartMessage = "Participant not found";
+                    return View();
+                }
+                RegistrationEntry FoundEntry = new RegistrationEntry();
+                int RegID = FoundEntry.RegUIDtoID(RegUID);
+
+                if (RegID == 0)
+                {
+                    ViewBag.Found = false;
+                    ViewBag.PartMessage = "Registration not found";
+                    return View();
+                }
+
+                ParticipantEntry FoundPartEntry = new ParticipantEntry();
+                FoundPartEntry = participantentry.FirstOrDefault();
+
+                if (FoundPartEntry == null)
+                {
+                    return HttpNotFound();
+                }
+
+                if (FoundPartEntry.RegistrationID != RegID)
+                {
+                    ViewBag.Found = false;
+                    ViewBag.PartMessage = "Participant not found";
+                    return View();
+                }
+
+                ViewBag.Found = true;
+                ViewBag.RegUID = RegUID;
+                ViewBag.RegistrationID = RegID;
+                ViewBag.ParticipantID = FoundPartEntry.ParticipantID;
+
+                return View(FoundPartEntry);
+            }
+        }
+    
+        //
+        // POST: /Particiapnt/HeadsetRequest/5?RegUID=xxx
+        [HttpPost]
+        [MultiButton(MatchFormKey = "headsetrequest", MatchFormValue1 = "Yes", MatchFormValue2 = "需要")]
+        public ActionResult HeadsetRequest(ParticipantEntry participantEntry)
+        {
+            var foundEntry = from m in db.ParticipantEntries
+                                 .Where(p => p.RegistrationID.Equals(participantEntry.RegistrationID))
+                                 .Where(p => p.FirstName.Equals(participantEntry.FirstName))
+                                   select m;
+
+            var regUID = new RegistrationEntry().RegIDtoUID(foundEntry.FirstOrDefault().RegistrationID);
+                
+            var headset = new Headset();
+
+            headset.ParticipantID = foundEntry.FirstOrDefault().ParticipantID;
+
+            var foundHeadset = from m in db.Headsets
+                                 .Where(p => p.ParticipantID.Equals(headset.ParticipantID))
+                             select m;
+
+            try
+            {
+                if (foundHeadset.FirstOrDefault().ParticipantID == headset.ParticipantID)
+                {
+                    return RedirectToAction("Modify", "Register", new { RegUID = regUID });
+                }
+
+            }
+            catch (Exception)
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Headsets.Add(headset);
+                    db.SaveChanges();
+
+                    EventHistory NewEvent = new EventHistory();
+                    NewEvent.AddHistory(foundEntry.FirstOrDefault().RegistrationID, "Headset Requested", foundEntry.FirstOrDefault().ParticipantID);
+
+                    return RedirectToAction("Modify", "Register", new { RegUID = regUID });
+                }
+            }
+
+            //if (!foundHeadset.Equals(null))
+            //{
+            //    if (foundHeadset.FirstOrDefault().ParticipantID == headset.ParticipantID)
+            //    {
+            //        return RedirectToAction("Modify", "Register", new {RegUID = regUID});
+            //    }
+            //}
+
+            //if (ModelState.IsValid)
+            //{
+            //    db.Headsets.Add(headset);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Modify", "Register", new { RegUID = regUID });
+            //}
+
+            return View(participantEntry); 
+   
+        }
     }
+
 }

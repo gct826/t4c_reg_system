@@ -134,7 +134,7 @@ namespace SCRegistrationWeb.Controllers_Admin
                 EventHistory NewEvent = new EventHistory();
                 NewEvent.AddHistory(participant.RegistrationID, "Small Group Assigned", smallgroup.SmallGroupID);
 
-                return RedirectToAction("Index", "AdminSmallGroupController", new { SerID = smallgroup.ServiceID });
+                return RedirectToAction("Index", "AdminCongregation", new { SerID = smallgroup.ServiceID });
             }
             
             var SGLIst = new[] { "Small Group 1", "Small Group 2", "Small Group 3", "Small Group 4", "Small Group 5", "Small Group 6", "Small Group 7", "Small Group 8", "Small Group 9" };
@@ -176,7 +176,7 @@ namespace SCRegistrationWeb.Controllers_Admin
             if (ModelState.IsValid)
             {
 
-                SmallGroup SGCheck = db.SmallGroups.Find(id);
+                //SmallGroup SGCheck = db.SmallGroups.Find(id);
                 if (smallgroup == null)
                 {
                     return HttpNotFound();
@@ -188,12 +188,13 @@ namespace SCRegistrationWeb.Controllers_Admin
                     return HttpNotFound();
                 }
 
-                if (participant.ParticipantID != SGCheck.PartID)
-                {
-                    return HttpNotFound();
-                }
+                //if (participant.ParticipantID != SGCheck.PartID)
+                //{
+                //    return HttpNotFound();
+                //}
 
                 smallgroup.SmallGroupID = id;
+                
 
                 db.Entry(smallgroup).State = EntityState.Modified;
                 db.SaveChanges();
@@ -201,7 +202,7 @@ namespace SCRegistrationWeb.Controllers_Admin
                 EventHistory NewEvent = new EventHistory();
                 NewEvent.AddHistory(participant.RegistrationID, "Small Group Modified", smallgroup.SmallGroupID);
 
-                return RedirectToAction("Index", "AdminSmallGroupController", new { SerID = smallgroup.ServiceID });
+                return RedirectToAction("Index", "AdminCongregation", new { SerID = smallgroup.ServiceID });
             }
             ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", smallgroup.ServiceID);
             return View(smallgroup);

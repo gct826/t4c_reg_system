@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using SCRegistrationWeb.Models;
 
 namespace SCRegistrationWeb.Controllers
@@ -54,11 +55,12 @@ namespace SCRegistrationWeb.Controllers
 
         //
         // GET: /Payment/Create
-        public ActionResult Create(FormCollection values)
+        public ActionResult Create(FormCollection values, int id =0 )
         {
             if (values.Count == 0 )
             {
                 ViewBag.isEmpty = true;
+                ViewBag.tempID = id;
                 return View();
             }
 

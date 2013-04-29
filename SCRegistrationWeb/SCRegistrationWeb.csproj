@@ -128,9 +128,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers-Admin\AdminCongregationController.cs" />
     <Compile Include="Controllers-Admin\AdminHistoryController.cs" />
-    <Compile Include="Controllers-Admin\AdminRegistrationController.cs" />
     <Compile Include="Controllers-Admin\AdminSmallGroupController.cs" />
     <Compile Include="Controllers-Admin\AdminStatusController.cs" />
+    <Compile Include="Controllers-Admin\AdminYouthGroupController.cs" />
     <Compile Include="Controllers-Admin\SearchRegistrationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers-Admin\AdminAgeRangeController.cs" />
@@ -139,6 +139,8 @@
     <Compile Include="Controllers-Admin\AdminPricingController.cs" />
     <Compile Include="Controllers-Admin\AdminRoomTypeController.cs" />
     <Compile Include="Controllers-Admin\AdminServiceController.cs" />
+    <Compile Include="Controllers-Admin\AdminRegistrationController.cs" />
+    <Compile Include="Controllers\AdminHeadsetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParticipantController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
@@ -190,9 +192,14 @@
     <Compile Include="Migrations\201303160158254_SmallGroupChange1.Designer.cs">
       <DependentUpon>201303160158254_SmallGroupChange1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201304212225001_AddHeadset.cs" />
+    <Compile Include="Migrations\201304212225001_AddHeadset.Designer.cs">
+      <DependentUpon>201304212225001_AddHeadset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Helpers\MultiButtonAttribute.cs" />
+    <Compile Include="Models\HeadsetModel.cs" />
     <Compile Include="Models\HistoryModel.cs" />
     <Compile Include="Models\PartAttributeModels.cs" />
     <Compile Include="Models\ParticipantEntry.cs" />
@@ -205,9 +212,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\banner.jpg" />
     <Content Include="Content\images\Poster\Poster1.jpg" />
     <Content Include="Content\images\Poster\Poster2.jpg" />
     <Content Include="Content\images\Poster\Poster3.jpg" />
+    <Content Include="Content\images\STan.jpeg" />
+    <Content Include="Content\images\STan_sm.jpeg" />
     <Content Include="Content\themes\iridium\images\banner-shadow-bg.png" />
     <Content Include="Content\themes\iridium\images\banner-wrapper-bg.png" />
     <Content Include="Content\themes\iridium\images\copyright-bg.png" />
@@ -367,10 +377,7 @@
     <Content Include="Views\AdminStatus\Edit.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Register\Complete.cshtml" />
-    <Content Include="Views\AdminRegistration\Details.cshtml" />
-    <Content Include="Views\AdminRegistration\Create.cshtml" />
     <Content Include="Views\SearchRegistration\EditRegistration.cshtml" />
-    <Content Include="Views\AdminRegistration\Delete.cshtml" />
     <Content Include="Views\SearchRegistration\Index.cshtml" />
     <Content Include="Views\SearchRegistration\Detail.cshtml" />
     <Content Include="Views\SearchRegistration\EditParticipant.cshtml" />
@@ -397,6 +404,20 @@
     <Content Include="Views\AdminCongregation\Delete.cshtml" />
     <Content Include="Views\Participant\Details.cshtml" />
     <Content Include="Views\AdminHistory\Reg.cshtml" />
+    <Content Include="Views\AdminRegistration\Index.cshtml" />
+    <Content Include="Views\AdminRegistration\Details.cshtml" />
+    <Content Include="Views\AdminRegistration\Create.cshtml" />
+    <Content Include="Views\AdminRegistration\Edit.cshtml" />
+    <Content Include="Views\AdminRegistration\Delete.cshtml" />
+    <Content Include="Views\Participant\PartCount.cshtml" />
+    <Content Include="Views\AdminHeadset\Index.cshtml" />
+    <Content Include="Views\AdminHeadset\Delete.cshtml" />
+    <Content Include="Views\Participant\HeadsetRequest.cshtml" />
+    <Content Include="Views\AdminYouthGroup\Details.cshtml" />
+    <Content Include="Views\AdminYouthGroup\Create.cshtml" />
+    <Content Include="Views\AdminYouthGroup\Edit.cshtml" />
+    <Content Include="Views\AdminYouthGroup\Delete.cshtml" />
+    <Content Include="Views\AdminYouthGroup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -437,6 +458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201303160158254_SmallGroupChange1.resx">
       <DependentUpon>201303160158254_SmallGroupChange1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201304212225001_AddHeadset.resx">
+      <DependentUpon>201304212225001_AddHeadset.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

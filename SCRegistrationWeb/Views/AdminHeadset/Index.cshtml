@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.Headset>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="main-wrapper">
+    <div class="12u" id="main-content">
+	    <div class="5grid-layout">
+	        <h2>Headset Requested List</h2>
+	        <table>
+	            <tr>
+	                <th>
+	                    @Html.DisplayNameFor(model => model.ParticipantEntries.FirstName)
+	                </th>
+	                <th>
+	                    @Html.DisplayNameFor(model => model.ParticipantEntries.LastName)
+	                </th>
+	                <th>
+	                    @Html.DisplayNameFor(model => model.ParticipantEntries.ChineseName)
+	                </th>
+	                <th>
+	                    @Html.DisplayNameFor(model => model.ParticipantEntries.ServiceID)
+	                </th>
+	                <th>
+	                    @Html.DisplayNameFor(model => model.ParticipantEntries.AgeRangeID)
+	                </th>
+	                <th></th>
+	            </tr>
+
+	            @foreach (var item in Model) {
+	                <tr>
+	                    <td>
+	                        @Html.DisplayFor(modelItem => item.ParticipantEntries.FirstName)
+	                    </td>
+	                    <td>
+	                        @Html.DisplayFor(modelItem => item.ParticipantEntries.LastName)
+	                    </td>
+	                    <td>
+	                        @Html.DisplayFor(modelItem => item.ParticipantEntries.ChineseName)
+	                    </td>
+	                    <td>
+	                        @Html.DisplayFor(modelItem => item.ParticipantEntries.ServiceID)
+	                    </td>
+	                    <td>
+	                        @Html.DisplayFor(modelItem => item.ParticipantEntries.AgeRangeID)
+	                    </td>
+	                    <td>
+	                        @Html.ActionLink("Delete", "Delete", new { id=item.HeadsetID })
+	                    </td>
+	                </tr>
+	            }
+
+	        </table>
+	    </div>
+	</div>
+</div>
+
+

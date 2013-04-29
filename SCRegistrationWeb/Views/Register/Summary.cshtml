@@ -1,4 +1,6 @@
-﻿@model IEnumerable<SCRegistrationWeb.Models.RegistrationEntry>
+﻿@*//Register/Summary/ID*@
+
+@model IEnumerable<SCRegistrationWeb.Models.RegistrationEntry>
 
 @{
     ViewBag.Title = "Summary";
@@ -46,11 +48,21 @@ foreach (var item in Model)
                             @Html.DisplayFor(modelItem => item.Email)
                 </h4>
             </div>
-            <div class="4u">
-                <h4>
-                            @Html.DisplayNameFor(model => model.Phone):
-                            @String.Format("{0:###-###-####}", Convert.ToInt64(item.Phone))
-                </h4>
+		    <div class="4u">
+		        <h4>
+		            @Html.DisplayNameFor(model => model.Phone):
+		            @String.Format("{0:###-###-####}", Convert.ToInt64(item.Phone))
+		        </h4>
+		    </div>
+            <div class="3u">
+                    @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                    {
+                        <input type="button" title="Close Registration" value="Close Registration" onclick="location.href='@Url.Action("Index", "Register")    '" />
+                    }
+                    @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                    {
+                        <input type="button" title="关闭注册" value="关闭注册" onclick="location.href='@Url.Action("Index", "Register")    '" />
+                    }
             </div>
         </div>
     </div>
