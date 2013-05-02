@@ -33,8 +33,9 @@ namespace SCRegistrationWeb.Controllers
                 var PartEntry = from m in db.ParticipantEntries.Include(p => p.RegistrationEntries).
                                     Include(p => p.Statuses).Include(p => p.Services).Include(p => p.AgeRanges).
                                     Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships).Include(p=> p.RoomTypes).
-                                    Where(p => p.RegistrationID.Equals(Id)).Where(p => !p.StatusID.Equals((int)4))
+                                    Where(p => p.RegistrationID.Equals(Id))
                                 select m;
+
 
                 RegistrationEntry Registration = new RegistrationEntry();
 
@@ -45,7 +46,14 @@ namespace SCRegistrationWeb.Controllers
                 ViewBag.RegIsConfirm = Registration.RegIsConfirm(Id);
                 ViewBag.RegIsComplete = Registration.RegIsComplete(Id);
 
-                return PartialView(PartEntry.ToList());
+                if (isAdmin)
+                {
+                    return PartialView(PartEntry.ToList());                    
+                }
+                else
+                {
+                    return PartialView(PartEntry.Where(p => !p.StatusID.Equals((int)4)).ToList());
+                }
             }
         }
 

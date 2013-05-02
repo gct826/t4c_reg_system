@@ -24,7 +24,15 @@
                 <div class="12u">
                     <!-- Logo -->
                     <h1 class="mobileUI-site-name">
-                        @Html.ActionLink("T4C SC", "Index", "Home")
+                        @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+                        {
+                            @Html.ActionLink("2013 Summer Conference", "Index", "Home")
+                        }
+                        @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+                        {
+                            @Html.ActionLink("2013年夏令會", "Index", "Home")
+                        }
+
                     </h1>
 
                     <div class="float-right">

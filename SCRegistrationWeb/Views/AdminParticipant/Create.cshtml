@@ -1,0 +1,108 @@
+﻿@model SCRegistrationWeb.Models.ParticipantEntry
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ParticipantEntry</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ServiceID, "Services")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ServiceID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ServiceID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AgeRangeID, "AgeRanges")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AgeRangeID", String.Empty)
+            @Html.ValidationMessageFor(model => model.AgeRangeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GenderID, "Genders")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("GenderID", String.Empty)
+            @Html.ValidationMessageFor(model => model.GenderID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RegTypeID, "RegTypes")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("RegTypeID", String.Empty)
+            @Html.ValidationMessageFor(model => model.RegTypeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FellowshipID, "Fellowships")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("FellowshipID", String.Empty)
+            @Html.ValidationMessageFor(model => model.FellowshipID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RoomTypeID, "RoomTypes")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("RoomTypeID", String.Empty)
+            @Html.ValidationMessageFor(model => model.RoomTypeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ChineseName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ChineseName)
+            @Html.ValidationMessageFor(model => model.ChineseName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PartPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PartPrice)
+            @Html.ValidationMessageFor(model => model.PartPrice)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -147,9 +147,19 @@ namespace SCRegistrationWeb.Controllers
 
                 RegistrationEntry FoundEntry = registrationentry.FirstOrDefault();
 
-                ViewBag.Found = true;
-                ViewBag.RegUID = FoundEntry.RegistrationUID;
-                return PartialView(registrationentry.ToList());
+                if (FoundEntry != null)
+                {
+                    ViewBag.Found = true;
+                    ViewBag.RegUID = FoundEntry.RegistrationUID;
+                    return PartialView(registrationentry.ToList());
+                }
+                else
+                {
+                    ViewBag.Found = false;
+                    ViewBag.MessageEn = "Participant not found";
+                    ViewBag.MessageCh = "没有找到登记";
+                    return PartialView();
+                }
             }
         }
 
@@ -493,7 +503,7 @@ namespace SCRegistrationWeb.Controllers
 
             var RegEntry = _db.RegEntries.Where(s => s.RegistrationID.Equals(ID));
 
-            if (RegEntry != null)
+            if (RegEntry.FirstOrDefault() != null)
             {
                 RegistrationEntry FoundEntries = RegEntry.FirstOrDefault();
 

@@ -128,6 +128,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers-Admin\AdminCongregationController.cs" />
     <Compile Include="Controllers-Admin\AdminHistoryController.cs" />
+    <Compile Include="Controllers-Admin\AdminParticipantController.cs" />
     <Compile Include="Controllers-Admin\AdminSmallGroupController.cs" />
     <Compile Include="Controllers-Admin\AdminStatusController.cs" />
     <Compile Include="Controllers-Admin\AdminYouthGroupController.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\arrowright.png" />
     <Content Include="Content\images\banner.jpg" />
     <Content Include="Content\images\Poster\Poster1.jpg" />
     <Content Include="Content\images\Poster\Poster2.jpg" />
@@ -418,6 +420,11 @@
     <Content Include="Views\AdminYouthGroup\Edit.cshtml" />
     <Content Include="Views\AdminYouthGroup\Delete.cshtml" />
     <Content Include="Views\AdminYouthGroup\Index.cshtml" />
+    <Content Include="Views\AdminParticipant\Index.cshtml" />
+    <Content Include="Views\AdminParticipant\Details.cshtml" />
+    <Content Include="Views\AdminParticipant\Create.cshtml" />
+    <Content Include="Views\AdminParticipant\Edit.cshtml" />
+    <Content Include="Views\AdminParticipant\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

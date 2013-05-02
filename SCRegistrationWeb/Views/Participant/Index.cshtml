@@ -191,30 +191,26 @@
                         </p>
 
             
-                        @if (@ViewBag.RegIsConfirm == false)
+                        @if (ViewBag.RegIsConfirm == false)
                         {
                             if (ViewContext.RouteData.Values["language"].ToString() == "en")
-                            { 
-                                <p>@Html.ActionLink("Edit", "Modify", new { RegUID = ViewBag.RegUID, isPage2 = false, id = item.ParticipantID })  </p>
-                                <p>@Html.ActionLink("Remove", "Remove", new { RegUID = ViewBag.RegUID, id = item.ParticipantID })</p>
+                            {
+                                <p>@Html.ActionLink("Edit", "Modify", new {RegUID = ViewBag.RegUID, isPage2 = false, id = item.ParticipantID})  </p>
+                                <p>@Html.ActionLink("Remove", "Remove", new {RegUID = ViewBag.RegUID, id = item.ParticipantID})</p>
 
-                                if (@ViewBag.isAdmin == true)
-                                {
-                                    <p>@Html.ActionLink("Admin Edit", "EditParticipant","SearchRegistration", new { RegUID = ViewBag.RegUID, id = item.ParticipantID },"")</p>
-                                }
                             }
                             if (ViewContext.RouteData.Values["language"].ToString() == "ch")
-                            { 
-                                <p>@Html.ActionLink("编辑", "Modify", new { RegUID = ViewBag.RegUID, isPage2 = false, id = item.ParticipantID })  </p>
-                                <p>@Html.ActionLink("清除", "Remove", new { RegUID = ViewBag.RegUID, id = item.ParticipantID })</p>
-
-                                if (@ViewBag.isAdmin == true)
-                                {
-                                    <p>@Html.ActionLink("Admin Edit", "EditParticipant", "SearchRegistration", new { RegUID = ViewBag.RegUID, id = item.ParticipantID},"")</p>
-                                }
+                            {
+                                <p>@Html.ActionLink("编辑", "Modify", new {RegUID = ViewBag.RegUID, isPage2 = false, id = item.ParticipantID})  </p>
+                                <p>@Html.ActionLink("清除", "Remove", new {RegUID = ViewBag.RegUID, id = item.ParticipantID})</p>
                             }
-
                         }
+                        
+                        @if (ViewBag.isAdmin == true)
+                            {
+                                <p>@Html.ActionLink("Admin Edit", "EditParticipant", "SearchRegistration", new { RegUID = ViewBag.RegUID, id = item.ParticipantID},"")</p>
+                            }
+                        
                     </div>  
                 </div> 
             }

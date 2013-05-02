@@ -19,16 +19,16 @@ namespace SCRegistrationWeb.Controllers_Admin
 
         public ActionResult Index(int SerID = 0)
         {
-            if ((SerID >= 1) && (SerID <= 4))
+            if ((SerID >= 1) && (SerID <= 7))
             {
                 ViewBag.Selected = true;
 
                 var participantentries = db.ParticipantEntries.Include(p => p.RegistrationEntries).Include(p => p.Statuses).
                     Include(p => p.Services).Include(p => p.AgeRanges).Include(p => p.Genders).Include(p => p.RegTypes).
                     Include(p => p.Fellowships).Include(p => p.RoomTypes).
-                    Where(p => p.ServiceID.Equals(SerID)).Where(s => s.AgeRangeID.Equals((int)5) || s.AgeRangeID.Equals((int)6));
+                    Where(p => p.ServiceID.Equals(SerID));
 
-                return View(participantentries.Where(p => p.StatusID != 4).ToList());
+                return View(participantentries.Where(p => p.StatusID != 4).OrderBy(p => p.RegistrationID).ToList());
             }
             
             ViewBag.Selected = false;

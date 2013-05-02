@@ -40,16 +40,16 @@ namespace SCRegistrationWeb.Controllers
             ViewBag.StatusID = new SelectList(db.Statuses, "StatusID", "Name");
             if (StatusID != 0)
             {
-                return View(participantentries.Where(s => s.StatusID == StatusID).ToList());
+                return View(participantentries.Where(s => s.StatusID == StatusID).OrderBy(p => p.RegistrationID).ToList());
             }
             else
             {
-                return View(participantentries.Where(s => s.StatusID != 4).ToList());
+                return View(participantentries.Where(s => s.StatusID != 4).OrderBy(p => p.RegistrationID).ToList());
             }
         }
 
         //
-        // GET: /SearchRegistration/Detail/RegUID
+        // GET: /SearchRegistration/Detail/id
 
         public ActionResult Detail(int Id = 0)
         {
@@ -165,13 +165,22 @@ namespace SCRegistrationWeb.Controllers
                 ViewBag.RegUID = RegUID;
                 ViewBag.RegistrationID = RegID;
                 ViewBag.ParticipantID = participantentry.FirstOrDefault().ParticipantID;
-                ViewBag.ServiceID = new SelectList(db.Services.Where(p => p.ServiceID.Equals(participantentry.FirstOrDefault().ServiceID)), "ServiceID", "Name", participantentry.FirstOrDefault().ServiceID);
-                ViewBag.AgeRangeID = new SelectList(db.AgeRanges.Where(p => p.AgeRangeID.Equals(participantentry.FirstOrDefault().AgeRangeID)), "AgeRangeID", "Name", participantentry.FirstOrDefault().AgeRangeID);
-                ViewBag.GenderID = new SelectList(db.Genders.Where(p => p.GenderID.Equals(participantentry.FirstOrDefault().GenderID)), "GenderID", "Name", participantentry.FirstOrDefault().GenderID);
-                ViewBag.RegTypeID = new SelectList(db.RegTypes.Where(p => p.RegTypeID.Equals(participantentry.FirstOrDefault().RegTypeID)), "RegTypeID", "Name", participantentry.FirstOrDefault().RegTypeID);
-                ViewBag.FellowshipID = new SelectList(db.Fellowships.Where(p => p.ServiceID.Equals(participantentry.FirstOrDefault().ServiceID)), "FellowshipID", "Name", participantentry.FirstOrDefault().FellowshipID);
-                ViewBag.RoomTypeID = new SelectList(db.RoomTypes.Where(p => p.RegTypeID.Equals(participantentry.FirstOrDefault().RegTypeID)), "RoomTypeID", "Name", participantentry.FirstOrDefault().RoomTypeID);
-                ViewBag.PartPrice = participantentry.FirstOrDefault().PartPrice;
+
+                ViewBag.StatusID = new SelectList(db.Statuses, "StatusID", "Name", participantentry.FirstOrDefault().StatusID);
+                ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", participantentry.FirstOrDefault().ServiceID);
+                ViewBag.AgeRangeID = new SelectList(db.AgeRanges, "AgeRangeID", "Name", participantentry.FirstOrDefault().AgeRangeID);
+                ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "Name", participantentry.FirstOrDefault().GenderID);
+                ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name", participantentry.FirstOrDefault().RegTypeID);
+                ViewBag.FellowshipID = new SelectList(db.Fellowships, "FellowshipID", "Name", participantentry.FirstOrDefault().FellowshipID);
+                ViewBag.RoomTypeID = new SelectList(db.RoomTypes, "RoomTypeID", "Name", participantentry.FirstOrDefault().RoomTypeID);
+
+                //ViewBag.ServiceID = new SelectList(db.Services.Where(p => p.ServiceID.Equals(participantentry.FirstOrDefault().ServiceID)), "ServiceID", "Name", participantentry.FirstOrDefault().ServiceID);
+                //ViewBag.AgeRangeID = new SelectList(db.AgeRanges.Where(p => p.AgeRangeID.Equals(participantentry.FirstOrDefault().AgeRangeID)), "AgeRangeID", "Name", participantentry.FirstOrDefault().AgeRangeID);
+                //ViewBag.GenderID = new SelectList(db.Genders.Where(p => p.GenderID.Equals(participantentry.FirstOrDefault().GenderID)), "GenderID", "Name", participantentry.FirstOrDefault().GenderID);
+                //ViewBag.RegTypeID = new SelectList(db.RegTypes.Where(p => p.RegTypeID.Equals(participantentry.FirstOrDefault().RegTypeID)), "RegTypeID", "Name", participantentry.FirstOrDefault().RegTypeID);
+                //ViewBag.FellowshipID = new SelectList(db.Fellowships.Where(p => p.ServiceID.Equals(participantentry.FirstOrDefault().ServiceID)), "FellowshipID", "Name", participantentry.FirstOrDefault().FellowshipID);
+                //ViewBag.RoomTypeID = new SelectList(db.RoomTypes.Where(p => p.RegTypeID.Equals(participantentry.FirstOrDefault().RegTypeID)), "RoomTypeID", "Name", participantentry.FirstOrDefault().RoomTypeID);
+                //ViewBag.PartPrice = participantentry.FirstOrDefault().PartPrice;
 
                 EventHistory NewEvent = new EventHistory();
                 NewEvent.AddHistory(RegID, "Admin Participant Opened", participantentry.FirstOrDefault().ParticipantID);
@@ -184,7 +193,7 @@ namespace SCRegistrationWeb.Controllers
         // POST: /SearchRegistration/EditParticipant/RegUID
 
         [HttpPost]
-        public ActionResult EditParticipant(string RegUID, RegistrationEntry registrationentry)
+        public ActionResult EditParticipant(string RegUID, int id, ParticipantEntry participantEntry)
         {
             if (RegUID == null)
             {
@@ -198,19 +207,51 @@ namespace SCRegistrationWeb.Controllers
                 if (FoundRegID != 0 && ModelState.IsValid)
                 {
 
-                    registrationentry.RegistrationID = FoundRegID;
+                    //participantEntry.RegistrationID = FoundRegID;
 
-                    db.Entry(registrationentry).State = EntityState.Modified;
+                    //var foundPartEntry = from m in db.ParticipantEntries.Include(p => p.RegistrationEntries).
+                    //                                  Include(p => p.Statuses)
+                    //                                 .Include(p => p.Services)
+                    //                                 .Include(p => p.AgeRanges)
+                    //                                 .
+                    //                                  Include(p => p.Genders)
+                    //                                 .Include(p => p.RegTypes)
+                    //                                 .Include(p => p.Fellowships)
+                    //                                 .Include(p => p.RoomTypes)
+                    //                                 .
+                    //                                  Where(p => p.RegistrationID.Equals(FoundRegID)).
+                    //                                  Where(p => p.FirstName.Equals(participantEntry.FirstName)).
+                    //                                  Where(p => p.LastName.Equals(participantEntry.LastName))
+                    //                     select m;
+
+                    //participantEntry.ParticipantID = foundPartEntry.FirstOrDefault().ParticipantID;
+                    //foundPartEntry = null;
+
+                    participantEntry.ParticipantID = id;
+                    participantEntry.RegistrationID = FoundRegID;
+
+                    db.Entry(participantEntry).State = EntityState.Modified;
                     db.SaveChanges();
 
                     EventHistory NewEvent = new EventHistory();
-                    NewEvent.AddHistory(registrationentry.RegistrationID, "Admin Registration Edited", 0);
+                    NewEvent.AddHistory(participantEntry.RegistrationID, "Admin Registration Edited", 0);
 
-                    return RedirectToAction("Detail", "SearchRegistration", new { RegUID = registrationentry.RegistrationUID });
+                    return RedirectToAction("Detail", "SearchRegistration", new { id = participantEntry.RegistrationID });                    
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.RegUID = RegUID;
+                    ViewBag.RegistrationID = participantEntry.RegistrationID;
+                    ViewBag.ParticipantID = participantEntry.ParticipantID;
+
+                    ViewBag.StatusID = new SelectList(db.Statuses, "StatusID", "Name", participantEntry.StatusID);
+                    ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", participantEntry.ServiceID);
+                    ViewBag.AgeRangeID = new SelectList(db.AgeRanges, "AgeRangeID", "Name", participantEntry.AgeRangeID);
+                    ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "Name", participantEntry.GenderID);
+                    ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name", participantEntry.RegTypeID);
+                    ViewBag.FellowshipID = new SelectList(db.Fellowships, "FellowshipID", "Name", participantEntry.FellowshipID);
+                    ViewBag.RoomTypeID = new SelectList(db.RoomTypes, "RoomTypeID", "Name", participantEntry.RoomTypeID);
+                    return View(participantEntry);
                 }
             }
         }

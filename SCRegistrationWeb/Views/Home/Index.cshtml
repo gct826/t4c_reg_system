@@ -22,25 +22,34 @@
 	<div class="12u" id="main-content">
 		<div class="5grid-layout">
 			<div class="row">
-				<div class="8u">
-					<h2>TCCC 2013 Summer Conference</h2>
-					<h3>A Church After God's Own Heart 合神心意的教会</h3>
-                    <h3>Rev. Stephen Tan 陳建平牧師</h3>
-                    <h3>Crown College</h3>
-                    <h3>June 7-9, 2013</h3>
-				</div>
+			    <div class="8u">
+			        @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+			        {
+    			        <h2>A Church After God's Own Heart</h2>
+    			        <h2>Rev. Stephen Tan</h2>
+			            <h2>Crown College</h2>
+			            <h2>June 7-9, 2013</h2>
+			        }
+			        @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+			        {
+    			        <h2>合神心意的教会</h2>
+    			        <h2>陳建平牧師</h2>
+			            <h2>皇冠大學</h2>
+			            <h2>六月七日至六月九日</h2>
+			        }
+			    </div>
 				<div class="4u">
 					<h2>Upcoming Events</h2>
 					<ul class="list-style2">
-						<li class="first"><img src="Content/images/pics02.png" width="59" height="59" alt="">
+						<li class="first"><img src="Content/images/arrowright.png" width="59" height="59" alt="">
 							<p class="text">Registration Opens 注册开放</p>
 							<p class="posted">April 28 四月二十八日</p>
 						</li>
-						<li><img src="Content/images/pics03.png" width="59" height="59" alt="">
+						<li><img src="Content/images/arrowright.png" width="59" height="59" alt="">
 							<p>Registration Closes 注册关闭</p>
 							<p class="posted">May 19 五月十九日</p>
 						</li>
-						<li><img src="Content/images/pics04.png" width="59" height="59" alt="">
+						<li><img src="Content/images/arrowright.png" width="59" height="59" alt="">
 							<p>Summer Conference 年夏令會</p>
 							<p class="posted">June 7 六月七日</p>
 						</li>
