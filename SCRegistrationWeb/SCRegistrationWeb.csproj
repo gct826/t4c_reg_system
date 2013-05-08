@@ -197,6 +197,14 @@
     <Compile Include="Migrations\201304212225001_AddHeadset.Designer.cs">
       <DependentUpon>201304212225001_AddHeadset.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201305070353076_Add_RoomModels.cs" />
+    <Compile Include="Migrations\201305070353076_Add_RoomModels.Designer.cs">
+      <DependentUpon>201305070353076_Add_RoomModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201305080313265_Add_RoomAssignment_DeleteFlag.cs" />
+    <Compile Include="Migrations\201305080313265_Add_RoomAssignment_DeleteFlag.Designer.cs">
+      <DependentUpon>201305080313265_Add_RoomAssignment_DeleteFlag.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Helpers\MultiButtonAttribute.cs" />
@@ -208,6 +216,7 @@
     <Compile Include="Models\PricingModels.cs" />
     <Compile Include="Models\RadioButtonList.cs" />
     <Compile Include="Models\RegistrationEntry.cs" />
+    <Compile Include="Models\RoomModels.cs" />
     <Compile Include="Models\SCRegistrationContext.cs" />
     <Compile Include="Models\SmallGroupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -400,10 +409,6 @@
     <Content Include="Views\AdminSmallGroup\Create.cshtml" />
     <Content Include="Views\AdminSmallGroup\Edit.cshtml" />
     <Content Include="Views\AdminCongregation\Index.cshtml" />
-    <Content Include="Views\AdminCongregation\Details.cshtml" />
-    <Content Include="Views\AdminCongregation\Create.cshtml" />
-    <Content Include="Views\AdminCongregation\Edit.cshtml" />
-    <Content Include="Views\AdminCongregation\Delete.cshtml" />
     <Content Include="Views\Participant\Details.cshtml" />
     <Content Include="Views\AdminHistory\Reg.cshtml" />
     <Content Include="Views\AdminRegistration\Index.cshtml" />
@@ -468,6 +473,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201304212225001_AddHeadset.resx">
       <DependentUpon>201304212225001_AddHeadset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201305070353076_Add_RoomModels.resx">
+      <DependentUpon>201305070353076_Add_RoomModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201305080313265_Add_RoomAssignment_DeleteFlag.resx">
+      <DependentUpon>201305080313265_Add_RoomAssignment_DeleteFlag.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

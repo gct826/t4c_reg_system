@@ -21,7 +21,6 @@ namespace SCRegistrationWeb.Models
 
         public ParticipantEntry ParticipantEntries { get; set; }
         public Service Services { get; set; }
-
-
     }
+
 }

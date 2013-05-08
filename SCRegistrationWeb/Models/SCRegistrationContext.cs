@@ -34,5 +34,13 @@ namespace SCRegistrationWeb.Models
         public DbSet<SmallGroup> SmallGroups { get; set; }
 
         public DbSet<Headset> Headsets { get; set; }
+
+        public DbSet<RoomNote> RoomNotes { get; set; }
+
+        public DbSet<Building> Buildings { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomAssignment> RoomAssignments { get; set; }
+
+    
     }
 }

@@ -6,9 +6,9 @@
 <div id="main-wrapper">
     <div class="12u" id="main-content">
 	    <div class="5grid-layout">
-            <h2>Congregation View</h2>
+            <h2>Sessions View</h2>
 
-            <p>Select the Congregation</p>
+            <p>Select the Session</p>
             <table>
                 <tr>
                     <th>
@@ -92,8 +92,10 @@
                             @Html.Action("Details","AdminSmallGroup",new { id = item.ParticipantID})
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID })
-@*                            @Html.ActionLink("Details", "Details", new { id=item.ParticipantID }) |
+                            @Html.ActionLink("Open", "Detail","SearchRegistration", new { Id=item.RegistrationEntries.RegistrationID },"")
+
+@*                            @Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID })
+                            @Html.ActionLink("Details", "Details", new { id=item.ParticipantID }) |
                             @Html.ActionLink("Delete", "Delete", new { id=item.ParticipantID })*@
                         </td>
                     </tr>

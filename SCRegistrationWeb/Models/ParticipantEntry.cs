@@ -27,8 +27,8 @@ namespace SCRegistrationWeb.Models
         [DisplayName("Status")]
         public int StatusID { get; set; }
 
-        [Required(ErrorMessage = "Congregation is required")]
-        [DisplayName("Congregation 所屬會眾")]
+        [Required(ErrorMessage = "Session is required")]
+        [DisplayName("Session 所屬會話")]
         public int ServiceID { get; set; }
 
         [Required(ErrorMessage = "Age Range is required")]
