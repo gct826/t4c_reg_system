@@ -57,6 +57,38 @@ namespace SCRegistrationWeb.Controllers
             }
         }
 
+        //
+        // GET: /Participant/ParticipantPartial
+        [ChildActionOnly]
+        public ActionResult ParticipantPartial(int id = 0)
+        {
+            if (id != 0)
+            {
+                var participantentry = from m in db.ParticipantEntries.Where(p => p.ParticipantID.Equals(id))
+                        select m;
+
+                if (participantentry.FirstOrDefault() != null)
+                {
+                    ViewBag.Found = true;
+                    return PartialView(participantentry.FirstOrDefault());
+                }
+                else
+                {
+                    ViewBag.Found = false;
+                    return PartialView();
+                }
+            }
+            else
+            {
+                {
+                    ViewBag.Found = false;
+                    return PartialView();
+                }
+            }
+
+        }
+
+        //
         // GET: /Participant/Modify/RegUID
         public ActionResult Modify(string RegUID, bool isPage2 = false, bool? isAdmin = false, int Id = 0)
         {
@@ -146,9 +178,10 @@ namespace SCRegistrationWeb.Controllers
             return View();
         }
 
-
+        //
         // POST: /Participant/Modify/RegUID
         [HttpPost]
+        [MultiButton(MatchFormKey = "roomnote", MatchFormValue1 = "Next", MatchFormValue2 = "下页")]
         public ActionResult Modify(string RegUID, bool isPage2, bool? isAdmin, int Id, ParticipantEntry participantentry)
         {
             if (isAdmin == null)
@@ -324,287 +357,9 @@ namespace SCRegistrationWeb.Controllers
             ViewBag.Message = "Catchall Error";
             return View();
         }
-
-        //
-        // GET: /Participant/Create?RegUID=xxx
-
-        //public ActionResult Create(string RegUID)
-        //{
-        //    if (RegUID == null)
-        //    {
-        //        ViewBag.PartMessage = "Participant not found";
-        //        return RedirectToAction("Index","Home");
-
-        //    }
-        //    else
-        //    {
-
-        //        RegistrationEntry FoundEntry = new RegistrationEntry();
-        //        int RegID = FoundEntry.RegUIDtoID(RegUID);
-
-        //        if (RegID == 0)
-        //        {
-        //            ViewBag.PartMessage = "Participant not found";
-        //            return RedirectToAction("Index", "Home");
-        //        }
-
-        //        ViewBag.RegUID = (string)RegUID;
-        //        ViewBag.RegistrationID = RegID;
-        //        ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name");
-        //        ViewBag.AgeRangeID = new SelectList(db.AgeRanges, "AgeRangeID", "Name");
-        //        ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "Name");
-        //        ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name");
-                
-        //        return View();
-        //    }
-        //}
-
-        ////
-        //// POST: /Participant/Create?RegUID=xxx
-        //[HttpPost]
-        //public ActionResult Create(string RegUID, ParticipantEntry participantentry)
-        //{
-        //    int RegID = (int)0;
-
-        //    if (RegUID == null)
-        //    {
-        //        ViewBag.PartMessage = "Participant not found";
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    else
-        //    {
-        //        RegistrationEntry FoundEntry = new RegistrationEntry();
-        //        RegID = FoundEntry.RegUIDtoID(RegUID); 
-        //    }
-
-        //    if (ModelState.IsValid && RegID != 0)
-        //    {
-           
-        //        participantentry.RegistrationID = RegID;
-        //        participantentry.StatusID = (int)1;
-        //        participantentry.FellowshipID = participantentry.ServiceID;
-        //        participantentry.RoomTypeID = participantentry.RegTypeID;
-
-        //        RegPrice FoundPrice = new RegPrice();
-        //        participantentry.PartPrice = FoundPrice.PriceReturn(participantentry.AgeRangeID, participantentry.RegTypeID);
-
-        //        db.ParticipantEntries.Add(participantentry);
-        //        db.SaveChanges();
- 
-        //        EventHistory NewEvent = new EventHistory();
-        //        NewEvent.AddHistory(RegID, "New Participant Created", participantentry.ParticipantID);
- 
-
-        //        return RedirectToAction("Page2", new { RegUID = RegUID, id = participantentry.ParticipantID });
-        //    }
-
-        //    ViewBag.RegUID = (string)RegUID;
-        //    ViewBag.RegistrationID = RegID;
-        //    ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", participantentry.ServiceID);
-        //    ViewBag.AgeRangeID = new SelectList(db.AgeRanges, "AgeRangeID", "Name", participantentry.AgeRangeID);
-        //    ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "Name", participantentry.GenderID);
-        //    ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name", participantentry.RegTypeID);
-        //    return View(participantentry);
-        //}
-
-        ////
-        //// GET: /Participant/Edit/5?RegUID=xxx
-        //public ActionResult Edit(string RegUID, int id = 0)
-        //{
-        //    if (RegUID == null || id == 0)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-        //    else
-        //    {
-        //        RegistrationEntry FoundEntry = new RegistrationEntry();
-        //        int RegID = FoundEntry.RegUIDtoID(RegUID);
-
-        //        var participantentry = from m in db.ParticipantEntries.Include(p => p.RegistrationEntries).
-        //            Include(p => p.Statuses).Include(p => p.Services).Include(p => p.AgeRanges).
-        //            Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships).Include(p => p.RoomTypes).
-        //            Where(p => p.ParticipantID.Equals(id))
-        //                               select m;
-
-        //        if (participantentry == null || RegID == 0 || participantentry.FirstOrDefault().RegistrationID != RegID)
-        //        {
-        //            return RedirectToAction("Index", "Home");
-        //        }
-
-        //        ViewBag.RegUID = RegUID;
-        //        ViewBag.RegistrationID = RegID;
-        //        ViewBag.ParticipantID = participantentry.FirstOrDefault().ParticipantID;
-        //        ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", participantentry.FirstOrDefault().ServiceID);
-        //        ViewBag.AgeRangeID = new SelectList(db.AgeRanges, "AgeRangeID", "Name", participantentry.FirstOrDefault().AgeRangeID);
-        //        ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "Name", participantentry.FirstOrDefault().GenderID);
-        //        ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name", participantentry.FirstOrDefault().RegTypeID);
-
-        //        EventHistory NewEvent = new EventHistory();
-        //        NewEvent.AddHistory(RegID, "Participant Opened", participantentry.FirstOrDefault().ParticipantID);
-
-        //        return View(participantentry.FirstOrDefault());
-        //    }
-        //}
-
-        ////
-        //// POST: /Participant/Edit/5
-        //[HttpPost]
-        //public ActionResult Edit(string RegUID, int id, ParticipantEntry participantentry)
-        //{
-        //    if (RegUID == null || id == 0)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-        //    RegistrationEntry FoundEntry = new RegistrationEntry();
-        //    int RegID = FoundEntry.RegUIDtoID(RegUID);
-
-        //    if (ModelState.IsValid && RegID != 0)
-        //    {
-        //        participantentry.RegistrationID = RegID;
-        //        participantentry.ParticipantID = id;
-        //        participantentry.StatusID = (int)1;
-
-        //        var partFellowshipList = from m in db.Fellowships.Where(p => p.FellowshipID.Equals(participantentry.FellowshipID))
-        //                             select m;
-        //        Fellowship partFellowship = partFellowshipList.First();
-
-        //        try
-        //        {
-        //            if (partFellowship.ServiceID != participantentry.ServiceID)
-        //            {
-        //                participantentry.FellowshipID = participantentry.ServiceID;
-        //            }
-        //        }
-        //        catch
-        //        {
-        //        }
-
-        //        var partRoomTypeList = from m in db.RoomTypes.Where(p => p.RoomTypeID.Equals(participantentry.RoomTypeID))
-        //                                 select m;
-        //        RoomType partRoomType = partRoomTypeList.FirstOrDefault();
-
-        //        if (partRoomType.RegTypeID != participantentry.RegTypeID)
-        //        {
-        //            participantentry.RoomTypeID = participantentry.RegTypeID;
-        //        }
-
-        //        RegPrice FoundPrice = new RegPrice();
-        //        participantentry.PartPrice = FoundPrice.PriceReturn(participantentry.AgeRangeID, participantentry.RegTypeID);
-
-        //        db.Entry(participantentry).State = EntityState.Modified;
-        //        db.SaveChanges();
-
-
-        //        EventHistory NewEvent = new EventHistory();
-        //        NewEvent.AddHistory(RegID, "Participant Edited", participantentry.ParticipantID);
-
-        //        return RedirectToAction("Page2", new { RegUID = RegUID, id = participantentry.ParticipantID });
-        //    }
-
-        //    ViewBag.RegUID = RegUID;
-        //    ViewBag.RegistrationID = RegID;
-        //    ViewBag.ParticipantID = participantentry.ParticipantID;
-        //    ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", participantentry.ServiceID);
-        //    ViewBag.AgeRangeID = new SelectList(db.AgeRanges, "AgeRangeID", "Name", participantentry.AgeRangeID);
-        //    ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "Name", participantentry.GenderID);
-        //    ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name", participantentry.RegTypeID);
-
-        //    return View(participantentry);
-        //}
-
-        ////
-        //// GET: /Participant/Page2/5?RegUID=xxx
-        //public ActionResult Page2(string RegUID, int id = 0)
-        //{
-        //    if (RegUID == null || id == 0)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-        //    else
-        //    {
-        //        RegistrationEntry FoundEntry = new RegistrationEntry();
-        //        int RegID = FoundEntry.RegUIDtoID(RegUID);
-
-        //        var participantentry = from m in db.ParticipantEntries.Include(p => p.RegistrationEntries).
-        //            Include(p => p.Statuses).Include(p => p.Services).Include(p => p.AgeRanges).
-        //            Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships).Include(p => p.RoomTypes).
-        //            Where(p => p.ParticipantID.Equals(id))
-        //                               select m;
-
-        //        if (participantentry == null || RegID == 0 || participantentry.FirstOrDefault().RegistrationID != RegID)
-        //        {
-        //            return RedirectToAction("Index", "Home");
-        //        }
-
-        //        ViewBag.RegUID = RegUID;
-        //        ViewBag.RegistrationID = RegID;
-        //        ViewBag.ParticipantID = participantentry.FirstOrDefault().ParticipantID;
-        //        ViewBag.ServiceID = new SelectList(db.Services.Where(p => p.ServiceID.Equals(participantentry.FirstOrDefault().ServiceID)), "ServiceID", "Name", participantentry.FirstOrDefault().ServiceID);
-        //        ViewBag.AgeRangeID = new SelectList(db.AgeRanges.Where(p => p.AgeRangeID.Equals(participantentry.FirstOrDefault().AgeRangeID)), "AgeRangeID", "Name", participantentry.FirstOrDefault().AgeRangeID);
-        //        ViewBag.GenderID = new SelectList(db.Genders.Where(p => p.GenderID.Equals(participantentry.FirstOrDefault().GenderID)), "GenderID", "Name", participantentry.FirstOrDefault().GenderID);
-        //        ViewBag.RegTypeID = new SelectList(db.RegTypes.Where(p => p.RegTypeID.Equals(participantentry.FirstOrDefault().RegTypeID)), "RegTypeID", "Name", participantentry.FirstOrDefault().RegTypeID);
-        //        ViewBag.FellowshipID = new SelectList(db.Fellowships.Where(p => p.ServiceID.Equals(participantentry.FirstOrDefault().ServiceID)), "FellowshipID", "Name", participantentry.FirstOrDefault().FellowshipID);
-        //        ViewBag.RoomTypeID = new SelectList(db.RoomTypes.Where(p => p.RegTypeID.Equals(participantentry.FirstOrDefault().RegTypeID)), "RoomTypeID", "Name", participantentry.FirstOrDefault().RoomTypeID);
-        //        ViewBag.PartPrice = participantentry.FirstOrDefault().PartPrice;
-
-        //        return View(participantentry.FirstOrDefault());
-        //    }
-        //}
-
-        ////
-        //// POST: /Participant/Page2/5?RegUID=xxx
-        //[HttpPost]
-        //public ActionResult Page2(string RegUID, int id, ParticipantEntry participantentry)
-        //{
-        //    if (RegUID == null || id == 0)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-            
-        //    RegistrationEntry FoundEntry = new RegistrationEntry();
-        //    int RegID = FoundEntry.RegUIDtoID(RegUID);
-
-        //    if (ModelState.IsValid && RegID != 0)
-        //    {
-        //        participantentry.RegistrationID = RegID;
-        //        participantentry.ParticipantID = id;
-        //        participantentry.StatusID = (int)2;
-
-        //        RegPrice FoundPrice = new RegPrice();
-        //        participantentry.PartPrice = FoundPrice.PriceReturn(participantentry.AgeRangeID, participantentry.RegTypeID);
-
-
-        //        db.Entry(participantentry).State = EntityState.Modified;
-        //        db.SaveChanges();
-
-
-        //        EventHistory NewEvent = new EventHistory();
-        //        NewEvent.AddHistory(RegID, "Participant Confirmed", participantentry.ParticipantID);
-
-        //        return RedirectToAction("Modify", "Register", new { RegUID = RegUID });
-        //    }
-
-        //    ViewBag.RegUID = RegUID;
-        //    ViewBag.RegistrationID = RegID;
-        //    ViewBag.ParticipantID = participantentry.ParticipantID;
-        //    ViewBag.ServiceID = new SelectList(db.Services.Where(p => p.ServiceID.Equals(participantentry.ServiceID)), "ServiceID", "Name", participantentry.ServiceID);
-        //    ViewBag.AgeRangeID = new SelectList(db.AgeRanges.Where(p => p.AgeRangeID.Equals(participantentry.AgeRangeID)), "AgeRangeID", "Name", participantentry.AgeRangeID);
-        //    ViewBag.GenderID = new SelectList(db.Genders.Where(p => p.GenderID.Equals(participantentry.GenderID)), "GenderID", "Name", participantentry.GenderID);
-        //    ViewBag.RegTypeID = new SelectList(db.RegTypes.Where(p => p.RegTypeID.Equals(participantentry.RegTypeID)), "RegTypeID", "Name", participantentry.RegTypeID);
-        //    ViewBag.FellowshipID = new SelectList(db.Fellowships.Where(p => p.ServiceID.Equals(participantentry.ServiceID)), "FellowshipID", "Name", participantentry.FellowshipID);
-        //    ViewBag.RoomTypeID = new SelectList(db.RoomTypes.Where(p => p.RegTypeID.Equals(participantentry.RegTypeID)), "RoomTypeID", "Name", participantentry.RoomTypeID);
-        //    ViewBag.PartPrice = participantentry.PartPrice;
-            
-        //    return View(participantentry);
-        //}
-
         
         //
         // GET: /Participant/Remove/5?RegUID=xxx
-
         public ActionResult Remove(string RegUID, int id = 0)
         {
             if (RegUID == null || id == 0)
@@ -722,7 +477,6 @@ namespace SCRegistrationWeb.Controllers
 
         //
         // GET: /Participant/Details/5
-
         [ChildActionOnly]
         public ActionResult Details(int id = 0)
         {
@@ -759,7 +513,6 @@ namespace SCRegistrationWeb.Controllers
 
         //
         // GET: /Participant/HeadsetRequest/5?RegUID=xxx
-
         public ActionResult HeadsetRequest(string RegUID, int id = 0)
         {
             if (RegUID == null || id == 0)
@@ -818,7 +571,7 @@ namespace SCRegistrationWeb.Controllers
         }
     
         //
-        // POST: /Particiapnt/HeadsetRequest/5?RegUID=xxx
+        // POST: /Participant/HeadsetRequest/5?RegUID=xxx
         [HttpPost]
         [MultiButton(MatchFormKey = "headsetrequest", MatchFormValue1 = "Yes", MatchFormValue2 = "需要")]
         public ActionResult HeadsetRequest(ParticipantEntry participantEntry)
@@ -860,24 +613,284 @@ namespace SCRegistrationWeb.Controllers
                 }
             }
 
-            //if (!foundHeadset.Equals(null))
-            //{
-            //    if (foundHeadset.FirstOrDefault().ParticipantID == headset.ParticipantID)
-            //    {
-            //        return RedirectToAction("Modify", "Register", new {RegUID = regUID});
-            //    }
-            //}
-
-            //if (ModelState.IsValid)
-            //{
-            //    db.Headsets.Add(headset);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Modify", "Register", new { RegUID = regUID });
-            //}
-
             return View(participantEntry); 
    
         }
+    
+        //
+        // GET: /Participant/RoomNote/5
+        [ChildActionOnly]
+        public ActionResult RoomNote(int id = 0)
+        {
+            if (id == 0)
+            {
+                ViewBag.Found = false;
+                ViewBag.PartMessage = "Missing Necessary Parameters";
+                return PartialView();
+
+            }
+            else
+            {                
+                var roomNote = from m in db.RoomNotes.Where(p => p.PartID.Equals(id))
+                               select m;
+
+                RoomNote foundRoomNote = new RoomNote();
+                foundRoomNote = roomNote.FirstOrDefault();
+
+                if (foundRoomNote == null)
+                {
+                    ViewBag.Found = false;
+                    ViewBag.RoomNote = null;
+
+                    RoomNote returnRoomNote = new RoomNote();
+                    returnRoomNote.Note = null;
+                    returnRoomNote.PartID = id;
+
+                    return PartialView(returnRoomNote);
+                }
+
+                ViewBag.Found = true;
+                ViewBag.RoomNote = foundRoomNote.Note;
+
+                return PartialView(foundRoomNote);
+            } 
+        }
+
+        //
+        // POST: /Participant/RoomNote/
+        [HttpPost]
+        [MultiButton(MatchFormKey = "roomnote", MatchFormValue1 = "Add/Edit", MatchFormValue2 = "加/改")]
+        public ActionResult RoomNote(string RegUID, bool isPage2, bool? isAdmin, int Id, ParticipantEntry participantentry)
+        {
+            if (isAdmin == null)
+            {
+                isAdmin = false;
+            }
+
+            if (RegUID == null)
+            {
+                ViewBag.Found = false;
+                ViewBag.Message = "Invalid Registration Key";
+                return View();
+            }
+
+            RegistrationEntry FoundEntry = new RegistrationEntry();
+            int RegID = FoundEntry.RegUIDtoID(RegUID);
+
+            if (RegID == 0)
+            {
+                ViewBag.Found = false;
+                ViewBag.Message = "Invalid Registration Key";
+                return View();
+            }
+
+            if (RegID != 0 && Id == 0)
+            {
+
+                ViewBag.Found = false;
+                ViewBag.Message = "Invalid Participant ID";
+                return View();
+            }
+
+            if (RegID != 0 && Id != 0)
+            {
+                if (isPage2)
+                {
+                    if (ModelState.IsValid && RegID != 0)
+                    {
+                        participantentry.RegistrationID = RegID;
+                        participantentry.ParticipantID = Id;
+                        participantentry.StatusID = (int)1;
+
+                        RegPrice FoundPrice = new RegPrice();
+                        participantentry.PartPrice = FoundPrice.PriceReturn(participantentry.AgeRangeID, participantentry.RegTypeID);
+
+                        db.Entry(participantentry).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        EventHistory NewEvent = new EventHistory();
+                        NewEvent.AddHistory(RegID, "RoomNote Add Page", participantentry.ParticipantID);
+
+                        return RedirectToAction("RoomNoteAdd", new { RegUID = RegUID, isPage2 = true, id = participantentry.ParticipantID });
+                    }
+
+                    ViewBag.ServiceID = new SelectList(db.Services.Where(p => p.ServiceID.Equals(participantentry.ServiceID)), "ServiceID", "Name", participantentry.ServiceID);
+                    ViewBag.AgeRangeID = new SelectList(db.AgeRanges.Where(p => p.AgeRangeID.Equals(participantentry.AgeRangeID)), "AgeRangeID", "Name", participantentry.AgeRangeID);
+                    ViewBag.GenderID = new SelectList(db.Genders.Where(p => p.GenderID.Equals(participantentry.GenderID)), "GenderID", "Name", participantentry.GenderID);
+                    ViewBag.RegTypeID = new SelectList(db.RegTypes.Where(p => p.RegTypeID.Equals(participantentry.RegTypeID)), "RegTypeID", "Name", participantentry.RegTypeID);
+                    ViewBag.FellowshipID = new SelectList(db.Fellowships.Where(p => p.ServiceID.Equals(participantentry.ServiceID)), "FellowshipID", "Name", participantentry.FellowshipID);
+                    ViewBag.RoomTypeID = new SelectList(db.RoomTypes.Where(p => p.RegTypeID.Equals(participantentry.RegTypeID)), "RoomTypeID", "Name", participantentry.RoomTypeID);
+                    ViewBag.PartPrice = participantentry.PartPrice;
+                }
+                else
+                {
+                    ViewBag.Found = false;
+                    ViewBag.Message = "Invalid Participant ID";
+                    return View();
+                }
+
+                
+
+                ViewBag.Found = false;
+                ViewBag.Message = "Invalid Participant ID";
+                return View();
+
+            }
+
+            ViewBag.Found = false;
+            ViewBag.Message = "Catchall Error";
+            return View();
+        }
+
+        //
+        // GET: /Participant/RoomNoteAdd/UID
+        public ActionResult RoomNoteAdd(string RegUID, bool isPage2 = false, bool? isAdmin = false, int Id = 0)
+        {
+            if (isAdmin == null)
+            {
+                isAdmin = false;
+            }
+
+            if (RegUID == null)
+            {
+                ViewBag.Found = false;
+                ViewBag.Message = "Invalid Registration Key";
+                return View();
+            }
+
+            RegistrationEntry FoundEntry = new RegistrationEntry();
+            int RegID = FoundEntry.RegUIDtoID(RegUID);
+
+            if (RegID == 0)
+            {
+                ViewBag.Found = false;
+                ViewBag.Message = "Invalid Registration Key";
+                return View();
+            }
+
+            if (RegID != 0 && Id == 0)
+            {
+                ViewBag.Found = true;
+                ViewBag.isNew = true;
+                ViewBag.isPage2 = isPage2;
+                ViewBag.RegUID = (string)RegUID;
+                ViewBag.RegistrationID = RegID;
+                ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name");
+                ViewBag.AgeRangeID = new SelectList(db.AgeRanges, "AgeRangeID", "Name");
+                ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "Name");
+                ViewBag.RegTypeID = new SelectList(db.RegTypes, "RegTypeID", "Name");
+
+                return View();
+            }
+
+            if (RegID != 0 && Id != 0)
+            {
+                var participantentry = from m in db.ParticipantEntries.Include(p => p.RegistrationEntries).
+                   Include(p => p.Statuses).Include(p => p.Services).Include(p => p.AgeRanges).
+                   Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships).Include(p => p.RoomTypes).
+                   Where(p => p.ParticipantID.Equals(Id))
+                                       select m;
+
+                var roomNote = from m in db.RoomNotes.Where(p => p.PartID.Equals(Id))
+                               select m;
+
+
+                if (roomNote == null || RegID == 0)
+                {
+                    ViewBag.Found = false;
+                    ViewBag.isNew = false;
+                    ViewBag.isPage2 = isPage2;
+                    ViewBag.isAdmin = isAdmin;
+                    ViewBag.RegUID = RegUID;
+                    ViewBag.RegistrationID = RegID;
+                    ViewBag.ParticipantID = Id;
+                    
+                    RoomNote returnRoomNote = new RoomNote();
+                    returnRoomNote.Note = null;
+                    returnRoomNote.PartID = Id;
+
+                    return View(returnRoomNote);
+                }
+
+                ViewBag.Found = true;
+                ViewBag.isNew = false;
+                ViewBag.isPage2 = isPage2;
+                ViewBag.isAdmin = isAdmin;
+                ViewBag.RegUID = RegUID;
+                ViewBag.RegistrationID = RegID;
+                ViewBag.ParticipantID = Id;
+
+                return View(roomNote.FirstOrDefault());
+            }
+
+            ViewBag.Found = false;
+            ViewBag.Message = "Catchall Error";
+            return View();
+        }
+
+        //
+        // POST: /Participant/RoomNoteAdd/UID
+        [HttpPost]
+        public ActionResult RoomNoteAdd(string RegUID, bool isPage2, bool? isAdmin, int ID, RoomNote roomNote)
+        {
+            if (isAdmin == null)
+            {
+                isAdmin = false;
+            }
+
+            if (RegUID == null)
+            {
+                ViewBag.Found = false;
+                ViewBag.Message = "Invalid Registration Key";
+                return View(roomNote);
+            }
+
+            RegistrationEntry FoundEntry = new RegistrationEntry();
+            int RegID = FoundEntry.RegUIDtoID(RegUID);
+
+            if (RegID == 0)
+            {
+                ViewBag.Found = false;
+                ViewBag.Message = "Invalid Registration Key";
+                return View(roomNote);
+            }
+
+            var findRoomNote = from m in db.RoomNotes.Where(p => p.PartID.Equals(ID))
+                select m;
+         
+            if (findRoomNote.FirstOrDefault() == null)
+            {
+
+                roomNote.PartID = ID;
+
+                db.RoomNotes.Add(roomNote);
+                db.SaveChanges();
+
+                EventHistory NewEvent = new EventHistory();
+                NewEvent.AddHistory(RegID, "RoomNote Add", roomNote.RoomNoteID);
+
+                return RedirectToAction("Modify", new { RegUID = RegUID, isPage2 = isPage2, id = ID });
+            }
+            else
+            {
+                RoomNote newRoomNote = findRoomNote.FirstOrDefault();
+
+                newRoomNote.Note = roomNote.Note;
+
+                db.Entry(newRoomNote).State = EntityState.Modified;
+                db.SaveChanges();
+
+                EventHistory NewEvent = new EventHistory();
+                NewEvent.AddHistory(RegID, "RoomNote Add", newRoomNote.RoomNoteID);
+                    
+                return RedirectToAction("Modify", new { RegUID = RegUID, isPage2 = isPage2, id = ID });
+            }
+
+            ViewBag.Found = false;
+            ViewBag.Message = "Catchall Error";
+            return View(roomNote);
+        }
+
     }
 
 }

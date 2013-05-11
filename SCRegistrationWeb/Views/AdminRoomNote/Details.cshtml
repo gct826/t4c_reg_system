@@ -1,0 +1,29 @@
+﻿@model SCRegistrationWeb.Models.RoomNote
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>RoomNote</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PartID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PartID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Note)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Note)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RoomNoteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

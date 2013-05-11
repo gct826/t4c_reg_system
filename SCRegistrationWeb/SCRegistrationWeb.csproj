@@ -141,11 +141,12 @@
     <Compile Include="Controllers-Admin\AdminRoomTypeController.cs" />
     <Compile Include="Controllers-Admin\AdminServiceController.cs" />
     <Compile Include="Controllers-Admin\AdminRegistrationController.cs" />
-    <Compile Include="Controllers\AdminHeadsetController.cs" />
+    <Compile Include="Controllers-Admin\AdminHeadsetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParticipantController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers-Admin\AdminRoomNoteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -430,6 +431,14 @@
     <Content Include="Views\AdminParticipant\Create.cshtml" />
     <Content Include="Views\AdminParticipant\Edit.cshtml" />
     <Content Include="Views\AdminParticipant\Delete.cshtml" />
+    <Content Include="Views\AdminRoomNote\Index.cshtml" />
+    <Content Include="Views\AdminRoomNote\Details.cshtml" />
+    <Content Include="Views\AdminRoomNote\Create.cshtml" />
+    <Content Include="Views\AdminRoomNote\Edit.cshtml" />
+    <Content Include="Views\AdminRoomNote\Delete.cshtml" />
+    <Content Include="Views\Participant\RoomNote.cshtml" />
+    <Content Include="Views\Participant\RoomNoteAdd.cshtml" />
+    <Content Include="Views\Participant\ParticipantPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

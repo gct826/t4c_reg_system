@@ -1,0 +1,79 @@
+﻿@*//Participant/RoomNoteAdd/5?RegUID=xxx*@
+
+@model SCRegistrationWeb.Models.RoomNote
+
+@{
+    ViewBag.Title = "Headset Request";
+}
+
+@if (ViewBag.Found == false)
+{
+    <p>@ViewBag.Message</p>
+}
+
+@if (ViewBag.Found)
+{
+    Html.RenderAction("Summary", "Register", new { Id = ViewBag.RegistrationID });
+
+    using (Html.BeginForm())
+    {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Headset Request</legend>
+
+        <div id="main-wrapper">
+    	    <div class="12u" id="main-content">
+	    	    <div class="5grid-layout">
+   
+                    @Html.Action("ParticipantPartial","Participant",new { id = ViewBag.ParticipantID})
+		            
+		            <div class="row">
+		                <div class="4u">
+		                    @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+		                    {                                              
+		                        <h3>Add/Edit Room Note:</h3>
+		                    }
+                                            
+		                    @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+		                    {                                              
+		                        <h3>加/改房间指示？</h3>
+		                    }
+
+		                </div>
+                        
+
+		                <div class="5u">
+		                    
+		                    <div class="roomnote">
+		                        @Html.TextAreaFor(model => model.Note)   
+		                        @Html.HiddenFor(model => model.PartID)
+		                    </div>
+
+		                    @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+		                    {                                              
+		                        <input type="button" value="Back" onclick="location.href='@Url.Action("Modify", "Participant", new { RegUID = ViewBag.RegUID, isPage2 = ViewBag.isPage2, id = ViewBag.ParticipantID })'" />        
+		                        <input type="submit" value="Save" />      
+
+		                    }
+                                            
+		                    @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+		                    {                                              
+		                        <input type="button" title="向后" value="向后" onclick="location.href='@Url.Action("Modify", "Participant", new { RegUID = ViewBag.RegUID, isPage2 = ViewBag.isPage2, id = ViewBag.ParticipantID })    '" />
+		                        <input type="submit" title="加/改" value="加/改" name="headsetrequest" />
+		                    }
+
+		                </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+
+    </fieldset>
+    }
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

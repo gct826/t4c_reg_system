@@ -1,0 +1,49 @@
+﻿@model SCRegistrationWeb.Models.ParticipantEntry
+
+<div class="row">
+    <div class="4u">
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label readonly">
+                        @Html.LabelFor(model => model.FirstName)
+                    </div>
+                    <div class="editor-field readonly">
+                        @Html.TextBoxFor(model => model.FirstName, new { disabled = "disabled", @readonly = "readonly" })
+                        @Html.HiddenFor(model => model.FirstName)
+                    </div>                                            
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="4u">
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label readonly">
+                        @Html.LabelFor(model => model.LastName)
+                    </div>
+                    <div class="editor-field readonly">
+                        @Html.TextBoxFor(model => model.LastName, new { disabled = "disabled", @readonly = "readonly" })
+                        @Html.HiddenFor(model => model.LastName)
+                    </div>                                           
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="4u">
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label readonly">
+                        @Html.LabelFor(model => model.ChineseName)
+                    </div>
+                    <div class="editor-field readonly">
+                        @Html.TextBoxFor(model => model.ChineseName, new { disabled = "disabled", @readonly = "readonly" })
+                        @Html.HiddenFor(model => model.ChineseName)
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

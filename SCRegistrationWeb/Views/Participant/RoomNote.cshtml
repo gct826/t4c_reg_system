@@ -1,0 +1,31 @@
+﻿@model SCRegistrationWeb.Models.RoomNote
+
+<p>Room Notes 房间指示:</p>
+@if (ViewBag.Found == false)
+{
+    <p>None/没有</p>
+}
+else
+{
+    <p>@ViewBag.RoomNote</p>
+}
+  
+@using (Html.BeginForm())
+{
+    <fieldset>
+        
+    @if (ViewContext.RouteData.Values["language"].ToString() == "en")
+	{                                              
+        <p>
+            <input type="submit" title="Add/Edit" value="Add/Edit" name="roomnote" />   
+        </p>   
+	}
+                                            
+	@if (ViewContext.RouteData.Values["language"].ToString() == "ch")
+	{                                              
+        <p>
+            <input type="submit" title="加/改" value="加/改" name="roomnote" />   
+        </p>   
+	}
+    </fieldset>
+}
