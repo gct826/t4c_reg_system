@@ -83,7 +83,7 @@ namespace SCRegistrationWeb.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
+                    FormsAuthentication.SetAuthCookie(model.UserName, true /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
                 else

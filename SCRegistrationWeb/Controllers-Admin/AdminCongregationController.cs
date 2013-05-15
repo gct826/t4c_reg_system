@@ -26,9 +26,12 @@ namespace SCRegistrationWeb.Controllers_Admin
                 var participantentries = db.ParticipantEntries.Include(p => p.RegistrationEntries).Include(p => p.Statuses).
                     Include(p => p.Services).Include(p => p.AgeRanges).Include(p => p.Genders).Include(p => p.RegTypes).
                     Include(p => p.Fellowships).Include(p => p.RoomTypes).
-                    Where(p => p.ServiceID.Equals(SerID));
+                    Where(p => p.ServiceID.Equals(SerID)).
+                    Where(p => p.StatusID != 4);
 
-                return View(participantentries.Where(p => p.StatusID != 4).OrderBy(p => p.RegistrationID).ToList());
+                ViewBag.PartCount = participantentries.Count();
+
+                return View(participantentries.OrderBy(p => p.RegistrationID).ToList());
             }
             
             ViewBag.Selected = false;

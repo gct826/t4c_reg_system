@@ -95,7 +95,6 @@ namespace SCRegistrationWeb.Models
             }
         }
 
-
         public bool RegIsConfirm(int ID=0)
         {
             if (ID !=0)

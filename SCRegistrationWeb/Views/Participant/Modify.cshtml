@@ -147,8 +147,10 @@
                                             foreach (SelectListItem item in @ViewBag.GenderID)
                                             {
                                                 <div>
-                                                    @Html.RadioButtonFor(model => model.GenderID, item.Value)
-                                                    @HttpUtility.HtmlEncode(item.Text)
+                                                    <label class="label_radio">
+                                                        @Html.RadioButtonFor(model => model.GenderID, item.Value)
+                                                        @HttpUtility.HtmlEncode(item.Text)
+                                                    </label>
                                                 </div>
                                             }
                                         }                                                                             
@@ -183,8 +185,10 @@
                                             foreach (SelectListItem item in @ViewBag.AgeRangeID)
                                             {
                                                 <div class="editor-field">
-                                                    @Html.RadioButtonFor(model => model.AgeRangeID, item.Value)
-                                                    @HttpUtility.HtmlEncode(item.Text)
+                                                    <label class="label_radio">
+                                                        @Html.RadioButtonFor(model => model.AgeRangeID, item.Value)
+                                                        @HttpUtility.HtmlEncode(item.Text)
+                                                    </label>
                                                 </div>
                                             }
                                         }                                                                             
@@ -219,8 +223,10 @@
                                             foreach (SelectListItem item in @ViewBag.ServiceID)
                                             {
                                                 <div>
-                                                    @Html.RadioButtonFor(model => model.ServiceID, item.Value)
-                                                    @HttpUtility.HtmlEncode(item.Text)
+                                                    <label class="label_radio">
+                                                        @Html.RadioButtonFor(model => model.ServiceID, item.Value)
+                                                        @HttpUtility.HtmlEncode(item.Text)
+                                                    </label>
                                                 </div>
                                             }
                                         }                                                                             
@@ -255,8 +261,10 @@
                                             foreach (SelectListItem item in @ViewBag.RegTypeID)
                                             {
                                                 <div>
-                                                    @Html.RadioButtonFor(model => model.RegTypeID, item.Value)
-                                                    @HttpUtility.HtmlEncode(item.Text)
+                                                    <label class="label_radio">
+                                                        @Html.RadioButtonFor(model => model.RegTypeID, item.Value)
+                                                        @HttpUtility.HtmlEncode(item.Text)
+                                                    </label>
                                                 </div>
                                             }
                                         }                                                                             
@@ -283,8 +291,10 @@
                                             foreach (SelectListItem item in @ViewBag.FellowshipID)
                                             {
                                                 <div>
-                                                    @Html.RadioButtonFor(model => model.FellowshipID, item.Value)
-                                                    @HttpUtility.HtmlEncode(item.Text) <br />
+                                                    <label class="label_radio">                                                    
+                                                        @Html.RadioButtonFor(model => model.FellowshipID, item.Value)
+                                                        @HttpUtility.HtmlEncode(item.Text) <br />
+                                                    </label>
                                                 </div>
                                             }
                                         }
@@ -313,8 +323,10 @@
                                             foreach (SelectListItem item in @ViewBag.RoomTypeID)
                                             {
                                                 <div>
-                                                    @Html.RadioButtonFor(model => model.RoomTypeID, item.Value)
-                                                    @HttpUtility.HtmlEncode(item.Text) <br />
+                                                    <label class="label_radio">                                                   
+                                                        @Html.RadioButtonFor(model => model.RoomTypeID, item.Value)
+                                                        @HttpUtility.HtmlEncode(item.Text) <br />
+                                                    </label>
                                                 </div>
                                             }
                                             <br/>
@@ -399,3 +411,36 @@
     }
 }
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+<script>
+    function setupLabel() {
+        if ($('.label_check input').length) {
+            $('.label_check').each(function(){ 
+                $(this).removeClass('c_on');
+            });
+            $('.label_check input:checked').each(function(){ 
+                $(this).parent('label').addClass('c_on');
+            });                
+        };
+        if ($('.label_radio input').length) {
+            $('.label_radio').each(function(){ 
+                $(this).removeClass('r_on');
+            });
+            $('.label_radio input:checked').each(function(){ 
+                $(this).parent('label').addClass('r_on');
+            });
+        };
+    };
+    $(document).ready(function(){
+        $('body').addClass('has-js');
+        $('.label_check, .label_radio').click(function(){
+            setupLabel();
+        });
+        setupLabel(); 
+    });
+</script>
+
+    }

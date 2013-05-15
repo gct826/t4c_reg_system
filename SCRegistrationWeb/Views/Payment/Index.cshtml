@@ -53,7 +53,7 @@
                         @Html.DisplayFor(modelItem => item.PaymentComment)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RegID)
+                        @Html.ActionLink(item.RegID.ToString(), "Detail", "SearchRegistration", new { Id = item.RegID },"")
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id=item.PaymentID })

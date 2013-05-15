@@ -17,7 +17,7 @@ namespace SCRegistrationWeb.Controllers
         //
         // GET: /SearchRegistration/
 
-        public ActionResult Index(string searchPhone, string searcheMail, string searchName, int StatusID=0)
+        public ActionResult Index(string searchPhone, string searcheMail, string searchName,int ServiceID =0, int AgeRangeID =0, int StatusID=0)
         {
             var participantentries = db.ParticipantEntries.Include(p => p.RegistrationEntries).Include(p => p.Statuses).Include(p => p.Services).Include(p => p.AgeRanges).Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships);
 
@@ -37,15 +37,43 @@ namespace SCRegistrationWeb.Controllers
                 participantentries = participantentries.Where(s => s.FirstName.Contains(searchName) || s.LastName.Contains(searchName));
             }
 
-            ViewBag.StatusID = new SelectList(db.Statuses, "StatusID", "Name");
-            if (StatusID != 0)
+            ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name");
+            if (ServiceID != 0)
             {
-                return View(participantentries.Where(s => s.StatusID == StatusID).OrderBy(p => p.RegistrationID).ToList());
+                participantentries = participantentries.Where(s => s.ServiceID == ServiceID);
+
             }
             else
             {
-                return View(participantentries.Where(s => s.StatusID != 4).OrderBy(p => p.RegistrationID).ToList());
+                participantentries = participantentries.Where(s => s.ServiceID != 0);
             }
+
+            ViewBag.AgeRangeID = new SelectList(db.AgeRanges, "AgeRangeID", "Name");
+            if (AgeRangeID != 0)
+            {
+                participantentries = participantentries.Where(s => s.AgeRangeID == AgeRangeID);
+
+            }
+            else
+            {
+                participantentries = participantentries.Where(s => s.AgeRangeID != 0);
+            }
+            
+            
+            ViewBag.StatusID = new SelectList(db.Statuses, "StatusID", "Name");
+            if (StatusID != 0)
+            {
+                participantentries = participantentries.Where(s => s.StatusID == StatusID);
+
+            }
+            else
+            {
+                participantentries = participantentries.Where(s => s.StatusID != 4);
+            }
+
+            ViewBag.PartCount = participantentries.Count();
+            return View(participantentries.OrderBy(p => p.RegistrationID).ToList());
+        
         }
 
         //

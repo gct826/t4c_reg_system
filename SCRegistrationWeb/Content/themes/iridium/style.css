@@ -557,3 +557,14 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+/* styles for radio button*/
+.has-js .label_check,
+.has-js .label_radio { padding-left: 34px; }
+.has-js .label_radio { background: url(images/radio_off.png) no-repeat; background-position:0px 8px; }
+.has-js .label_check { background: url(images/check_off.png) no-repeat; }
+.has-js label.c_on { background: url(images/check-on.png) no-repeat; }
+.has-js label.r_on { background: url(images/radio_on.png) no-repeat; background-position:0px 8px;}
+.has-js .label_check input,
+.has-js .label_radio input { position: absolute; left: -9999px; }
+

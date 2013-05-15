@@ -9,28 +9,29 @@
             <h2>Sessions View</h2>
 
             <p>Select the Session</p>
-            <table>
-                <tr>
-                    <th>
-                        @Html.ActionLink("English", "Index", new { SerID = 1 })
-                    </th>
-                    <th>
-                        @Html.ActionLink("Mandarian", "Index", new { SerID = 2 })
-                    </th>
-                    <th>
-                        @Html.ActionLink("Cantonese", "Index", new { SerID = 3 })
-                    </th>
-                    <th>
-                        @Html.ActionLink("Youth Group", "Index", new { SerID = 5 })
-                    </th>
-                    <th>
-                        @Html.ActionLink("Childrens", "Index", new { SerID = 6 })
-                    </th>
-                    <th>
-                        @Html.ActionLink("Nursery", "Index", new { SerID = 7 })
-                    </th>
-                </tr>
-            </table>
+	    <table>
+	        <tr>
+	            <th>
+	                @Html.ActionLink("English", "Index", new { SerID = 1 })
+	            </th>
+	            <th>
+	                @Html.ActionLink("Mandarian", "Index", new { SerID = 2 })
+	            </th>
+	            <th>
+	                @Html.ActionLink("Cantonese", "Index", new { SerID = 3 })
+	            </th>
+	            <th>
+	                @Html.ActionLink("Youth Group", "Index", new { SerID = 5 })
+	            </th>
+	            <th>
+	                @Html.ActionLink("Childrens", "Index", new { SerID = 6 })
+	            </th>
+	            <th>
+	                @Html.ActionLink("Nursery", "Index", new { SerID = 7 })
+	            </th>
+	        </tr>
+	    </table>
+            <h4>Total Found Participants: @ViewBag.PartCount</h4>
             @if (ViewBag.Selected)
             {
                 

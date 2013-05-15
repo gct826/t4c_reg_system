@@ -28,7 +28,7 @@ namespace SCRegistrationWeb.Controllers
         public ActionResult Index()
         {
             var paymententries = db.PaymentEntries.Include(p => p.PmtStatuses).Include(p => p.PmtTypes);
-            return View(paymententries.ToList());
+            return View(paymententries.OrderBy(p => p.PaymentDate).ToList());
         }
 
         //

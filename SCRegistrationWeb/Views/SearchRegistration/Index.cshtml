@@ -13,10 +13,13 @@
                     Email: @Html.TextBox("SearcheMail")
                     Phone: @Html.TextBox("SearchPhone")
                     Name: @Html.TextBox("SearchName")
+                    Service: @Html.DropDownList("ServiceID","All Sessions")
+                    Age Range: @Html.DropDownList("AgeRangeID","All Ages")
                     Status: @Html.DropDownList("StatusID", "All Active")  
                     <input type ="submit" value="Filter" />
                 </div>
             }
+            <h4>Total Found Participants: @ViewBag.PartCount</h4>
             <table>
                 <tr>
                     <th></th>
@@ -50,13 +53,15 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Statuses.Name)
                     </th>
-                    <th></th>
+@*                    <th></th>*@
                 </tr>
 
             @foreach (var item in Model) {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RegistrationID)
+@*                        @Html.DisplayFor(modelItem => item.RegistrationID)*@
+                        
+                        @Html.ActionLink(item.RegistrationID.ToString(), "Detail", "SearchRegistration", new { Id = item.RegistrationEntries.RegistrationID },"")
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.RegistrationEntries.Email)
@@ -88,9 +93,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Statuses.Name)
                     </td>
-                    <td>
+@*                    <td>
                         @Html.ActionLink("Open", "Detail", new { Id=item.RegistrationEntries.RegistrationID })
-                    </td>
+                    </td>*@
                 </tr>
             }
 

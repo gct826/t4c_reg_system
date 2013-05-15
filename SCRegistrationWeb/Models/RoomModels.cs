@@ -24,6 +24,8 @@ namespace SCRegistrationWeb.Models
 
     public class Building
     {
+        SCRegistrationContext _db = new SCRegistrationContext();
+
         [Key]
         [ScaffoldColumn(false)]
         public int BuildingID { get; set; }
@@ -36,6 +38,25 @@ namespace SCRegistrationWeb.Models
         public int RoomTypeID { get; set; }
 
         public RoomType RoomTypes { get; set; }
+
+        public int TotalBeds(int id = 0)
+        {
+            if (id != 0)
+            {
+                var foundRooms = _db.Rooms.Where(s => s.BuildingID.Equals(id));
+
+                int totalBeds = (int)0;
+
+                foreach (var item in foundRooms)
+                {
+                    totalBeds = totalBeds + item.NumOfBeds;
+                }
+
+                return totalBeds;
+
+            }
+            return (int)0;
+        }
     }
 
     public class Room
@@ -72,5 +93,6 @@ namespace SCRegistrationWeb.Models
         public ParticipantEntry ParticipantEntries { get; set; }
         public Room Rooms { get; set; }
     }
+
 
 }
