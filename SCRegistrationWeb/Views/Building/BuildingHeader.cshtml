@@ -1,0 +1,67 @@
+﻿@model SCRegistrationWeb.Models.Building
+
+@if (ViewBag.BuildingFound)
+{
+    <div id="banner-wrapper">
+    <div class="12u">
+        <div class="5grid-layout">
+            <div class="12u">
+                <fieldset>
+                    <legend>Building</legend>
+
+                    <div class="4u">
+                        <h2>
+                            @ViewBag.BuildingName
+                        </h2>
+                    </div>
+                
+                    <div class="4u">
+                        <h2>
+                            @ViewBag.BuildingType
+                        </h2>
+                    </div>
+                
+                    <div class="2u">
+                        <h4>
+                            Total/Available Rooms: 
+                            @Html.Action("TotalBeds", "Building", new { id = ViewBag.BuildingId })
+                        </h4>
+                    </div>            
+                </fieldset>
+            </div>
+            @if (ViewBag.RoomFound)
+            {
+             <div class="12u">
+                <div class ="2u">
+                    <h3>
+                        Room: @ViewBag.RoomName
+                    </h3>
+                </div>
+                <div class="2u">
+                    <h3>
+                        @ViewBag.RoomNumofBeds Beds
+                    </h3>
+                </div>
+                <div class ="2u">
+                    <h3>
+                        @Html.Action("RoomBedAvail", "Building", new {id = ViewBag.RoomId}) Available
+                    </h3>
+                </div>
+            </div>               
+            }
+            
+            @if (ViewBag.RoomFound)
+            {
+                @Html.ActionLink("Back to Rooms", "Details", new {id = ViewBag.BuildingId})
+            }
+            else
+            {
+            <p>
+                @Html.ActionLink("Back to Buildings", "Index")
+            </p>                
+            }
+
+        </div>
+    </div>
+</div>
+}

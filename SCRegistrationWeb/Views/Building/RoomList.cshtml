@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.Room>
+
+<div id="main-wrapper">
+    <div class="12u" id="main-content">
+        <div class="5grid-layout">
+
+            @foreach (var item in Model)
+            {
+                <div class ="row">
+                    <div class="2u">
+                        <h3>
+                            Room: @Html.DisplayFor(modelItem => item.Name)
+                        </h3>
+                    </div>
+                    <div class="2u">
+                        <h3>
+                            @Html.DisplayFor(modelItem => item.NumOfBeds) Beds
+                        </h3>
+                    </div>
+                    <div class ="2u">
+                        <h3>
+                            @Html.Action("RoomBedAvail", "Building", new {id = item.RoomID}) Available             
+                        </h3>
+                    </div>
+                    <div class="2u">
+                        <p>
+                             @Html.ActionLink("Assign", "RoomAssign", new { id=item.RoomID })
+                        </p>
+                    </div>
+                        @Html.Action("RoomDetail", "Building", new {id = item.RoomID})
+                </div>
+            }
+        </div>
+    </div>
+</div>

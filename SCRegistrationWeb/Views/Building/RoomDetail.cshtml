@@ -1,0 +1,50 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.RoomAssignment>
+
+<table>
+    <th>
+        RegID
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.ParticipantEntries.FirstName)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.ParticipantEntries.LastName)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.ParticipantEntries.Genders)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.ParticipantEntries.AgeRanges)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.ParticipantEntries.Services)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.ParticipantEntries.Fellowships)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.ParticipantEntries.RoomTypes)
+    </th>
+    <th></th>
+    @foreach (var item in Model)
+    {
+        @Html.Action("PartDetail", "Building", new {id = item.PartID})  
+    }
+    
+    @if (ViewBag.VacantRooms > 0)
+    {
+        for(int i=0;i < ViewBag.VacantRooms; i++)
+        {
+            @: <tr>
+            @:       <td><p>---</p></td>
+            @:       <td><p>-------</p></td>
+            @:       <td><p>-------</p></td>
+            @:       <td></td>
+            @:       <td></td>
+            @:       <td></td>
+            @: </tr>
+        
+        } 
+    }
+
+</table>

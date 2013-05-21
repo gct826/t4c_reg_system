@@ -30,9 +30,11 @@ namespace SCRegistrationWeb.Controllers
             RoomNote roomnote = db.RoomNotes.Find(id);
             if (roomnote == null)
             {
-                return HttpNotFound();
+                ViewBag.RoomNoteFound = false;
+                return PartialView();
             }
-            return View(roomnote);
+            ViewBag.RoomNoteFound = true;
+            return PartialView(roomnote);
         }
 
         //

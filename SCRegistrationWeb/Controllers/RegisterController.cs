@@ -298,7 +298,7 @@ namespace SCRegistrationWeb.Controllers
         //
         // POST: /Register/Search
         [HttpPost]
-        [MultiButton(MatchFormKey = "action", MatchFormValue1 = "Modify Registration", MatchFormValue2 = "修改注册")]
+        [MultiButton(MatchFormKey = "action", MatchFormValue1 = "Open Registration", MatchFormValue2 = "修改注册")]
         public ActionResult Search(FormCollection values)
         {
             var order = new RegistrationEntry();

@@ -1,5 +1,22 @@
 ﻿@model IEnumerable<SCRegistrationWeb.Models.ParticipantEntry>
 
+@helper Truncate(string
+input, int length,bool dots=true)
+ {
+    if (input.Length <= length) {
+        @input
+    } else {
+        if (dots)
+        {
+            @input.Substring(0, length)<text>...</text>
+        }
+        else
+        {
+            @input.Substring(0, length)  
+        }
+    }
+}
+
 @{
     ViewBag.Title = "Search Registration";
 }
@@ -10,9 +27,9 @@
 
             @using (Html.BeginForm()){
                 <div class="editor-field short"> 
-                    Email: @Html.TextBox("SearcheMail")
-                    Phone: @Html.TextBox("SearchPhone")
-                    Name: @Html.TextBox("SearchName")
+                    String: @Html.TextBox("SearchString")
+@*                    Phone: @Html.TextBox("SearchPhone")
+                    Name: @Html.TextBox("SearchName")*@
                     Service: @Html.DropDownList("ServiceID","All Sessions")
                     Age Range: @Html.DropDownList("AgeRangeID","All Ages")
                     Status: @Html.DropDownList("StatusID", "All Active")  
@@ -64,7 +81,7 @@
                         @Html.ActionLink(item.RegistrationID.ToString(), "Detail", "SearchRegistration", new { Id = item.RegistrationEntries.RegistrationID },"")
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RegistrationEntries.Email)
+                        @Truncate(item.RegistrationEntries.Email,10,true)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.RegistrationEntries.Phone)
@@ -79,19 +96,19 @@
                         @Html.DisplayFor(modelItem => item.ChineseName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Services.Name)
+                        @Truncate(item.Services.Name,3,false)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.AgeRanges.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Genders.Name)
+                        @Truncate(item.Genders.Name,1,false)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RegTypes.Name)
+                        @Truncate(item.RegTypes.Name,4,false)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Statuses.Name)
+                        @Truncate(item.Statuses.Name,4,false)
                     </td>
 @*                    <td>
                         @Html.ActionLink("Open", "Detail", new { Id=item.RegistrationEntries.RegistrationID })

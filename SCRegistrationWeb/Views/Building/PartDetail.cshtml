@@ -1,0 +1,59 @@
+﻿@model SCRegistrationWeb.Models.ParticipantEntry
+
+@helper Truncate(string
+input, int length,bool dots=true)
+ {
+    if (input.Length <= length) {
+        @input
+    } else {
+        if (dots)
+        {
+            @input.Substring(0, length)<text>...</text>
+        }
+        else
+        {
+            @input.Substring(0, length)  
+        }
+    }
+}
+
+@if (ViewBag.PartFound == true)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.RegistrationID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.LastName)
+        </td>
+        <td>
+            @Truncate(Model.Genders.Name,1,false)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.AgeRanges.Name)
+        </td>
+        <td>
+            @Truncate(Model.Services.Name,3,false)
+        </td>
+        <td>
+            @Truncate(Model.Fellowships.Name,8)
+        </td>
+        <td>
+            @Truncate(Model.Fellowships.Name,8)
+        </td>
+        <td>
+            <p class="small">
+                @Html.ActionLink("remove", "PartUnassign", "Building", new { partid = Model.ParticipantID }, null)
+            </p>     
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="8">
+            @Html.Action("Details", "AdminRoomNote", new{id = Model.ParticipantID}) 
+        </td> 
+    </tr>
+}

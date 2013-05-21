@@ -49,7 +49,7 @@
 		                if (ViewContext.RouteData.Values["language"].ToString() == "en")
 		                {
 		                    <input type="submit" title="Create New Registration" value="Create New Registration" name="action" />
-		                    <input type="submit" title="Modify Registration" value="Modify Registration" name="action" />
+		                    <input type="submit" title="Open Registration" value="Open Registration" name="action" />
 		                }
 		                if (ViewContext.RouteData.Values["language"].ToString() == "ch")
 		                {
@@ -65,8 +65,8 @@
 		            @if (ViewContext.RouteData.Values["language"].ToString() == "en")
 		            {
 		                <p>
-		                    Enter an e-mail address and phone number to start the registration. Please remember the e-mail address and phone number you
-		                    use as this will allow you the ability to view and modify the registration at a later date as necessary.
+                            Enter an e-mail address and phone number to start the registration. Please remember the e-mail address and phone number you
+		                    use as this will allow you the ability to view the registration at a later date as necessary.
 		                </p>
 		                <input type="button" value ="Back to Home" onclick=" location.href = '@Url.Action("Index", "Home")    ' " />
 		            }

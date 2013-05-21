@@ -1,0 +1,74 @@
+﻿@model IEnumerable<SCRegistrationWeb.Models.ParticipantEntry>
+
+@helper Truncate(string
+input, int length,bool dots=true)
+ {
+    if (input.Length <= length) {
+        @input
+    } else {
+        if (dots)
+        {
+            @input.Substring(0, length)<text>...</text>
+        }
+        else
+        {
+            @input.Substring(0, length)  
+        }
+    }
+}
+
+<h4>Please select from below.</h4>
+
+@using (Html.BeginForm()){
+    <div class="editor-field short">
+        RegID: @Html.TextBox("RegID") 
+        String: @Html.TextBox("SearchString")
+        RoomType: @Html.DropDownList("RoomTypeID", "All Room Type")
+        Service: @Html.DropDownList("ServiceID","All Sessions")
+        <input type ="submit" value="Filter" />
+    </div>
+}
+
+<table>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegistrationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Truncate(item.Genders.Name,1,false)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgeRanges.Name)
+        </td>
+        <td>
+            @Truncate(item.Services.Name,3,false)
+        </td>
+        <td>
+            @Truncate(item.Fellowships.Name,8) 
+        </td>
+        <td>
+            @Truncate(item.RoomTypes.Name,8)
+        </td>
+        <td>
+            <p class="small">
+                @Html.ActionLink("assign", "PartAssign", "Building", new { roomid = ViewBag.RoomID, partid = item.ParticipantID }, null)              
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="8">
+            @Html.Action("Details", "AdminRoomNote", new{id = item.ParticipantID}) 
+        </td> 
+    </tr>
+    
+    }
+</table>

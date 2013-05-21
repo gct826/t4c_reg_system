@@ -17,24 +17,24 @@ namespace SCRegistrationWeb.Controllers
         //
         // GET: /SearchRegistration/
 
-        public ActionResult Index(string searchPhone, string searcheMail, string searchName,int ServiceID =0, int AgeRangeID =0, int StatusID=0)
+        public ActionResult Index(string searchString, int ServiceID =0, int AgeRangeID =0, int StatusID=0)
         {
             var participantentries = db.ParticipantEntries.Include(p => p.RegistrationEntries).Include(p => p.Statuses).Include(p => p.Services).Include(p => p.AgeRanges).Include(p => p.Genders).Include(p => p.RegTypes).Include(p => p.Fellowships);
 
 
-            if (!string.IsNullOrEmpty(searchPhone))
-            {
-                participantentries = participantentries.Where(s => s.RegistrationEntries.Phone.Contains(searchPhone));
-            }
+            //if (!string.IsNullOrEmpty(searchPhone))
+            //{
+            //    participantentries = participantentries.Where(s => s.RegistrationEntries.Phone.Contains(searchPhone));
+            //}
 
-            if (!string.IsNullOrEmpty(searcheMail))
-            {
-                participantentries = participantentries.Where(s => s.RegistrationEntries.Email.Contains(searcheMail));
-            }
+            //if (!string.IsNullOrEmpty(searcheMail))
+            //{
+            //    participantentries = participantentries.Where(s => s.RegistrationEntries.Email.Contains(searcheMail));
+            //}
 
-            if (!string.IsNullOrEmpty(searchName))
+            if (!string.IsNullOrEmpty(searchString))
             {
-                participantentries = participantentries.Where(s => s.FirstName.Contains(searchName) || s.LastName.Contains(searchName));
+                participantentries = participantentries.Where(s => s.FirstName.Contains(searchString) || s.LastName.Contains(searchString) || s.RegistrationEntries.Email.Contains(searchString) || s.RegistrationEntries.Phone.Contains(searchString));
             }
 
             ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name");

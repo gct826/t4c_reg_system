@@ -4,26 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (ViewBag.BuildingFound)
+{
 
-<fieldset>
-    <legend>Building</legend>
+    @Html.Action("BuildingHeader", "Building", new { id = ViewBag.BuildingId })
+    @Html.Action("RoomList", "Building", new { id = ViewBag.BuildingId })
+       
+}
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.RoomTypes.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.RoomTypes.Name)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.BuildingID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

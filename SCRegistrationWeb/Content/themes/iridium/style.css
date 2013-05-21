@@ -73,6 +73,10 @@ p {
 	margin-bottom: 10px;
 }
 
+.small {
+    font-size: .8em;
+}
+
 .about {
     margin-left: 20px;
 }

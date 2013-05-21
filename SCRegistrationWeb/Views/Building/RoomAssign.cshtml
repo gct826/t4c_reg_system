@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "RoomAssign";
+}
+
+@if (ViewBag.RoomFound)
+{
+
+    @Html.Action("BuildingHeader", "Building", new { id = ViewBag.BuildingId, roomid = ViewBag.RoomId })
+
+    <div id="main-wrapper">
+        <div class="12u" id="main-content">
+            <div class="5grid-layout">
+                
+                <h4>Current Room Assignments.</h4>
+                @Html.Action("RoomDetail", "Building", new {id = ViewBag.RoomId})
+    
+                @if (ViewBag.VacantBeds > 0)
+                {
+                @Html.Action("PartSelectList", "Building", new{id = ViewBag.RoomId})       
+                }
+                else
+                {
+                <p>Room has no Vacant Bed.</p>
+                }
+            </div>
+        </div>
+    </div>
+    
+}
+
+
+

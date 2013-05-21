@@ -55,12 +55,64 @@ namespace SCRegistrationWeb.Models
                 return totalBeds;
 
             }
-            return (int)0;
+
+            if (id == 0)
+            {
+                var foundRooms = _db.Rooms;
+                int totalBeds = (int) 0;
+
+                foreach (var item in foundRooms)
+                {
+                    totalBeds = totalBeds + item.NumOfBeds;
+                }
+
+                return totalBeds;
+
+            }
+
+            return (int)-1;
         }
+        
+        public int TotalVacantBeds(int id = 0)
+        {
+            if (id != 0)
+            {
+                var foundRooms = _db.Rooms.Where(s => s.BuildingID.Equals(id)).ToList();
+
+                int totalVacantBeds = (int) 0;
+
+                foreach (var item in foundRooms)
+                {
+                    totalVacantBeds = totalVacantBeds + item.VacantBeds(item.RoomID);
+                }
+
+                return totalVacantBeds;
+
+            }
+            
+            if (id == 0)
+            {
+                var foundRooms = _db.Rooms;
+                int totalVacantBeds = (int)0;
+
+                foreach (var item in foundRooms)
+                {
+                    totalVacantBeds = totalVacantBeds + item.VacantBeds(item.RoomID);
+                }
+
+                return totalVacantBeds;
+
+            }
+
+            return (int) -1;
+        }
+        
     }
 
     public class Room
     {
+        SCRegistrationContext _db = new SCRegistrationContext();
+
         [Key]
         [ScaffoldColumn(false)]
         public int RoomID { get; set; }
@@ -77,6 +129,44 @@ namespace SCRegistrationWeb.Models
         public int BuildingID { get; set; }
 
         public Building Buildings { get; set; }
+
+        public int VacantBeds(int id = 0)
+        {
+            if (id != 0)
+            {
+                var foundRoom = _db.Rooms.FirstOrDefault(s => s.RoomID.Equals(id));
+
+                var foundParticipants = _db.RoomAssignments
+                    .Where(b => b.RoomID.Equals(id))
+                    .Where(b => b.IsDeleted.Equals(false))
+                    .ToList();
+
+                int isInfant = (int)0;
+
+                foreach (var participant in foundParticipants)
+                {
+                ParticipantEntry foundParticipant =
+                    _db.ParticipantEntries.FirstOrDefault(b => b.ParticipantID.Equals(participant.PartID));
+
+                    if (foundParticipant != null && foundParticipant.AgeRangeID == (int)1)
+                    {
+                        isInfant = isInfant + 1;
+                    }
+                }
+
+                if (foundRoom == null)
+                {
+                    return (int)-1;
+                }
+
+                int vacantBeds = foundRoom.NumOfBeds - foundParticipants.Count() + isInfant;
+
+                return vacantBeds;
+
+            }
+
+            return (int)-1;
+        }
     }
 
     public class RoomAssignment

@@ -28,7 +28,7 @@ namespace SCRegistrationWeb.Controllers
         public ActionResult Index()
         {
             var paymententries = db.PaymentEntries.Include(p => p.PmtStatuses).Include(p => p.PmtTypes);
-            return View(paymententries.OrderBy(p => p.PaymentDate).ToList());
+            return View(paymententries.OrderByDescending(p => p.PaymentDate).ToList());
         }
 
         //
@@ -191,34 +191,65 @@ namespace SCRegistrationWeb.Controllers
         }
 
         //
-        // GET: /Payment/Delete/5
+        // GET: /Payment/RegView
+        public ActionResult RegView()
+        {
+            var registrationList = db.RegEntries.Where(b => b.IsConfirmed.Equals(true)).ToList();
 
-        //public ActionResult Delete(int id = 0)
-        //{
-        //    PaymentEntry paymententry = db.PaymentEntries.Find(id);
-        //    if (paymententry == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(paymententry);
-        //}
+            foreach (var registration in registrationList)
+            {
+                decimal totalRegPrice = registration.RegTotalPrice(registration.RegistrationID);
 
-        //
-        // POST: /Payment/Delete/5
+                var paymentEntries = from m in db.PaymentEntries.Where(p => p.RegID.Equals(registration.RegistrationID))
+                                     select m;
 
-        //[HttpPost, ActionName("Delete")]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    PaymentEntry paymententry = db.PaymentEntries.Find(id);
-        //    db.PaymentEntries.Remove(paymententry);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+                decimal totalScholarship = (decimal) 0;
+                decimal totalCashRecieved = (decimal) 0;
+                decimal totalCheckRecieved = (decimal) 0;
+                decimal totalRefund = (decimal) 0;
+                decimal totalAdjustment = (decimal) 0;
+                decimal totalCreditCard = (decimal) 0;
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    db.Dispose();
-        //    base.Dispose(disposing);
-        //}
+                foreach (var item in paymentEntries)
+                {
+                    if (item.PmtTypeID == 1 && item.PmtStatusID != 3)
+                    {
+                        totalScholarship = totalScholarship + item.PaymentAmt;
+                    }
+
+                    if (item.PmtTypeID == 2 && item.PmtStatusID != 3)
+                    {
+                        totalCashRecieved = totalCashRecieved + item.PaymentAmt;
+                    }
+
+                    if (item.PmtTypeID == 3 && item.PmtStatusID != 3)
+                    {
+                        totalCheckRecieved = totalCheckRecieved + item.PaymentAmt;
+                    }
+
+                    if (item.PmtTypeID == 4 && item.PmtStatusID != 3)
+                    {
+                        totalRefund = totalRefund + item.PaymentAmt;
+                    }
+
+                    if (item.PmtTypeID == 5 && item.PmtStatusID != 3)
+                    {
+                        totalAdjustment = totalAdjustment + item.PaymentAmt;
+                    }
+
+                    if (item.PmtTypeID == 6 && item.PmtStatusID != 3)
+                    {
+                        totalCreditCard = totalCreditCard + item.PaymentAmt;
+                    }
+                }
+
+                ViewBag.totalRemaining = totalRegPrice - totalScholarship -
+                                         totalCashRecieved - totalCheckRecieved - totalRefund -
+                                         totalAdjustment - totalCreditCard;
+            }
+            return View();
+
+
+        }
     }
 }

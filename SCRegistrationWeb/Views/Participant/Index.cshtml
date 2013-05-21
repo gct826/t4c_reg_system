@@ -21,16 +21,16 @@
                     <div class="4u">
                         @if (ViewContext.RouteData.Values["language"].ToString() == "en")
                         {                    
-                            <p>This registration has been confirmed.</p>
-                            <p>Click "Edit Registration" to modify registration.</p>
-                            <input type="button" title="Edit Registration" value="Edit Registration" onclick="location.href='@Url.Action("Unlock", "Register", new { RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin })    '" />
+                            <p>This registration has been confirmed and can not be modified.</p>
+                            <p>If you need to modify, please email <a href="mailto:gct826@gmail.com">gct826@gmail.com</a> with your modification request.</p>
+                            <!--input type="button" title="Edit Registration" value="Edit Registration" onclick="location.href='Url.Action("Unlock", "Register", new { RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin })    '" /-->
                         }
                         
                         @if (ViewContext.RouteData.Values["language"].ToString() == "ch")
                         {                    
-                            <p>注册已被证实。</p>
-                            <p>点击“编辑注册“进行修改登记。</p>
-                            <input type="button" title="编辑注册" value="编辑注册" onclick="location.href='@Url.Action("Unlock", "Register", new { RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin })    '" />
+                            <p>注册已被证实，不能修改。</p>
+                            <p>如果需要修改，请电邮 <a href="mailto:gct826@gmail.com">gct826@gmail.com</a>。</p>
+                            <!--input type="button" title="编辑注册" value="编辑注册" onclick="location.href='Url.Action("Unlock", "Register", new { RegUID = ViewBag.RegUID, isAdmin = ViewBag.isAdmin })    '" /-->
                         }
                     </div>
                         Html.RenderAction("PaymentSummary", "Register", new { ID = ViewBag.RegID });

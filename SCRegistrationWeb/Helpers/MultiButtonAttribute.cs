@@ -19,5 +19,6 @@ namespace SCRegistrationWeb.Models
                (controllerContext.HttpContext.Request[MatchFormKey] == MatchFormValue1 || controllerContext.HttpContext.Request[MatchFormKey] == MatchFormValue2);
         }
     }
+
 }
     

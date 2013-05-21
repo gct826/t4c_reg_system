@@ -151,6 +151,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Migrations\201210251950382_Initial.cs" />
     <Compile Include="Migrations\201210251950382_Initial.Designer.cs">
       <DependentUpon>201210251950382_Initial.cs</DependentUpon>
@@ -445,6 +446,14 @@
     <Content Include="Views\Building\Index.cshtml" />
     <Content Include="Views\Building\Details.cshtml" />
     <Content Include="Views\Building\TotalBeds.cshtml" />
+    <Content Include="Views\Building\RoomList.cshtml" />
+    <Content Include="Views\Building\RoomDetail.cshtml" />
+    <Content Include="Views\Building\RoomBedAvail.cshtml" />
+    <Content Include="Views\Building\PartDetail.cshtml" />
+    <Content Include="Views\Building\RoomAssign.cshtml" />
+    <Content Include="Views\Building\BuildingHeader.cshtml" />
+    <Content Include="Views\Building\PartSelectList.cshtml" />
+    <Content Include="Views\Payment\RegView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
